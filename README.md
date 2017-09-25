@@ -1,2 +1,2 @@
-# LAIGTP1
-LAIG first assignment
+# LAIG
+LAIG assignments
