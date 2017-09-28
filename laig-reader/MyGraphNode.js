@@ -24,6 +24,9 @@ function MyGraphNode(graph, nodeID) {
     mat4.identity(this.transformMatrix);
 }
 
+MyGraphNode.prototype.constructor = MyGraphNode
+MyGraphNode.prototype = Object.create(MyGraphNode.prototype);;
+
 /**
  * Adds the reference (ID) of another node to this node's children array.
  */
@@ -34,6 +37,6 @@ MyGraphNode.prototype.addChild = function(nodeID) {
 /**
  * Adds a leaf to this node's leaves array.
  */
-MyGraphNode.prototype.addChild = function(leaf) {
+MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
