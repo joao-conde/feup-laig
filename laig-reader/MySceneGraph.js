@@ -1472,12 +1472,9 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
         this.scene.popMatrix();
 
     }
-
     console.log("passei do 2º ciclo");
 
 }
-
-
 
 
 
