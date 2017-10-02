@@ -1491,6 +1491,7 @@ MySceneGraph.generateRandomString = function(length) {
  * Displays the scene, processing each node, starting in the root node.
  */
 MySceneGraph.prototype.displayScene = function() {
+  
   for(node in this.nodes){
     if(node instanceof MyGraphLeaf)
       console.log("folha");
