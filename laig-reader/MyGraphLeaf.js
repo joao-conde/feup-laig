@@ -32,7 +32,7 @@ function MyGraphLeaf(graph, xmlelem) {
 
 	else if(this.type == "triangle") {
 
-		this.primitive = new MyTriangle(this.graph.scene, 
+		this.primitive = new MyTriangle(this.graph.scene,
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]),
@@ -46,22 +46,22 @@ function MyGraphLeaf(graph, xmlelem) {
 
 	else if(this.type == "cylinder") {
 
-		this.primitive = new MyVersatileCylinder(this.graph.scene, 
+		this.primitive = new MyVersatileCylinder(this.graph.scene,
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]),
 			parseInt(this.args[3]),
 			parseInt(this.args[4]));
-		
+
 	}
 
-	else if(this.type == "cylinder") {
+	else if(this.type == "sphere") {
 
-		this.primitive = new MySphere(this.graph.scene, 
+		this.primitive = new MySphere(this.graph.scene,
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]));
-		
+
 	}
 
 }
@@ -71,7 +71,7 @@ MyGraphLeaf.prototype = Object.create(MyGraphLeaf.prototype);
 
 
 MyGraphLeaf.prototype.display = function(length) {
-    
+
 	if(this.primitive != null) {
 
 		this.graph.scene.pushMatrix();
@@ -80,7 +80,6 @@ MyGraphLeaf.prototype.display = function(length) {
 
 	}
 
-	
+
 
 }
-
