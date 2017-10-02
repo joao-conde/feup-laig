@@ -1517,7 +1517,15 @@ MySceneGraph.generateRandomString = function(length) {
 /**
  * Displays the scene, processing each node, starting in the root node.
  */
+
 MySceneGraph.prototype.displayScene = function() {
+    // entry point for graph rendering
+    // remove log below to avoid performance issues
+    this.processNode("root", null, null);
+}
+
+
+MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTexture) {
   
     var node = this.nodes[nodeID];
 
