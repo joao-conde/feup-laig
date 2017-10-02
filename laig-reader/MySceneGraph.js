@@ -1557,10 +1557,5 @@ MySceneGraph.prototype.displayScene = function() {
 
     console.log("passei do 2º ciclo");
 
-
-<<<<<<< HEAD
-
-
-=======
 }
->>>>>>> resolver
+
