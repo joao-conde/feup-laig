@@ -7,11 +7,6 @@
 function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 	CGFobject.call(this,scene);
 
-	this.minS = 0;
-	this.maxS = 1;
-	this.minT = 0;
-	this.maxT = 1;
-
 	this.leftTopX = leftTopX;
 	this.leftTopY = leftTopY;
 
@@ -24,7 +19,10 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 	this.rightTopX = rightBottomX;
 	this.rightTopY = leftTopY;
 
-
+	this.minS = this.leftBottomX;
+	this.maxS = this.rightBottomX;
+	this.minT = this.leftBottomY;
+	this.maxT = this.leftTopY;
 
 
 	this.initBuffers();
