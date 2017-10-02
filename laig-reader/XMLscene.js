@@ -115,6 +115,7 @@ XMLscene.prototype.display = function() {
     
     if (this.graph.loadedOk) 
     {        
+
         // Applies initial transformations.
         this.multMatrix(this.graph.initialTransforms);
 
@@ -152,4 +153,8 @@ XMLscene.prototype.display = function() {
     
     // ---- END Background, camera and axis setup
     
+}
+
+XMLscene.prototype.rotateDeg = function(ang, x, y, z) {
+    this.rotate(ang * Math.PI / 180, x, y, z);
 }

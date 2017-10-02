@@ -46,6 +46,7 @@ function MySceneGraph(filename, scene) {
  */
 MySceneGraph.prototype.onXMLReady = function()
 {
+
     console.log("XML Loading finished.");
     var rootElement = this.reader.xmlDoc.documentElement;
 
@@ -67,6 +68,7 @@ MySceneGraph.prototype.onXMLReady = function()
  * Parses the LSX file, processing each block.
  */
 MySceneGraph.prototype.parseLSXFile = function(rootElement) {
+    
     if (rootElement.nodeName != "SCENE")
         return "root tag <SCENE> missing";
 
@@ -1164,6 +1166,8 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
 
 MySceneGraph.prototype.parseLeaves = function(leavesNode) {
 
+
+
     var children = leavesNode.children;
 
     var numArgs = [];
@@ -1223,6 +1227,7 @@ MySceneGraph.prototype.parseLeaves = function(leavesNode) {
 
         // Creates node.
         this.nodes[nodeID] = new MyGraphLeaf(this,nodeID,type,args);
+        console("a criar com 4 args");
     }
 
     console.log("Parsed leaves");
@@ -1232,6 +1237,8 @@ MySceneGraph.prototype.parseLeaves = function(leavesNode) {
  * Parses the <NODES> block.
  */
 MySceneGraph.prototype.parseNodes = function(nodesNode) {
+
+    console.log("Parsing Nodes" + this);
 
     // Traverses nodes.
     var children = nodesNode.children;
@@ -1262,6 +1269,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
+            
+            this.nodes["teste"] = "teste value";
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
@@ -1410,14 +1419,32 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 					if (descendants[j].nodeName == "LEAF")
 					{
 						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
-
+                        
 						if (type != null)
 							this.log("   Leaf: "+ type);
 						else
 							this.warn("Error in leaf");
 
+                        var leaf = new MyGraphLeaf(this, descendants[j]);
+
+                        console.log("descendentes:");
+                        if(descendants[j].length > 0) {
+                            console.log("Mais do que 1 descendante");
+                        }
+                        else {
+                            console.log("Apenas um descendante");
+                        }
+
+                        console.log(descendants[j]);
+
+
+
 						//parse leaf
-						//this.nodes[nodeID].addLeaf(new MyGraphLeaf(this,descendants[j]);
+						this.nodes[nodeID].addLeaf(leaf);
+
+                        console.log("Nó:");
+                        console.log(this.nodes[nodeID]);
+                        //console.log("no": + this.nodes[nodeID]);
                         sizeChildren++;
 					}
 					else
@@ -1492,8 +1519,5 @@ MySceneGraph.generateRandomString = function(length) {
  */
 MySceneGraph.prototype.displayScene = function() {
   
-  for(node in this.nodes){
-    if(node instanceof MyGraphLeaf)
-      console.log("folha");
-  }
+
 }
