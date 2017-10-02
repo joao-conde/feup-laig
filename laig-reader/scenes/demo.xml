@@ -164,7 +164,6 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-
             <NODEREF id="luzes" />
             <NODEREF id="piramide" />
             <NODEREF id="arvores" />
@@ -173,6 +172,8 @@
         </DESCENDANTS>
 
     </NODE>
+
+
 
     <!-- The floor -->
     <NODE id="chao">
@@ -185,7 +186,7 @@
 
         <DESCENDANTS>
 					<LEAF  type="rectangle" args="0 4 5 0" />
-				</DESCENDANTS>
+		</DESCENDANTS>
 
     </NODE>
 

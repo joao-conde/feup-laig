@@ -55,7 +55,7 @@ function MyGraphLeaf(graph, xmlelem) {
 		
 	}
 
-	else if(this.type == "cylinder") {
+	else if(this.type == "sphere") {
 
 		this.primitive = new MySphere(this.graph.scene, 
 			parseInt(this.args[0]),
@@ -70,7 +70,7 @@ MyGraphLeaf.prototype.constructor = MyGraphLeaf;
 MyGraphLeaf.prototype = Object.create(MyGraphLeaf.prototype);
 
 
-MyGraphLeaf.prototype.display = function(length) {
+MyGraphLeaf.prototype.display = function() {
     
 	if(this.primitive != null) {
 
