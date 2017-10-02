@@ -22,11 +22,12 @@ function MyGraphLeaf(graph, xmlelem) {
 
 	if(this.type == "rectangle") {
 
-		this.primitive = new MyQuad(this.graph.scene,
+		this.primitive = new MyRectangle(this.graph.scene,
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]),
-			parseInt(this.args[3]));
+			parseInt(this.args[3])
+			);
 
 	}
 

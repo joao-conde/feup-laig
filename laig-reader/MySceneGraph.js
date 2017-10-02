@@ -39,6 +39,8 @@ function MySceneGraph(filename, scene) {
 	 */
 
     this.reader.open('scenes/' + filename, this);
+
+    this.scene.enableTextures(true);
 }
 
 /*
@@ -915,6 +917,7 @@ MySceneGraph.prototype.parseTextures = function(texturesNode) {
             var texture = new CGFtexture(this.scene,"./scenes/" + filepath);
 
             this.textures[textureID] = [texture, amplifFactorS, amplifFactorT];
+            console.log(texture);
             oneTextureDefined = true;
         }
         else
@@ -1270,8 +1273,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
             
-            this.nodes["teste"] = "teste value";
-
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
@@ -1459,6 +1460,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
     }
 
     console.log("Parsed nodes");
+    console.log(this.nodes);
     return null ;
 }
 
@@ -1532,38 +1534,43 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
     if(node == null)
         return;
 
-    var material = node.materialID == null ? initialMaterial : this.materials[node.materialID];
-    var texture = node.textureID == null ? initialTexture : this.textures[node.textureID];
+    var materialID = node.materialID == "null" ? initialMaterial : node.materialID;
+    var textureID = node.textureID == "null" ? initialTexture : node.textureID;
+
     this.scene.multMatrix(node.transformMatrix);
 
     for(var i = 0 ; i < node.children.length ; i++) {
 
         this.scene.pushMatrix();
-        this.processNode(node.children[i], this.materials[node.children[i].materialID], this.textures[node.children[i].textureID]);
+        this.processNode(node.children[i], materialID, textureID);
+
+        //console.log(this.textures[node.children[i].textureID]);
+
         this.scene.popMatrix();
 
     }
 
-    console.log("passei do ciclo");
-
-    
     for(var i = 0; i < node.leaves.length ; i++) {
 
         this.scene.pushMatrix();
         
-        if(material != null)
-            //if(texture != null)
-              //  material.loadTexture(texture)
-            material.apply();
+        if(materialID != null) {
+
+            var material = this.materials[materialID];
+
+             if(textureID != null && textureID != "clear") {
+                //texture[0].bind(1);
+                var texture = this.textures[textureID];
+                material.setTexture(texture[0]);
+             }
+                
+            this.materials[materialID].apply();
+        }
         
-        console.log("material");
-        console.log(material);
         node.leaves[i].display();
         this.scene.popMatrix();
 
     }
-
-    console.log("passei do 2º ciclo");
 
 }
 
