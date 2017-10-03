@@ -141,6 +141,26 @@ XMLscene.prototype.display = function() {
         // Displays the scene.
         this.graph.displayScene();
 
+        /*
+
+        this.lightMaterial = new CGFappearance(this);
+        this.lightMaterial.setAmbient(0.0, 0.0, 0.0, 1.0);
+        this.lightMaterial.setDiffuse(0.5, 0.5, 0.5, 1.0);
+        this.lightMaterial.setSpecular(0.5, 0.5, 0.5, 1.0);
+        this.lightMaterial.setShininess(1);
+        this.lightMaterial.setEmission(0.0,0.0,0.0,1.0);
+
+
+        var sphere = new MySphere(this, 1,2048,30);
+        this.pushMatrix();
+        this.translate(0,4,0);
+        this.scale(3,3,3);
+        this.lightMaterial.apply();
+        sphere.display();
+        this.popMatrix();
+        */
+
+
     }
 	else
 	{

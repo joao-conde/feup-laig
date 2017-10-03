@@ -7,7 +7,7 @@
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="0" />
     <rotation axis="z" angle="0" />
-    <scale sx="0.25" sy="0.25" sz="0.25" />
+    <scale sx="0.3" sy="0.3" sz="0.3" />
     <reference length="5" />
 </INITIALS>
 
@@ -285,7 +285,7 @@
     <!-- The post in the lamp post... -->
     <NODE id="luz_suporte">
         <MATERIAL id="lightPostMaterial" />
-        <TEXTURE id="null" />
+        <TEXTURE id="rocks" />
 
         <SCALE sx="0.5" sy="2.02" sz="0.5" />
         <ROTATION axis="x" angle="-90" />

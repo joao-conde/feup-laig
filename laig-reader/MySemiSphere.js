@@ -22,8 +22,8 @@
 
 	this.vertices = [];
 	this.normals = [];
-  	this.indices = [];
-  	this.texCoords = [];
+  this.indices = [];
+  this.texCoords = [];
 
 	var angleIterator = (1.0*Math.PI/2)/this.stacks;
 
@@ -39,9 +39,9 @@
 
 			this.normals.push(Math.cos(i*this.angle)*Math.cos(stack*angleIterator));
 			this.normals.push(Math.sin(i*this.angle)*Math.cos(stack*angleIterator));
-			this.normals.push(Math.sin(stack*angleIterator));
+			this.normals.push(Math.sin(stack*angleIterator)); // corresponde ao raio da circunferencia da stack atual
 
-      		this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
+      this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
 
 		}
 
@@ -75,35 +75,33 @@
 
 	}
 
-	
-
 	var currentVerticesBases = this.vertices.length;
 
 	/*
-	// BASE
+
+	// BASE 1
 	this.vertices.push(0);
 	this.vertices.push(0);
 	this.vertices.push(0);
 
 	this.normals.push(0);
 	this.normals.push(0);
-	this.normals.push(1);
+	this.normals.push(-1);
 
-  	this.texCoords.push(0.5, 0.5);
+  this.texCoords.push(0.5, 0.5);
 
-	for(var i = 0; i < this.slices; i++){
+	for(i = 0; i < this.slices; i++){
 		this.vertices.push(Math.cos(i*this.angle));
 		this.vertices.push(Math.sin(i*this.angle));
 		this.vertices.push(0);
 
 		this.normals.push(0);
 		this.normals.push(0);
-		this.normals.push(0);
+		this.normals.push(-1);
 	}
 
-	for(var i = 1; i <= this.slices; i++) {
-
-		if(i == this.slices) {
+	for(i = 1; i <= this.slices; i++){
+		if(i == this.slices){
 			this.indices.push(currentVerticesBases/3 + 0);
 			this.indices.push(currentVerticesBases/3 + 1);
 			this.indices.push(currentVerticesBases/3 + i);
@@ -117,12 +115,9 @@
 
 	*/
 
-	/*
-  	for(i = 0; i < this.slices; i++){
-    	this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5);
-  	}
-  	*/
-
+  for(i = 0; i < this.slices; i++){
+    this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5);
+  }
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();

@@ -21,7 +21,6 @@ function MySceneGraph(filename, scene) {
     scene.graph = this;
 
     this.nodes = [];
-
     this.idRoot = null;                    // The id of the root element.
 
     this.axisCoords = [];
@@ -40,7 +39,6 @@ function MySceneGraph(filename, scene) {
 
     this.reader.open('scenes/' + filename, this);
 
-    this.scene.enableTextures(true);
 }
 
 /*
