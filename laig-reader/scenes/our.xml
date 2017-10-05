@@ -27,17 +27,21 @@
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
+
+    <LIGHT id="light1">
+          <enable value ="1" />
+          <position x="30" y="10" z="0" w="1" />
+          <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+          <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+      </LIGHT>
+
 </LIGHTS>
 
 <TEXTURES>
-	<!-- Tree trunk -->
-    <TEXTURE id="trunk">
-        <file path="images/trunk-image.jpg" />
-        <amplif_factor s="2" t="2" />
-    </TEXTURE>
     <TEXTURE iD="sunsurface">
       <file path="images/sunsufrace.jpg" />
-      <!-- <amplif_factor/> -->
+      <amplif_factor s="2" t="2" />
     </TEXTURE>
 </TEXTURES>
 
@@ -53,7 +57,7 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
-    <!-- Pyramid material -->
+    <!-- Sun material
       <MATERIAL id="sunMaterial">
           <shininess value="1" />
           <specular r="0" g="0" b="0" a="1" />
@@ -61,6 +65,7 @@
           <ambient r="0.2" g="0.2" b="0.2" a="1" />
           <emission r="0.0" g="0.0" b="0.0" a="1" />
       </MATERIAL>
+    -->
 
 </MATERIALS>
 
@@ -80,14 +85,167 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="luzes" />
-            <NODEREF id="piramide" />
-            <NODEREF id="arvores" />
-            <NODEREF id="chao" />
-            <NODEREF id="bancos" />
+            <NODEREF id="sun" />
+            <NODEREF id="mercury" />
+            <NODEREF id="venus" />
+            <NODEREF id="earth" />
+            <NODEREF id="mars" />
+            <NODEREF id="jupiter" />
+            <NODEREF id="saturn" />
+            <NODEREF id="uranus" />
+            <NODEREF id="neptun" />
         </DESCENDANTS>
-
     </NODE>
+
+    <NODE id="sun">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere1" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere2" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="venus">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere3" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="earth">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="earthmoon" />
+        <LEAF id="sphere4" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="marsmoon1" />
+        <NODERED id="marsmoon2" />
+        <LEAF id="sphere4" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="jupitermoon1" />
+        <NODERED id="jupitermoon2" />
+        <NODERED id="jupitermoon3" />
+        <NODERED id="jupitermoon4" />
+        <LEAF id="sphere5" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS> <!--
+        <NODEREF id="saturnmoon1" />
+        <NODEREF id="saturnmoon2" />
+        <NODEREF id="saturnmoon3" />
+        <NODEREF id="saturnmoon4" />
+        <NODEREF id="saturnmoon5" />
+        <NODEREF id="saturnmoon6" />
+        <NODEREF id="saturnmoon7" /> -->
+        <LEAF id="sphere6" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS> <!--
+        <NODEREF id="uranusmoon1" />
+        <NODERED id="uranusmoon2" />
+        <NODERED id="uranusmoon3" />
+        <NODERED id="uranusmoon4" />
+        <NODERED id="uranusmoon5" /> -->
+        <LEAF id="sphere7" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptun">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS> <!--
+        <NODEREF id="neptunmoon1" />
+        <NODERED id="neptunmoon2" /> -->
+        <LEAF id="sphere8" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="earthmoon">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere9" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="marsmoon1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere10" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="marsmoon2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere11" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="jupitermoon1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere12" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="jupitermoon2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere13" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="jupitermoon3">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere14" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE  id="jupitermoon4">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="sphere15" type="sphere" args="2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
 
 </NODES>
 
