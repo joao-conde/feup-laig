@@ -1572,3 +1572,13 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
 
 }
 
+MySceneGraph.prototype.update = function(currTime) {
+
+    for(node in this.nodes) {
+
+        this.nodes[node].update();
+
+    }
+
+}
+

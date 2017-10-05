@@ -276,8 +276,7 @@
         <SCALE sx="-1" sy="1" sz="1" />
 
         <DESCENDANTS>
-						<LEAF id="sphere1" type="sphere" args="2 20 20" />
-
+			<LEAF id="sphere1" type="sphere" args="2 20 20" />
         </DESCENDANTS>
 
     </NODE>

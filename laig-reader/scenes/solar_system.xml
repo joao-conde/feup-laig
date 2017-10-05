@@ -1,0 +1,149 @@
+<SCENE>
+
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="1.5" sy="1.5" sz="1.5" />
+    <reference length="5" />
+</INITIALS>
+
+
+<!-- Illumination and clear colour -->
+<ILLUMINATION>
+    <ambient r="0.3" g="0.3" b="0.3" a="1" />
+    <background r="0.1" g="0.1" b="0.1" a="1" />
+    <doubleside value = "1"/>
+</ILLUMINATION>
+
+
+<LIGHTS>
+	<LIGHT id="Sun Light">
+        <enable value ="1" />
+        <position  x="0" y="0" z="0" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+</LIGHTS>
+
+<TEXTURES>
+	<!-- sun texture -->
+    <TEXTURE id="sun_surface">
+      <file path="images/sunsurface.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- earth texture -->
+    <TEXTURE id="earth_surface">
+      <file path="images/earth.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <!-- earth moon texture -->
+    <TEXTURE id="earth_moon_surface">
+      <file path="images/moon.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+</TEXTURES>
+
+
+<MATERIALS>
+
+    <!-- A default material -->
+    <MATERIAL id="default_material">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Sun material -->
+      <MATERIAL id="sun_material">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="1.0" b="1.0" a="1" />
+    </MATERIAL>
+
+      <!-- Earth material -->
+      <MATERIAL id="earth_material">
+          <shininess value="1" />
+          <specular r="0.8" g="0.8" b="0.8" a="1" />
+          <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Moon material -->
+      <MATERIAL id="earth_moon_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+</MATERIALS>
+
+<!-- The nodes -->
+<NODES>
+
+    <ROOT id="root" />
+
+    <!-- The root node -->
+    <NODE id="root">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="sun" />
+            <NODEREF id="earth" />
+        </DESCENDANTS>
+    </NODE>
+
+    
+
+    <!-- The sun node -->
+    <NODE id="sun">
+        <MATERIAL id="sun_material" />
+        <TEXTURE id="sun_surface" />
+        <DESCENDANTS>
+            <LEAF id="sun_sphere" type="sphere" args="3 200 200" />
+        </DESCENDANTS>
+    </NODE> 
+
+
+
+    <!-- The earth node -->
+    <NODE id="earth">
+        <MATERIAL id="earth_material" />
+        <TEXTURE id="earth_surface" />
+        <TRANSLATION x="10" y="0" z="0" />
+        <DESCENDANTS>
+            <NODEREF id = "earth_moon"/>
+            <LEAF id="earth_sphere" type="sphere" args="1 200 200" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- The earthe moon node -->
+    <NODE id="earth_moon">
+        <MATERIAL id="earth_moon_material"/>
+        <TEXTURE id="earth_moon_surface"/>
+        <TRANSLATION x="-1" y="1" z="-1"/>
+        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
+        <DESCENDANTS>
+            <LEAF id="earth_moon_sphere_leaf" type="sphere" args="1 200 200"/>
+    </NODE>
+
+    
+
+
+</NODES>
+
+</SCENE>

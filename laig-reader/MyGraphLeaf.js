@@ -20,6 +20,7 @@ function MyGraphLeaf(graph, xmlelem) {
 	this.args = this.graph.reader.getString(xmlelem, 'args').split(" ");
 	this.primitive = null;
 
+
 	if(this.type == "rectangle") {
 
 		this.primitive = new MyRectangle(this.graph.scene,
@@ -58,7 +59,8 @@ function MyGraphLeaf(graph, xmlelem) {
 
 	else if(this.type == "sphere") {
 
-		this.primitive = new MySphere(this.graph.scene,
+		this.primitive = new MyWholeSphere(this.graph.scene,
+			
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]));

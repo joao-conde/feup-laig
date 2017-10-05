@@ -22,16 +22,14 @@
 
 	this.vertices = [];
 	this.normals = [];
-  this.indices = [];
-  this.texCoords = [];
+  	this.indices = [];
+  	this.texCoords = [];
 
 	var angleIterator = (1.0*Math.PI/2)/this.stacks;
 
 	for(stack = 0; stack <= this.stacks; stack++){
 
 		for(i = 0; i < this.slices; i++){
-
-			//Ponto 1
 
 			this.vertices.push(Math.cos(i*this.angle)*Math.cos(stack*angleIterator));
 			this.vertices.push(Math.sin(i*this.angle)*Math.cos(stack*angleIterator));
@@ -41,7 +39,7 @@
 			this.normals.push(Math.sin(i*this.angle)*Math.cos(stack*angleIterator));
 			this.normals.push(Math.sin(stack*angleIterator)); // corresponde ao raio da circunferencia da stack atual
 
-      this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
+      		this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
 
 		}
 

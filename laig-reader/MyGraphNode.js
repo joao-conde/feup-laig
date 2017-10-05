@@ -40,3 +40,16 @@ MyGraphNode.prototype.addChild = function(nodeID) {
 MyGraphNode.prototype.addLeaf = function(leaf) {
     this.leaves.push(leaf);
 }
+
+MyGraphNode.prototype.update = function(currTime) {
+
+    if(this.nodeID == "earth") {
+
+        this.graph.scene.pushMatrix();
+        this.graph.scene.rotateDeg(45,1,0,0);
+        this.leaves[0].display();
+        this.graph.scene.popMatrix();
+
+    }
+
+}

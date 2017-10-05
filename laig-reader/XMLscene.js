@@ -10,6 +10,8 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+
+    
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -141,25 +143,7 @@ XMLscene.prototype.display = function() {
         // Displays the scene.
         this.graph.displayScene();
 
-        /*
-
-        this.lightMaterial = new CGFappearance(this);
-        this.lightMaterial.setAmbient(0.0, 0.0, 0.0, 1.0);
-        this.lightMaterial.setDiffuse(0.5, 0.5, 0.5, 1.0);
-        this.lightMaterial.setSpecular(0.5, 0.5, 0.5, 1.0);
-        this.lightMaterial.setShininess(1);
-        this.lightMaterial.setEmission(0.0,0.0,0.0,1.0);
-
-
-        var sphere = new MySphere(this, 1,2048,30);
-        this.pushMatrix();
-        this.translate(0,4,0);
-        this.scale(3,3,3);
-        this.lightMaterial.apply();
-        sphere.display();
-        this.popMatrix();
-        */
-
+        this.setUpdatePeriod(100);
 
     }
 	else
@@ -168,8 +152,6 @@ XMLscene.prototype.display = function() {
 		this.axis.display();
 	}
     
-
-    this.popMatrix();
     
     // ---- END Background, camera and axis setup
     
@@ -177,4 +159,10 @@ XMLscene.prototype.display = function() {
 
 XMLscene.prototype.rotateDeg = function(ang, x, y, z) {
     this.rotate(ang * Math.PI / 180, x, y, z);
+}
+
+XMLscene.prototype.update = function(currTime) {
+
+    this.graph.update(currTime);
+
 }
