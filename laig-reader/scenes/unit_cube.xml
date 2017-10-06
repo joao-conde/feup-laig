@@ -137,135 +137,81 @@
         <TEXTURE id="null" />
 
         <DESCENDANTS>
-            <NODEREF id="sun" />
-            <NODEREF id="mercury" />
-            <NODEREF id="venus" />
-            <NODEREF id="earth" />
-            <NODEREF id="mars" />
-            <NODEREF id="jupiter" />
-            <NODEREF id="saturn" />
-            <NODEREF id="uranus" />
-            <NODEREF id="neptune" />
-            <NODEREF id="shuttle" />
+            <NODEREF id="unit_cube"/>
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="unit_cube">
+      <MATERIAL id="null"/>
+      <TEXTURE id= "sun_surface"/>
 
-    <NODE id="sun">
-        <MATERIAL id="sun_material" />
-        <TEXTURE id="sun_surface" />
-        <DESCENDANTS>
-            <LEAF id="sun_sphere" type="sphere" args="3 200 200" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="unit_cube_face1"/>
+        <NODEREF id="unit_cube_face2"/>
+        <NODEREF id="unit_cube_face3"/>
+        <NODEREF id="unit_cube_face4"/>
+        <NODEREF id="unit_cube_face5"/>
+        <NODEREF id="unit_cube_face6"/>
+      </DESCENDANTS>
     </NODE>
 
-
-    <NODE id="mercury">
-        <MATERIAL id="mercury_material" />
-        <TEXTURE id="mercury_surface" />
-        <TRANSLATION x="5" y="0" z="0" />
-        <DESCENDANTS>
-            <LEAF id="mercury_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
+    <NODE id="unit_cube_face1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <TRANSLATION x="0" y="0" z="1"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face1_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
-    <NODE id="venus">
-        <MATERIAL id="null" />
-        <TEXTURE id="venus_surface" />
-        <TRANSLATION x="5" y="5" z="0" />
-        <DESCENDANTS>
-            <LEAF id="venus_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
+    <NODE id="unit_cube_face2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <ROTATION axis="y" angle="-90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face2_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
-
-    <NODE id="earth">
-        <MATERIAL id="earth_material" />
-        <TEXTURE id="earth_surface" />
-        <TRANSLATION x="10" y="0" z="0" />
-        <DESCENDANTS>
-            <NODEREF id = "earth_moon"/>
-            <LEAF id="earth_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
+    <NODE id="unit_cube_face3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face3_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
-    <NODE id="earth_moon">
-        <MATERIAL id="earth_moon_material"/>
-        <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="-1" y="1" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
-        <DESCENDANTS>
-            <LEAF id="earth_moon_sphere_leaf" type="sphere" args="1 200 200"/>
-        </DESCENDANTS>
+    <NODE id="unit_cube_face4">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <TRANSLATION x="1" y="0" z="1"/>
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face4_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
-    <NODE id="mars">
-        <MATERIAL id="null" />
-        <TEXTURE id="mars_surface" />
-        <TRANSLATION x="5" y="5" z="10" />
-        <DESCENDANTS>
-            <NODEREF id="mars_moon1" />
-            <NODEREF id="mars_moon2" />
-            <LEAF id="mars_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
+    <NODE id="unit_cube_face5">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <TRANSLATION x="1" y="0" z="0"/>
+      <ROTATION axis="y" angle="180"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face5_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
-    <NODE id="mars_moon1">
-        <MATERIAL id="null"/>
-        <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="-1" y="1" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
-        <DESCENDANTS>
-            <LEAF id="mars_moon1_sphere" type="sphere" args="1 200 200"/>
-        </DESCENDANTS>
+    <NODE id="unit_cube_face6">
+      <MATERIAL id="null"/>
+      <TEXTURE id="sun_surface"/>
+      <TRANSLATION x="0" y="1" z="0"/>
+      <ROTATION axis="x" angle="-90"/>
+      <TRANSLATION x="0" y="-1" z="0"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face6_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
     </NODE>
-
-    <NODE id="mars_moon2">
-        <MATERIAL id="null"/>
-        <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="1" y="0" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
-        <DESCENDANTS>
-            <LEAF id="mars_moon2_sphere" type="sphere" args="1 200 200"/>
-        </DESCENDANTS>
-    </NODE>
-
-    <NODE id="jupiter">
-        <MATERIAL id="null" />
-        <TEXTURE id="jupiter_surface" />
-        <TRANSLATION x="-5" y="0" z="10" />
-        <DESCENDANTS>
-            <LEAF id="jupiter_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
-    </NODE>
-
-    <NODE id="saturn">
-        <MATERIAL id="null" />
-        <TEXTURE id="saturn_surface" />
-        <TRANSLATION x="0" y="-5" z="10" />
-        <DESCENDANTS>
-            <LEAF id="saturn_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
-    </NODE>
-
-    <NODE id="uranus">
-        <MATERIAL id="null" />
-        <TEXTURE id="uranus_surface" />
-        <TRANSLATION x="-5" y="-5" z="10" />
-        <DESCENDANTS>
-            <LEAF id="uranus_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
-    </NODE>
-
-    <NODE id="neptune">
-        <MATERIAL id="null" />
-        <TEXTURE id="neptune_surface" />
-        <TRANSLATION x="-5" y="5" z="0" />
-        <DESCENDANTS>
-            <LEAF id="neptune_sphere" type="sphere" args="1 200 200" />
-        </DESCENDANTS>
-    </NODE>
-
 
 </NODES>
 
