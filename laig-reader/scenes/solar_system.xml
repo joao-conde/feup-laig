@@ -172,7 +172,7 @@
     <NODE id="venus">
         <MATERIAL id="null" />
         <TEXTURE id="venus_surface" />
-        <TRANSLATION x="5" y="5" z="0" />
+        <TRANSLATION x="7.5" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="venus_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
@@ -202,7 +202,7 @@
     <NODE id="mars">
         <MATERIAL id="null" />
         <TEXTURE id="mars_surface" />
-        <TRANSLATION x="5" y="5" z="10" />
+        <TRANSLATION x="12.5" y="0" z="0" />
         <DESCENDANTS>
             <NODEREF id="mars_moon1" />
             <NODEREF id="mars_moon2" />
@@ -233,7 +233,7 @@
     <NODE id="jupiter">
         <MATERIAL id="null" />
         <TEXTURE id="jupiter_surface" />
-        <TRANSLATION x="-5" y="0" z="10" />
+        <TRANSLATION x="15" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="jupiter_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
@@ -242,7 +242,7 @@
     <NODE id="saturn">
         <MATERIAL id="null" />
         <TEXTURE id="saturn_surface" />
-        <TRANSLATION x="0" y="-5" z="10" />
+        <TRANSLATION x="17.5" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="saturn_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
@@ -251,7 +251,7 @@
     <NODE id="uranus">
         <MATERIAL id="null" />
         <TEXTURE id="uranus_surface" />
-        <TRANSLATION x="-5" y="-5" z="10" />
+        <TRANSLATION x="20" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="uranus_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
@@ -260,7 +260,7 @@
     <NODE id="neptune">
         <MATERIAL id="null" />
         <TEXTURE id="neptune_surface" />
-        <TRANSLATION x="-5" y="5" z="0" />
+        <TRANSLATION x="22.5" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="neptune_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
