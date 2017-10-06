@@ -17,7 +17,7 @@
 </ILLUMINATION>
 
 <LIGHTS>
-	<LIGHT id="sun_light">
+	<LIGHT id="light1">
         <enable value ="1" />
         <position  x="0" y="0" z="0" w="1" />
         <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
@@ -27,56 +27,10 @@
 </LIGHTS>
 
 <TEXTURES>
-    <TEXTURE id="sun_surface">
-      <file path="images/sunsurface.jpg" />
-      <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="earth_surface">
-      <file path="images/earth.jpg" />
-      <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="earth_moon_surface">
-      <file path="images/moon.jpg" />
-      <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="mercury_surface">
-      <file path="images/mercury_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="venus_surface">
-      <file path="images/venus_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="mars_surface">
-      <file path="images/mars_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="jupiter_surface">
-      <file path="images/jupiter_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="saturn_surface">
-      <file path="images/saturn_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="uranus_surface">
-      <file path="images/uranus_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
-    <TEXTURE id="neptune_surface">
-      <file path="images/neptune_surface.jpg"/>
-      <amplif_factor s="1" t="1"/>
-    </TEXTURE>
-
+  <TEXTURE id="vidral">
+      <file path="images/vidral.jpg" />
+      <amplif_factor s="15" t="10" />
+  </TEXTURE>
 </TEXTURES>
 
 <MATERIALS>
@@ -90,42 +44,6 @@
         <emission r="0.5" g="0.5" b="0.5" a="1" />
     </MATERIAL>
 
-    <!-- Sun material -->
-      <MATERIAL id="sun_material">
-        <shininess value="100" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
-        <emission r="1.0" g="1.0" b="1.0" a="1" />
-    </MATERIAL>
-
-      <!-- Earth material -->
-      <MATERIAL id="earth_material">
-          <shininess value="1" />
-          <specular r="0.8" g="0.8" b="0.8" a="1" />
-          <diffuse r="0.8" g="0.8" b="0.8" a="1" />
-          <ambient r="0" g="0" b="0" a="1" />
-          <emission r="0.0" g="0.0" b="0.0" a="1" />
-      </MATERIAL>
-
-      <!-- Moon material -->
-      <MATERIAL id="earth_moon_material">
-          <shininess value="1" />
-          <specular r="1.0" g="1.0" b="1.0" a="1" />
-          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
-          <ambient r="0" g="0" b="0" a="1" />
-          <emission r="0.0" g="0.0" b="0.0" a="1" />
-      </MATERIAL>
-
-      <!-- Mercury material -->
-      <MATERIAL id="mercury_material">
-          <shininess value="1" />
-          <specular r="1.0" g="1.0" b="1.0" a="1" />
-          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
-          <ambient r="0" g="0" b="0" a="1" />
-          <emission r="0.0" g="0.0" b="0.0" a="1" />
-      </MATERIAL>
-
 </MATERIALS>
 
 <NODES>
@@ -134,7 +52,7 @@
 
     <NODE id="root">
         <MATERIAL id="default_material" />
-        <TEXTURE id="null" />
+        <TEXTURE id="vidral" />
 
         <DESCENDANTS>
             <NODEREF id="unit_cube"/>
@@ -143,7 +61,7 @@
 
     <NODE id="unit_cube">
       <MATERIAL id="null"/>
-      <TEXTURE id= "sun_surface"/>
+      <TEXTURE id= "null"/>
 
       <DESCENDANTS>
         <NODEREF id="unit_cube_face1"/>
@@ -157,7 +75,7 @@
 
     <NODE id="unit_cube_face1">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <TRANSLATION x="0" y="0" z="1"/>
       <DESCENDANTS>
         <LEAF id="unit_cube_face1_rectangle" type="rectangle" args="0 1 1 0"/>
@@ -166,7 +84,7 @@
 
     <NODE id="unit_cube_face2">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <ROTATION axis="y" angle="-90"/>
       <DESCENDANTS>
         <LEAF id="unit_cube_face2_rectangle" type="rectangle" args="0 1 1 0"/>
@@ -175,7 +93,7 @@
 
     <NODE id="unit_cube_face3">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <ROTATION axis="x" angle="90"/>
       <DESCENDANTS>
         <LEAF id="unit_cube_face3_rectangle" type="rectangle" args="0 1 1 0"/>
@@ -184,7 +102,7 @@
 
     <NODE id="unit_cube_face4">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <TRANSLATION x="1" y="0" z="1"/>
       <ROTATION axis="y" angle="90"/>
       <DESCENDANTS>
@@ -194,7 +112,7 @@
 
     <NODE id="unit_cube_face5">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <TRANSLATION x="1" y="0" z="0"/>
       <ROTATION axis="y" angle="180"/>
       <DESCENDANTS>
@@ -204,7 +122,7 @@
 
     <NODE id="unit_cube_face6">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <TRANSLATION x="0" y="1" z="0"/>
       <ROTATION axis="x" angle="-90"/>
       <TRANSLATION x="0" y="-1" z="0"/>
