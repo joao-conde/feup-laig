@@ -1,0 +1,213 @@
+<SCENE>
+
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.3" sy="0.3" sz="0.3" />
+    <reference length="5" />
+</INITIALS>
+
+<ILLUMINATION>
+    <ambient r="0.5" g="0.5" b="0.5" a="1" />
+    <background r="0.1" g="0.1" b="0.1" a="1" />
+    <doubleside value = "1"/>
+</ILLUMINATION>
+
+<LIGHTS>
+	<LIGHT id="light0">
+        <enable value ="1" />
+        <position  x="0" y="10" z="0" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light1">
+        <enable value ="1" />
+        <position x="30" y="10" z="0" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light2">
+        <enable value ="1" />
+        <position x="0" y="10" z="20" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light3">
+        <enable value ="1" />
+        <position x="30" y="10" z="20" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+</LIGHTS>
+
+<TEXTURES>
+
+    <TEXTURE id="whitemetal">
+        <file path="images/whitemetal.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="stripes">
+        <file path="images/whiteblackstripes.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="wings">
+        <file path="images/wings.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="cockpit">
+        <file path="images/cockpit.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+</TEXTURES>
+
+<MATERIALS>
+    <MATERIAL id="defaultMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+</MATERIALS>
+
+<LEAVES>
+</LEAVES>
+
+<NODES>
+
+    <ROOT id="root" />
+
+    <NODE id="root">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="whitemetal" />
+        <DESCENDANTS>
+          <NODEREF id ="shuttle" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_wings" />
+          <NODEREF id="shuttle_body" />
+          <NODEREF id="shuttle_rockets"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_body">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+					<NODEREF id="shuttle_cockpit" />
+          <NODEREF id="shuttle_cargo" />
+		    </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cockpit">
+        <MATERIAL id="null" />
+        <TEXTURE id="cockpit" />
+
+        <DESCENDANTS>
+          <LEAF id="cockpit_cylinder" type="cylinder" args="3 2 1 200 200 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cargo">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-6" />
+
+        <DESCENDANTS>
+          <LEAF id="cargo_cylinder" type="cylinder" args="6 2 2 20 20 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_wings">
+        <MATERIAL id="null" />
+        <TEXTURE id="wings" />
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_leftW" />
+          <NODEREF id="shuttle_rightW" />
+          <NODEREF id="shuttle_topW" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_topW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+          <TRANSLATION x="0" y="2" z="-5" />
+          <ROTATION axis="z" angle="90"/>
+
+        <DESCENDANTS>
+          <LEAF id="leftW_triangle" type="triangle" args="4 0 0 0 0 3 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_leftW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+          <TRANSLATION x="0" y="-2" z="-5" />
+
+        <DESCENDANTS>
+          <LEAF id="leftW_triangle" type="triangle" args="6 0 0 0 0 5 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rightW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-2" z="-5" />
+        <ROTATION axis="z" angle="180" />
+
+        <DESCENDANTS>
+          <LEAF id="rightW_triangle" type="triangle" args="6 0 0 0 0 5 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rockets">
+        <MATERIAL id="null" />
+        <TEXTURE id="stripes" />
+
+        <TRANSLATION x="0" y="0" z="-7"/>
+
+        <DESCENDANTS>
+          <LEAF id="rocket_cone" type="cylinder" args="2 2 1 200 200 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+</NODES>
+
+</SCENE>

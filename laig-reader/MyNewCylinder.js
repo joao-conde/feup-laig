@@ -9,7 +9,7 @@
  	this.topRadius = topRadius;
 	this.slices = slices;
 	this.stacks = stacks;
-	this.angle = 2*Math.PI*1.0/slices;
+	this.angle = 2*Math.PI*1.0/slices * 1.01;
 
 	this.topCap = topCap;
  	this.bottomCap = bottomCap;
@@ -62,8 +62,8 @@
 			this.normals.push(Math.sin(i*this.angle) * radius);
 			this.normals.push(radius);
 
-			//this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
-			this.texCoords.push(stack,i);
+			this.texCoords.push(this.patchWidth*i, 1 - (this.patchHeight * stack));
+			//this.texCoords.push(stack,i);
 			
 		}
 
@@ -142,8 +142,8 @@
 
 		for(i = 0; i < this.slices; i++){
 
-	    	this.texCoords.push((((Math.cos(i*this.angle))/2) * this.slices + 0.5) , ((Math.sin(i*this.angle)) /2) * this.slices + 0.5); // repeat texture in base cap
-	    	//this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5); //stretch textura in base cap
+	    	//this.texCoords.push((((Math.cos(i*this.angle))/2) * this.slices + 0.5) , ((Math.sin(i*this.angle)) /2) * this.slices + 0.5); // repeat texture in base cap
+	    	this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5); //stretch textura in base cap
 	  	}
 	  	
 	}
@@ -187,8 +187,8 @@
 		}
 
 		for(i = 0; i < this.slices; i++){
-	    	this.texCoords.push((((Math.cos(i*this.angle))/2) * this.slices + 0.5) , ((Math.sin(i*this.angle)) /2) * this.slices + 0.5); // repeat texture in top cap
-	    	//this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5); //stretch textura in top cap
+	    	//this.texCoords.push((((Math.cos(i*this.angle))/2) * this.slices + 0.5) , ((Math.sin(i*this.angle)) /2) * this.slices + 0.5); // repeat texture in top cap
+	    	this.texCoords.push(((Math.cos(i*this.angle))/2) + 0.5 , ((Math.sin(i*this.angle)) /2) + 0.5); //stretch textura in top cap
 	  	}
 
 

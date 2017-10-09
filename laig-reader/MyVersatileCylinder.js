@@ -6,12 +6,12 @@
  */
 
 
-function MyVersatileCylinder(scene, height, bottomRadius, topRadius, slices, stacks) {
+function MyVersatileCylinder(scene, height, bottomRadius, topRadius, slices, stacks, topCap, bottomCap) {
 	CGFobject.call(this,scene);
 
 	this.scene = scene;
 	this.height = height;
-	this.body = new MyNewCylinder(scene, bottomRadius, topRadius, slices, stacks)
+	this.body = new MyNewCylinder(scene, bottomRadius, topRadius, slices, stacks, topCap, bottomCap);
 
 
 };
