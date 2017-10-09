@@ -62,8 +62,33 @@
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <TEXTURE id="jupiter_moon1_surface">
+      <file path="images/jupiter_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon2_surface">
+      <file path="images/jupiter_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon3_surface">
+      <file path="images/jupiter_moon_3.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
     <TEXTURE id="saturn_surface">
       <file path="images/saturn_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon1_surface">
+      <file path="images/saturn_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon2_surface">
+      <file path="images/saturn_moon_2.png"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
@@ -72,8 +97,28 @@
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <TEXTURE id="uranus_moon1_surface">
+      <file path="images/uranus_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_moon2_surface">
+      <file path="images/uranus_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
     <TEXTURE id="neptune_surface">
       <file path="images/neptune_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_1_surface">
+      <file path="images/neptune_moons.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_2_surface">
+      <file path="images/neptune_moon_2.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
@@ -214,8 +259,8 @@
     <NODE id="earth_moon">
         <MATERIAL id="earth_moon_material"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="-1" y="1" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
+        <TRANSLATION x="0" y="5" z="0"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="earth_moon_sphere_leaf" type="sphere" args="1 200 200"/>
         </DESCENDANTS>
@@ -235,8 +280,8 @@
     <NODE id="mars_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="-1" y="1" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
+        <TRANSLATION x="0" y="-4" z="0"/>
+        <SCALE sx="0.3" sy="0.3" sz="0.3"/>
         <DESCENDANTS>
             <LEAF id="mars_moon1_sphere" type="sphere" args="1 200 200"/>
         </DESCENDANTS>
@@ -245,8 +290,8 @@
     <NODE id="mars_moon2">
         <MATERIAL id="null"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="1" y="0" z="-1"/>
-        <SCALE sx="0.1" sy="0.1" sz="0.1"/>
+        <TRANSLATION x="4" y="0" z="0"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="mars_moon2_sphere" type="sphere" args="1 200 200"/>
         </DESCENDANTS>
@@ -257,9 +302,39 @@
         <TEXTURE id="jupiter_surface" />
         <TRANSLATION x="90" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
-
         <DESCENDANTS>
+            <NODEREF id="jupiter_moon1"/>
+            <NODEREF id="jupiter_moon2"/>
+            <NODEREF id="jupiter_moon3"/>
             <LEAF id="jupiter_sphere" type="sphere" args="9 200 200" />
+        </DESCENDANTS>
+    </NODE>
+
+     <NODE id="jupiter_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon1_surface"/>
+        <TRANSLATION x="0" y="12" z="0"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon1_sphere" type="sphere" args="1 200 200"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon2_surface"/>
+        <TRANSLATION x="0" y="0" z="13"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon2_sphere" type="sphere" args="1.5 200 200"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon3">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon3_surface"/>
+        <TRANSLATION x="0" y="0" z="-13"/>
+        <SCALE sx="0.8" sy="0.8" sz="0.8"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon3_sphere" type="sphere" args="1 200 200"/>
         </DESCENDANTS>
     </NODE>
 
@@ -270,7 +345,27 @@
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <LEAF id="saturn_sphere" type="sphere" args="9 200 200" />
+            <NODEREF id="saturn_moon1"/>
+            <NODEREF id="saturn_moon2"/>
+            <LEAF id="saturn_sphere" type="sphere" args="8.5 200 200" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="saturn_moon1_surface"/>
+        <TRANSLATION x="0" y="0" z="-11"/>
+        <DESCENDANTS>
+            <LEAF id="saturn_moon_1_sphere" type="sphere" args="1.1 200 200"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="saturn_moon2_surface"/>
+        <TRANSLATION x="0" y="-8" z="8"/>
+        <DESCENDANTS>
+            <LEAF id="mars_moon2_sphere" type="sphere" args="1.5 200 200"/>
         </DESCENDANTS>
     </NODE>
 
@@ -279,9 +374,30 @@
         <TEXTURE id="uranus_surface" />
         <TRANSLATION x="140" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
-
         <DESCENDANTS>
+            <NODEREF id="uranus_moon1"/>
+            <NODEREF id="uranus_moon2"/>
             <LEAF id="uranus_sphere" type="sphere" args="6 200 200" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="uranus_moon1_surface"/>
+        <TRANSLATION x="0" y="5" z="-5"/>
+        <SCALE sx="0.3" sy="0.3" sz="0.3"/>
+        <DESCENDANTS>
+            <LEAF id="uranus_moon1_sphere" type="sphere" args="1.1 200 200"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="uranus_moon2_surface"/>
+        <TRANSLATION x="0" y="-5" z="-5"/>
+        <SCALE sx="0.7" sy="0.8" sz="0.6"/>
+        <DESCENDANTS>
+            <LEAF id="uranus_moon2_sphere" type="sphere" args="1 200 200"/>
         </DESCENDANTS>
     </NODE>
 
@@ -292,7 +408,29 @@
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
+            <NODEREF id="neptune_moon1"/>
+            <NODEREF id="neptune_moon2"/>
             <LEAF id="neptune_sphere" type="sphere" args="6 200 200" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="neptune_moon_1_surface"/>
+        <TRANSLATION x="0" y="6" z="-6"/>
+        <SCALE sx="0.7" sy="0.5" sz="0.5"/>
+        <DESCENDANTS>
+            <LEAF id="neptune_moon1_sphere" type="sphere" args="1.1 200 200"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="neptune_moon_2_surface"/>
+        <TRANSLATION x="0" y="6" z="6"/>
+        <SCALE sx="0.6" sy="0.8" sz="0.6"/>
+        <DESCENDANTS>
+            <LEAF id="neptune_moon2_sphere" type="sphere" args="2 200 200"/>
         </DESCENDANTS>
     </NODE>
 

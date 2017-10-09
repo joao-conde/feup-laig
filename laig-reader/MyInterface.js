@@ -6,7 +6,7 @@ function MyInterface() {
     //call CGFinterface constructor 
     CGFinterface.call(this);
 }
-;
+
 
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
@@ -25,7 +25,17 @@ MyInterface.prototype.init = function(application) {
     this.gui = new dat.GUI();
 
     // add a group of controls (and open/expand by defult)
-    
+    var group = this.gui.addFolder("Transforms");
+    group.open();
+    var zoomController = group.add(this.scene, 'zoom', 1, 20).name("Zoom").step(0.1);
+    zoomController.scene = this.scene;
+
+    zoomController.onChange(function(newValue) {
+
+        this.scene.zoom = newValue;
+
+    });
+
     return true;
 };
 
@@ -46,5 +56,8 @@ MyInterface.prototype.addLightsGroup = function(lights) {
             group.add(this.scene.lightValues, key);
         }
     }
+
+    
+    
 }
 

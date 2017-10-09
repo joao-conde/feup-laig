@@ -1541,9 +1541,6 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
 
         this.scene.pushMatrix();
         this.processNode(node.children[i], materialID, textureID);
-
-        //console.log(this.textures[node.children[i].textureID]);
-
         this.scene.popMatrix();
 
     }

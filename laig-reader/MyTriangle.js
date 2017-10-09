@@ -87,11 +87,6 @@ MyTriangle.prototype.setScaleFactor = function(afs, aft) {
 
   	];
 
-	console.log("depois");
-	console.log(this.texCoords);
-
-
-
 	this.updateTexCoordsGLBuffers();
 
 }

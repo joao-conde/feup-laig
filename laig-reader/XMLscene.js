@@ -7,9 +7,11 @@ var DEGREE_TO_RAD = Math.PI / 180;
 function XMLscene(interface) {
     CGFscene.call(this);
 
-    this.interface = interface;
+    this.zoom = 1;
 
+    this.interface = interface;
     this.lightValues = {};
+
 
     
 }
@@ -141,6 +143,7 @@ XMLscene.prototype.display = function() {
         }
 
         // Displays the scene.
+        this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
         this.setUpdatePeriod(100);
