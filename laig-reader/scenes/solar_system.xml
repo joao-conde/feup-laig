@@ -183,8 +183,10 @@
         <MATERIAL id="earth_material" />
         <TEXTURE id="earth_surface" />
         <TRANSLATION x="10" y="0" z="0" />
+        <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
             <NODEREF id = "earth_moon"/>
+            <NODEREF id="space_station"/>
             <LEAF id="earth_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
     </NODE>
@@ -265,6 +267,119 @@
             <LEAF id="neptune_sphere" type="sphere" args="1 200 200" />
         </DESCENDANTS>
     </NODE>
+
+    <NODE id="unit_cube">
+      <MATERIAL id="null"/>
+      <TEXTURE id= "null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="unit_cube_face1"/>
+        <NODEREF id="unit_cube_face2"/>
+        <NODEREF id="unit_cube_face3"/>
+        <NODEREF id="unit_cube_face4"/>
+        <NODEREF id="unit_cube_face5"/>
+        <NODEREF id="unit_cube_face6"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="1"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face1_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <ROTATION axis="y" angle="-90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face2_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <ROTATION axis="x" angle="90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face3_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face4">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="1" y="0" z="1"/>
+      <ROTATION axis="y" angle="90"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face4_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face5">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="1" y="0" z="0"/>
+      <ROTATION axis="y" angle="180"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face5_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="unit_cube_face6">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="1" z="0"/>
+      <ROTATION axis="x" angle="-90"/>
+      <TRANSLATION x="0" y="-1" z="0"/>
+      <DESCENDANTS>
+        <LEAF id="unit_cube_face6_rectangle" type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="space_station">
+      <MATERIAL id = "null"/>
+      <TEXTURE id="clear"/>
+      <TRANSLATION x="0" y="0" z="1"/>
+      <SCALE sx="0.1" sy="0.1" sz="0.1"/>
+      <DESCENDANTS>
+        <NODEREF id="space_station_body"/>
+        <!--<NODEREF id="space_station_sides"/>-->
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="space_station_body">
+      <MATERIAL id = "null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <NODEREF id="space_station_upper_body"/>
+        <NODEREF id="space_station_lower_body"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="space_station_upper_body">
+      <MATERIAL id = "null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <LEAF id ="space_station_upper_body_cylinder" type="cylinder" args = "2 1 1 100 100 1 1"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="space_station_lower_body">
+      <MATERIAL id = "null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="-2"/> 
+      <DESCENDANTS>
+        <LEAF id ="space_station_lowers_body_cylinder" type="cylinder" args = "2 1 1 100 100 1 1"/>
+      </DESCENDANTS>
+    </NODE>
+
+
+
 
 
 </NODES>

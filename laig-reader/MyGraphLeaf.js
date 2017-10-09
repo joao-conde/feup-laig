@@ -3,22 +3,15 @@
  * @constructor
 **/
 
-
-/*
-function MyGraphLeaf(graph,xmlelem,type,args) {
-  this.graph = graph;
-  this.id = xmlelem;
-  this.primitive = type;
-  this.vertexes = args;
-}
-*/
-
 function MyGraphLeaf(graph, xmlelem) {
 
 	this.graph = graph;
 	this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
 	this.args = this.graph.reader.getString(xmlelem, 'args').split(" ");
 	this.primitive = null;
+
+	this.afs = 1;
+	this.aft = 1;
 
 
 	if(this.type == "rectangle") {
@@ -27,8 +20,7 @@ function MyGraphLeaf(graph, xmlelem) {
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]),
-			parseInt(this.args[3])
-			);
+			parseInt(this.args[3]));
 
 	}
 
@@ -53,7 +45,9 @@ function MyGraphLeaf(graph, xmlelem) {
 			parseInt(this.args[1]),
 			parseInt(this.args[2]),
 			parseInt(this.args[3]),
-			parseInt(this.args[4]));
+			parseInt(this.args[4]),
+			parseInt(this.args[5]),
+			parseInt(this.args[6]));
 
 	}
 
@@ -71,6 +65,14 @@ function MyGraphLeaf(graph, xmlelem) {
 
 MyGraphLeaf.prototype.constructor = MyGraphLeaf;
 MyGraphLeaf.prototype = Object.create(MyGraphLeaf.prototype);
+
+MyGraphLeaf.prototype.setScaleFactor = function(afs, aft) {
+
+	if(this.type == "rectangle" || this.type == "triangle") {
+		this.primitive.setScaleFactor(afs,aft);
+	}
+
+}
 
 
 MyGraphLeaf.prototype.display = function() {

@@ -21,7 +21,7 @@
 
 	this.radius = radius;
 
-	this.angle = 2*Math.PI*1.0/this.slices;
+	this.angle = (2*Math.PI*1.0/this.slices)*1.01;
 
   	this.patchWidth = 1.0 / this.slices;
   	this.patchHeight = 1.0 / this.stacks;
@@ -45,14 +45,15 @@
 
 		for(var slice = 0; slice < this.slices; slice++){
 
-			var x = Math.sin(slice*this.angle)*Math.sin(stack*angleIterator) * this.radius;
-			var y = Math.cos(stack*angleIterator) * this.radius;//* side; // corresponde ao raio da circunferencia da stack atual
-			var z = Math.cos(slice*this.angle) * Math.sin(stack*angleIterator) * this.radius;
+			var multWidth = slice*this.angle;
+			var multHeight = stack*angleIterator;
+
+			var x = Math.sin(multWidth)*-Math.sin(multHeight) * this.radius;
+			var z = Math.cos(multHeight) * this.radius;//* side; // corresponde ao raio da circunferencia da stack atual
+			var y = Math.cos(multWidth) * Math.sin(multHeight) * this.radius;
 
 			this.vertices.push(x,y,z);
 			this.normals.push(x,y,z);
-
-			
 
 		}
 
@@ -65,7 +66,8 @@
 			var texCoordS = slice == this.slices - 1 ? 1 : this.patchWidth*slice;
 			var texCoordT = stack == this.stacks ? 1 : this.patchHeight * stack;
 
-      		this.texCoords.push(texCoordS,texCoordT);
+			this.texCoords.push(texCoordS,texCoordT); //stretch
+      		//this.texCoords.push(texCoordS*this.slices,texCoordT*this.stacks); //repeat
 
 		}
 
@@ -89,8 +91,6 @@
 		}
 
 	}
-
-	var currentVerticesBases = this.vertices.length;
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();

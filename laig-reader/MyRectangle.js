@@ -24,8 +24,9 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 	this.minT = this.leftBottomY;
 	this.maxT = this.leftTopY;
 
-
 	this.initBuffers();
+
+
 };
 
  MyRectangle.prototype = Object.create(CGFobject.prototype); 
@@ -54,6 +55,7 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 		0, 0, 1
 	];
 
+	
 	this.texCoords = [
 
 		this.minS, this.maxT,
@@ -62,6 +64,21 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 		this.maxS, this.minT
 
 	];
-
+	
 	this.initGLBuffers();
 };
+
+MyRectangle.prototype.setScaleFactor = function(afs, aft) {
+
+	this.texCoords = [
+
+		this.minS, this.maxT/aft,
+		this.maxS/afs, this.maxT/aft,
+		this.minS, this.minT,
+		this.maxS/afs, this.minT
+
+	];
+
+	this.updateTexCoordsGLBuffers();
+
+}

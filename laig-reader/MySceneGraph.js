@@ -1556,10 +1556,18 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
 
             var material = this.materials[materialID];
 
-             if(textureID != null && textureID != "clear") {
+             if(textureID != null) {
                 //texture[0].bind(1);
-                var texture = this.textures[textureID];
-                material.setTexture(texture[0]);
+
+                if(textureID == "clear") {
+                    material.setTexture(null);
+                }
+                else {
+                    var texture = this.textures[textureID];
+                    node.leaves[i].setScaleFactor(texture[1], texture[2]);
+                    material.setTexture(texture[0]);
+                }
+
              }
                 
             this.materials[materialID].apply();
