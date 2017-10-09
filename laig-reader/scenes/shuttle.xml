@@ -105,6 +105,8 @@
         <MATERIAL id="null"/>
         <TEXTURE id="null"/>
 
+        <SCALE sx="1.5" sy="1.5" sz="1.5"/>
+
         <DESCENDANTS>
           <NODEREF id="shuttle_wings" />
           <NODEREF id="shuttle_body" />
@@ -115,7 +117,7 @@
 
     <NODE id="shuttle_body">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="whitemetal" />
 
         <DESCENDANTS>
 					<NODEREF id="shuttle_cockpit" />
@@ -126,7 +128,7 @@
 
     <NODE id="shuttle_cockpit">
         <MATERIAL id="null" />
-        <TEXTURE id="cockpit" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
           <LEAF id="cockpit_cylinder" type="cylinder" args="3 2 1 200 200 1 1" />
@@ -148,7 +150,7 @@
 
     <NODE id="shuttle_wings">
         <MATERIAL id="null" />
-        <TEXTURE id="wings" />
+        <TEXTURE id="null" />
 
         <DESCENDANTS>
           <NODEREF id="shuttle_leftW" />
@@ -162,23 +164,47 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-          <TRANSLATION x="0" y="2" z="-5" />
-          <ROTATION axis="z" angle="90"/>
+        <TRANSLATION x="0.5" y="1.5" z="-5"/>
+        <SCALE sx="0.5" sy="0.4" sz="0.5"/>
+        <ROTATION axis="z" angle="90"/>
 
         <DESCENDANTS>
-          <LEAF id="leftW_triangle" type="triangle" args="4 0 0 0 0 3 0 0 0" />
+          <NODEREF id="topwing"/>
         </DESCENDANTS>
 
+    </NODE>
+
+
+    <NODE id="topwing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="pyramid_twing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_twing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF id="pyramid_twing_triangle1" type="triangle" args="8 1 0 0 0 6 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle2" type="triangle" args="8 1 0 0 2 6 0 2 0"/>
+        <LEAF id="pyramid_twing_triangle3" type="triangle" args="8 1 0 0 2 0 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle4" type="triangle" args="0 0 6 0 2 6 8 1 0"/>
+      </DESCENDANTS>
     </NODE>
 
     <NODE id="shuttle_leftW">
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-          <TRANSLATION x="0" y="-2" z="-5" />
+          <TRANSLATION x="0" y="-1.70" z="-5" />
+          <SCALE sx="1.5" sy="1" sz="2"/>
 
         <DESCENDANTS>
-          <LEAF id="leftW_triangle" type="triangle" args="6 0 0 0 0 5 0 0 0" />
+          <NODEREF id="wing" />
         </DESCENDANTS>
 
     </NODE>
@@ -187,11 +213,11 @@
         <MATERIAL id="null" />
         <TEXTURE id="null" />
 
-        <TRANSLATION x="0" y="-2" z="-5" />
-        <ROTATION axis="z" angle="180" />
+        <TRANSLATION x="0" y="-1.70" z="-5" />
+        <SCALE sx="-1.5" sy="1" sz="2"/>
 
         <DESCENDANTS>
-          <LEAF id="rightW_triangle" type="triangle" args="6 0 0 0 0 5 0 0 0" />
+          <NODEREF id="wing" />
         </DESCENDANTS>
 
     </NODE>
@@ -206,6 +232,25 @@
           <LEAF id="rocket_cone" type="cylinder" args="2 2 1 200 200 1 1" />
         </DESCENDANTS>
 
+    </NODE>
+
+    <NODE id="wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="pyramid_wing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="pyramid_wing_triangle1" type="triangle" args="4 0 0 0 0 3 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle2" type="triangle" args="4 0 0 0 1 3 0 1 0"/>
+        <LEAF id="pyramid_wing_triangle3" type="triangle" args="4 0 0 0 1 0 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle4" type="triangle" args="0 0 3 0 1 3 4 0 0"/>
+      </DESCENDANTS>
     </NODE>
 
 </NODES>
