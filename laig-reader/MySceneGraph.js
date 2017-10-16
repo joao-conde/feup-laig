@@ -1417,27 +1417,47 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 else
 					if (descendants[j].nodeName == "LEAF")
 					{
-						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+						var type=this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
                         
 						if (type != null)
 							this.log("   Leaf: "+ type);
-						else
-							this.warn("Error in leaf");
+                        else
+                            this.warn("Error in leaf");
 
-                        var leaf = new MyGraphLeaf(this, descendants[j]);
+                        var patchArgs = [];
 
-                        console.log("descendentes:");
-                        if(descendants[j].length > 0) {
-                            console.log("Mais do que 1 descendante");
+                        if(type == "patch") {
+
+                            var cplines = descendants[j].children;
+
+                            for(var k = 0; k < cplines.length; k++) {
+
+                                var line = [];
+                                var points = cplines[k].children;
+
+                                for(var l = 0; l < points.length; l++) {
+
+                                    var x = parseInt(points[l].attributes[0].nodeValue);
+                                    var y = parseInt(points[l].attributes[1].nodeValue);
+                                    var z = parseInt(points[l].attributes[2].nodeValue);
+                                    var w = parseInt(points[l].attributes[3].nodeValue);
+                                    
+                                    var cpoint = [x,y,z,w];
+                                    line.push(cpoint);
+
+                                }
+
+                                patchArgs.push(line);
+
+                            }
+
+
                         }
-                        else {
-                            console.log("Apenas um descendante");
-                        }
+                            
+						
+                        var leaf = new MyGraphLeaf(this, descendants[j], patchArgs);
 
-                        console.log(descendants[j]);
-
-
-
+ 
 						//parse leaf
 						this.nodes[nodeID].addLeaf(leaf);
 

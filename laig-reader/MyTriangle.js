@@ -27,7 +27,7 @@ function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
 	this.distance_1_2 = distance(this.x1,this.y1,this.z1,this.x2,this.y2,this.z2);
 	this.distance_2_3 = distance(this.x2,this.y2,this.z2,this.x3,this.y3,this.z3);
 
-	this.cos_beta =  (Math.pow(this.distance_1_3,2) - Math.pow(this.distance_1_2,2) + Math.pow(this.distance_2_3,2)) / (2 * this.distance_1_3 * this.distance_2_3); 
+	this.cos_beta = (-Math.pow(this.distance_2_3,2) + Math.pow(this.distance_1_3,2) + Math.pow(this.distance_1_2,2)) / (2 * this.distance_1_3 * this.distance_1_2) 
 	this.sin_beta = Math.sin(Math.acos(this.cos_beta));
 
 	this.initBuffers();
@@ -63,14 +63,16 @@ MyTriangle.prototype.initBuffers = function () {
 	];
 
 	
-
+	
 	this.texCoords = [
 
-	    0, 0,
-	    this.distance_2_3, 0,
-	    this.distance_2_3 - this.distance_1_3 * this.cos_beta, this.distance_1_3 * this.sin_beta
+
+	    0, this.y1,
+	    this.distance_1_2, this.y2,
+	    this.distance_1_2 - this.distance_2_3 * this.cos_beta, this.y1 - this.distance_2_3 * this.sin_beta
 
   	];
+
 
 	this.initGLBuffers();
 
@@ -79,13 +81,15 @@ MyTriangle.prototype.initBuffers = function () {
 MyTriangle.prototype.setScaleFactor = function(afs, aft) {
 
 
+	
 	this.texCoords = [
 
-	    0, 0,
-	    this.distance_2_3/afs, 0,
-	    (this.distance_2_3 - this.distance_1_3 * this.cos_beta) / afs, (this.distance_1_3 * this.sin_beta) / aft
+	    0, this.y1/aft,
+	    this.distance_1_2/afs, this.y2/aft,
+	    (this.distance_1_2 - this.distance_2_3 * this.cos_beta)/afs, (this.y1 - this.distance_2_3 * this.sin_beta)/aft
 
   	];
+
 
 	this.updateTexCoordsGLBuffers();
 

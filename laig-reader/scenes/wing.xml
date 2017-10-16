@@ -92,7 +92,8 @@
         <MATERIAL id="defaultMaterial" />
         <TEXTURE id="null" />
         <DESCENDANTS>
-          <NODEREF id ="wing" />
+          <!--<NODEREF id ="wing" />-->
+          <NODEREF id ="test"/>
         </DESCENDANTS>
     </NODE>
 
@@ -115,6 +116,30 @@
         <LEAF id="pyramid_wing_triangle4" type="triangle" args="0 0 3 0 1 3 4 0 0"/>
       </DESCENDANTS>
     </NODE>
+
+
+    <NODE id = "test">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="stripes" />
+      <ROTATION axis="x" angle="-90"/>
+      <DESCENDANTS>
+        <LEAF id="leaf_test" type="patch" args = "20 20">
+            <CPLINE>
+                <CPOINT xx="0" yy="0" zz="0" ww="1"/>
+                <CPOINT xx="0" yy="0" zz="4" ww="1"/>
+            </CPLINE>
+            <CPLINE>
+                <CPOINT xx="-2" yy="4" zz="0" ww="1"/>
+                <CPOINT xx="-2" yy="4" zz="4" ww="1"/>
+            </CPLINE>
+            <CPLINE>
+                <CPOINT xx="-4" yy="0" zz="0" ww="1"/>
+                <CPOINT xx="-4" yy="0" zz="4" ww="1"/>
+            </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
 
 </NODES>
 

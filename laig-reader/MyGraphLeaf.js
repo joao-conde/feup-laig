@@ -3,15 +3,14 @@
  * @constructor
 **/
 
-function MyGraphLeaf(graph, xmlelem) {
+function MyGraphLeaf(graph, xmlelem, controlVertexes) {
 
 	this.graph = graph;
-	this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+	this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 	this.args = this.graph.reader.getString(xmlelem, 'args').split(" ");
 	this.primitive = null;
 
-	this.afs = 1;
-	this.aft = 1;
+	this.controlVertexes = controlVertexes;
 
 
 	if(this.type == "rectangle") {
@@ -58,6 +57,18 @@ function MyGraphLeaf(graph, xmlelem) {
 			parseInt(this.args[0]),
 			parseInt(this.args[1]),
 			parseInt(this.args[2]));
+
+	}
+
+	else if(this.type == "patch") {
+
+		
+		this.primitive = new MyPatch(this.graph.scene,
+			
+			this.controlVertexes,
+			parseInt(this.args[0]),
+			parseInt(this.args[1]));
+			
 
 	}
 

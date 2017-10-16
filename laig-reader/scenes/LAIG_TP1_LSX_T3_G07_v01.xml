@@ -1,0 +1,956 @@
+<SCENE>
+
+<!-- Initial values -->
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.25" sy="0.25" sz="0.25" />
+    <reference length="5" />
+</INITIALS>
+
+
+<!-- Illumination and clear colour -->
+<ILLUMINATION>
+    <ambient r="0.2" g="0.2" b="0.2" a="1" />
+    <background r="0" g="0" b="0" a="1" />
+</ILLUMINATION>
+
+
+<!-- Lights -->
+<LIGHTS>
+	<LIGHT id="light0">
+        <enable value ="1" />
+        <position  x="0" y="10" z="0" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light1">
+        <enable value ="1" />
+        <position x="30" y="10" z="0" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+	<LIGHT id="light2">
+        <enable value ="1" />
+        <position x="0" y="10" z="20" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light3">
+        <enable value ="1" />
+        <position x="30" y="10" z="20" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+        <specular r="0.6" g="0.6" b="0.6" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="candle">
+        <enable value ="1" />
+        <position x="15" y="8.4" z="10" w="1" />
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <diffuse r="0.76" g="0.5" b="0" a="1.0" />
+        <specular r="0.93" g="0.87" b="0.22" a="1.0" />
+    </LIGHT>
+
+</LIGHTS>
+
+<!-- Textures -->
+<TEXTURES>
+	<!-- Papel dourado -->
+  <TEXTURE id="papelDourado">
+      <file path="images/papelOuro.png" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <!-- Textura corpo da Vela -->
+  <TEXTURE id="riscasRosas">
+    <file path="images/vela.png" />
+    <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <!-- Textura pavio queimado -->
+  <TEXTURE id="pavio">
+    <file path="images/pavio.png" />
+    <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <!-- Cobertura do bolo -->
+  <TEXTURE id="sprinkles">
+    <file path="images/cobertura.png" />
+    <amplif_factor s="7" t="6" />
+  </TEXTURE>
+
+  <!-- Cobertura lados bolo -->
+  <TEXTURE id="coberturaLados">
+    <file path="images/cobertura.png" />
+    <amplif_factor s="0.8" t="0.8" />
+  </TEXTURE>
+
+  <TEXTURE id="chantilly">
+    <file path="images/chantilly.png" />
+    <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <!-- Massa do bolo -->
+  <TEXTURE id="massaBolo">
+    <file path="images/cakeLayer.png" />
+    <amplif_factor s="7" t="5" />
+  </TEXTURE>
+
+</TEXTURES>
+
+
+<MATERIALS>
+
+    <!-- Material default -->
+    <MATERIAL id="defaultMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.4" g="0.4" b="0.4" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Material chama -->
+    <MATERIAL id="materialChama">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="0.95" b="0.18" a="1" />
+    </MATERIAL>
+
+    <!-- Material prato de papel -->
+    <MATERIAL id="materialPrato">
+        <shininess value="1" />
+        <specular r="0.5" g="0.5" b="0.5" a="1" />
+        <diffuse r="0.3" g="0.3" b="0.3" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Material corpo da vela -->
+    <MATERIAL id="materialCorpoVela">
+        <shininess value="1" />
+        <specular r="0.4" g="0.4" b="0.4" a="1" />
+        <diffuse r="0.3" g="0.3" b="0.3" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Material Creme Cobertura -->
+    <MATERIAL id="materialCobertura">
+        <shininess value="1" />
+        <specular r="0.1" g="0.1" b="0.1" a="1" />
+        <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Material Massa do Bolo -->
+    <MATERIAL id="materialMassaBolo">
+        <shininess value="1" />
+        <specular r="0.1" g="0.1" b="0.1" a="1" />
+        <diffuse r="0.5" g="0.5" b="0.5" a="1" />
+        <ambient r="0.4" g="0.4" b="0.4" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+</MATERIALS>
+
+<!-- The nodes -->
+<NODES>
+
+    <ROOT id="root" />
+
+    <!-- The root node -->
+    <NODE id="root">
+        <MATERIAL id="defaultMaterial" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="10.5" y="0" z="10" />
+
+        <DESCENDANTS>
+            <NODEREF id="bolo" />
+            <NODEREF id="prato" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <!-- O prato de papel -->
+    <NODE id="prato">
+        <MATERIAL id="materialPrato" />
+        <TEXTURE id="papelDourado" />
+
+        <TRANSLATION x="4.5" y="0" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="meioPrato" />
+          <NODEREF id="decoracaoPrato" />
+				</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="meioPrato">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <SCALE sx="8" sy="1.05" sz="8" />
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="-90" />
+
+      <DESCENDANTS>
+        <NODEREF id="decoracaoPrato1" />
+        <NODEREF id="decoracaoPrato2" />
+        <NODEREF id="decoracaoPrato3" />
+        <NODEREF id="decoracaoPrato4" />
+        <NODEREF id="decoracaoPrato5" />
+        <NODEREF id="decoracaoPrato6" />
+        <NODEREF id="decoracaoPrato7" />
+        <NODEREF id="decoracaoPrato8" />
+        <NODEREF id="decoracaoPrato9" />
+        <NODEREF id="decoracaoPrato10" />
+        <NODEREF id="decoracaoPrato11" />
+        <NODEREF id="decoracaoPrato12" />
+        <NODEREF id="decoracaoPrato13" />
+        <NODEREF id="decoracaoPrato14" />
+        <NODEREF id="decoracaoPrato15" />
+        <NODEREF id="decoracaoPrato16" />
+        <NODEREF id="decoracaoPrato17" />
+        <NODEREF id="decoracaoPrato18" />
+        <NODEREF id="decoracaoPrato19" />
+        <NODEREF id="decoracaoPrato20" />
+        <NODEREF id="decoracaoPrato21" />
+        <NODEREF id="decoracaoPrato22" />
+        <NODEREF id="decoracaoPrato23" />
+        <NODEREF id="decoracaoPrato24" />
+        <NODEREF id="decoracaoPrato25" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="15" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato3">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="30" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato4">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="45" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato5">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="60" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato6">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="75" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato7">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="90" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato8">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="105" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato9">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="120" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato10">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="135" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato11">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="150" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato12">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="165" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato13">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="180" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato14">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="195" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato15">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="210" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato16">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="225" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato17">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="240" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato18">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="255" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato19">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="270" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato20">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="285" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato21">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="300" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato22">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="315" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato23">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="330" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato24">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="345" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="decoracaoPrato25">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="z" angle="360" />
+      <TRANSLATION x="-8" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="cilindroPrato" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cilindroPrato">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.1 1 1 1 40 1 1" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- O bolo -->
+    <NODE id="bolo">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0.1" z="0" />
+
+        <DESCENDANTS>
+          <NODEREF id="corpoBolo" />
+          <NODEREF id="decoracaoBolo" />
+          <NODEREF id="vela" />
+				</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="corpoBolo">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <SCALE sx="1.5" sy="1" sz="1" />
+      <ROTATION axis="y" angle="30"/>
+
+      <DESCENDANTS>
+        <NODEREF id="coberturaBolo" />
+        <NODEREF id="ladosBolo" />
+        <NODEREF id="trasBolo" />
+        <NODEREF id="cimaBolo" />
+        <NODEREF id="baseBolo" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ladosBolo">
+      <MATERIAL id="materialMassaBolo" />
+      <TEXTURE id="massaBolo" />
+
+      <DESCENDANTS>
+        <NODEREF id="ladoEsquerdoBolo" />
+        <NODEREF id="ladoDireitoBolo" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ladoEsquerdoBolo" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="y" angle="-60" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 5 7 0" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ladoDireitoBolo" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="y" angle="-180" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="-7 5 0 0" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="trasBolo" >
+      <MATERIAL id="materialCobertura" />
+      <TEXTURE id="sprinkles" />
+
+      <TRANSLATION x="7" y="0" z="0" />
+      <ROTATION axis="y" angle="60" />
+      <TRANSLATION x="-7" y="0" z="0" />
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 5 7 0" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cimaBolo" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="5" z="0" />
+
+      <DESCENDANTS>
+        <LEAF type="triangle" args="7 0 0 0 0 0 3.5 0 6.1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="baseBolo" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="7" y="0" z="0" />
+      <ROTATION axis="z" angle="180" />
+
+      <DESCENDANTS>
+        <LEAF type="triangle" args="7 0 0 0 0 0 3.5 0 6.1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Decoracao bolo -->
+
+    <NODE id="decoracaoBolo" >
+      <MATERIAL id="materialCobertura" />
+      <TEXTURE id="chantilly" />
+
+      <SCALE sx="1" sy="1" sz="0.9" />
+      <TRANSLATION x="8.3" y="5" z="-3.5" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantilly1" />
+        <NODEREF id="chantilly2" />
+        <NODEREF id="chantilly3" />
+        <NODEREF id="chantilly4" />
+        <NODEREF id="chantilly5" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantilly1" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="0.75" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantillyBase" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantilly2" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.25" />
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="0.75" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantillyBase" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantilly3" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.25" />
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="1.25" />
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="0.75" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantillyBase" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantilly4" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="0.625" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantillyBase" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantilly5" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="1.25" />
+      <TRANSLATION x="0" y="0" z="1.5" />
+      <TRANSLATION x="0" y="0" z="0.625" />
+
+      <DESCENDANTS>
+        <NODEREF id="chantillyBase" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="chantillyBase" >
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="x" angle="90" />
+      <SCALE sx="0.75" sy="0.75" sz="0.75" />
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="1 20 20"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- A vela -->
+    <NODE id="vela" >
+      <MATERIAL id="materialCorpoVela" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="4.5" y="4.9" z="0" />
+      <ROTATION axis="x" angle="-90"/>
+
+      <DESCENDANTS>
+        <NODEREF id="corpoVela" />
+        <NODEREF id="pavio" />
+        <NODEREF id="lume" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="corpoVela" >
+      <MATERIAL id="null" />
+      <TEXTURE id="riscasRosas" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="3 0.2 0.1 20 10 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pavio" >
+      <MATERIAL id="null" />
+      <TEXTURE id="pavio" />
+
+      <TRANSLATION x="0" y="0" z="3" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.4 0.05 0.05 20 10 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="lume" >
+      <MATERIAL id="materialChama" />
+      <TEXTURE id="clear" />
+
+      <TRANSLATION x="0" y="0" z="3.4" />
+      <SCALE sx="-1" sy="-1" sz="-1" />
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="0.2 20 20" />
+      </DESCENDANTS>
+    </NODE>
+
+    <!-- Cobertura bolo -->
+    <NODE id="coberturaBolo">
+      <MATERIAL id="materialCobertura" />
+      <TEXTURE id="sprinkles" />
+
+      <TRANSLATION x="0" y="5" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="topoCimaCobertura" />
+        <NODEREF id="ladoEsquerdoCobertura" />
+        <NODEREF id="ladoDireitoCobertura" />
+        <NODEREF id="trasCobertura" />
+        <NODEREF id="remendosCobertura" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="topoCimaCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="0.2" z="0" />
+
+      <DESCENDANTS>
+        <LEAF type="triangle" args="7 0 0 0 0 0 3.5 0 6.1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ladoEsquerdoCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="y" angle="30"/>
+
+      <DESCENDANTS>
+        <NODEREF id="ladoCimaCobertura" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ladoDireitoCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <ROTATION axis="y" angle="90"/>
+
+      <DESCENDANTS>
+        <NODEREF id="ladoCimaCobertura" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="trasCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="7" y="0" z="0" />
+      <ROTATION axis="y" angle="60" />
+      <ROTATION axis="y" angle="-90" />
+
+      <DESCENDANTS>
+        <NODEREF id="ladoCimaCobertura" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ladoCimaCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="coberturaLados" />
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="7 0.2 0.2 10 10 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="remendosCobertura">
+      <MATERIAL id="null" />
+      <TEXTURE id="coberturaLados" />
+
+      <DESCENDANTS>
+        <NODEREF id="remendo1" />
+        <NODEREF id="remendo2" />
+        <NODEREF id="remendo3" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="remendo1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="remendo" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="remendo2">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="7" y="0" z="0" />
+
+      <DESCENDANTS>
+        <NODEREF id="remendo" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="remendo3">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="3.5" y="0" z="6.1" />
+
+      <DESCENDANTS>
+        <NODEREF id="remendo" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="remendo">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF type="sphere" args="0.2 10 10" />
+      </DESCENDANTS>
+    </NODE>
+
+</NODES>
+
+</SCENE>

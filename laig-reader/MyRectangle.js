@@ -19,10 +19,10 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 	this.rightTopX = rightBottomX;
 	this.rightTopY = leftTopY;
 
-	this.minS = this.leftBottomX;
-	this.maxS = this.rightBottomX;
-	this.minT = this.leftBottomY;
-	this.maxT = this.leftTopY;
+	this.minS = 0;
+	this.maxS = Math.sqrt(Math.pow((this.leftBottomX - this.rightBottomX),2) + Math.pow((this.leftBottomY - this.rightBottomY),2));
+	this.minT = 0;
+	this.maxT = Math.sqrt(Math.pow((this.leftTopX - this.leftBottomX),2) + Math.pow((this.leftTopY - this.leftBottomY),2));
 
 	this.initBuffers();
 
@@ -34,6 +34,7 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
  
  MyRectangle.prototype.initBuffers = function () {
 	this.vertices = [
+            
             this.leftBottomX, this.leftBottomY, 0,
             this.rightBottomX, this.rightBottomY, 0,
             this.rightTopX, this.rightTopY, 0,
@@ -55,16 +56,16 @@ function MyRectangle(scene, leftTopX, leftTopY, rightBottomX, rightBottomY) {
 		0, 0, 1
 	];
 
-	
+
 	this.texCoords = [
 
 		this.minS, this.maxT,
 		this.maxS, this.maxT,
-		this.minS, this.minT,
-		this.maxS, this.minT
+		this.maxS, this.minT,
+		this.minS, this.minT
 
 	];
-	
+
 	this.initGLBuffers();
 };
 
@@ -72,10 +73,10 @@ MyRectangle.prototype.setScaleFactor = function(afs, aft) {
 
 	this.texCoords = [
 
-		this.minS, this.maxT/aft,
+		this.minS/afs, this.maxT/aft,
 		this.maxS/afs, this.maxT/aft,
-		this.minS, this.minT,
-		this.maxS/afs, this.minT
+		this.maxS/afs, this.minT/aft,
+		this.minS/afs, this.minT/aft
 
 	];
 
