@@ -66,11 +66,15 @@
       <file path="images/fake_news.jpg" />
       <amplif_factor s="1" t="1" />
   </TEXTURE>
+
+  <TEXTURE id="ss_skin">
+      <file path="images/metal.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
 </TEXTURES>
 
 <MATERIALS>
 
-    <!-- A default material -->
     <MATERIAL id="default_material">
         <shininess value="1" />
         <specular r="0.5" g="0.5" b="0.5" a="1" />
@@ -87,7 +91,7 @@
 
     <NODE id="root">
         <MATERIAL id="default_material" />
-        <TEXTURE id="trump" />
+        <TEXTURE id="ss_skin" />
 
         <DESCENDANTS>
             <NODEREF id="space_station"/>
@@ -100,7 +104,7 @@
       <TEXTURE id="null"/>
       <DESCENDANTS>
         <NODEREF id="ss_sides"/>
-        <!--<NODEREF id="ss_body"/>-->
+        <NODEREF id="ss_body"/>
       </DESCENDANTS>
     </NODE>
 
@@ -116,6 +120,8 @@
     <NODE id="ss_leftside">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
+      <TRANSLATION x="-3" y="0" z="-3" />
+      <SCALE sx="2" sy="2.5" sz="2"/>
       <DESCENDANTS>
         <LEAF type="patch" args="40 40">
           <CPLINE>
@@ -124,9 +130,9 @@
             <CPOINT x="0" y="0" z="4" ww="1"/>
           </CPLINE>
           <CPLINE>
-            <CPOINT x="2" y="0" z="0" ww="1"/>
-            <CPOINT x="2" y="2" z="2" ww="1"/>
-            <CPOINT x="2" y="0" z="4" ww="1"/>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
           </CPLINE>
         </LEAF>
       </DESCENDANTS>
@@ -135,6 +141,8 @@
     <NODE id="ss_rightside">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
+      <TRANSLATION x="13" y="0" z="-3" />
+      <SCALE sx="2" sy="2.5" sz="2"/>
       <DESCENDANTS>
         <LEAF type="patch" args="40 40">
           <CPLINE>
