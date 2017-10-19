@@ -27,6 +27,32 @@
 </LIGHTS>
 
 <TEXTURES>
+
+  <TEXTURE id="panel">
+      <file path="images/solarpanel.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="ss_skin">
+      <file path="images/whitemetal.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="blacktops">
+      <file path="images/wings.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="glass">
+      <file path="images/glass.png" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="grill">
+      <file path="images/metalgrill.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
     <TEXTURE id="sun_surface">
       <file path="images/sunsurface.jpg" />
       <amplif_factor s="1" t="1" />
@@ -587,6 +613,325 @@
         <LEAF id="pyramid_wing_triangle4" type="triangle" args="0 0 3 0 1 3 4 0 0"/>
       </DESCENDANTS>
     </NODE>
+
+
+        <NODE id="space_station">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="0" y="-10" z="-2"/>
+          <SCALE sx="0.2" sy="0.2" sz="0.2"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_sides"/>
+            <NODEREF id="ss_body"/>
+
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <SCALE sx="0.2" sy="1" sz="1"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_sides_junction_left"/>
+            <NODEREF id="ss_sides_junction_right"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_left">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="-5" y="0" z="-2"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_sides_junction_left_bot"/>
+            <NODEREF id="ss_sides_junction_left_top"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_right">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="5" y="0" z="-2"/>
+          <SCALE sx="-1" sy="1" sz="1"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_sides_junction_right_bot"/>
+            <NODEREF id="ss_sides_junction_right_top"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_left_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_left_bot">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_right_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides_junction_right_bot">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="2" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_sides">
+          <MATERIAL id="null"/>
+          <TEXTURE id="panel"/>
+          <ROTATION axis="x" angle="45"/>
+          <SCALE sx="4" sy="1" sz="2"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_leftside"/>
+            <NODEREF id="ss_rightside"/>
+            <NODEREF id="ss_sides_junction"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_leftside">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="-2" y="0" z="-2" />
+          <DESCENDANTS>
+            <NODEREF id="ss_leftside_top"/>
+            <NODEREF id="ss_leftside_bot"/>
+          </DESCENDANTS>
+        </NODE>
+
+
+        <NODE id="ss_leftside_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="0" y="0" z="0" ww="1"/>
+                <CPOINT x="0" y="2" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_leftside_bot">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="0" y="0" z="0" ww="1"/>
+                <CPOINT x="0" y="2" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_rightside">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="7" y="0" z="-2" />
+          <DESCENDANTS>
+            <NODEREF id="ss_rightside_top"/>
+            <NODEREF id="ss_rightside_bot"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_rightside_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="0" y="0" z="0" ww="1"/>
+                <CPOINT x="0" y="2" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_rightside_bot">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <DESCENDANTS>
+            <LEAF type="patch" args="40 40">
+              <CPLINE>
+                <CPOINT x="-5" y="0" z="0" ww="1"/>
+                <CPOINT x="-5" y="2" z="2" ww="1"/>
+                <CPOINT x="-5" y="0" z="4" ww="1"/>
+              </CPLINE>
+              <CPLINE>
+                <CPOINT x="0" y="0" z="0" ww="1"/>
+                <CPOINT x="0" y="2" z="2" ww="1"/>
+                <CPOINT x="0" y="0" z="4" ww="1"/>
+              </CPLINE>
+            </LEAF>
+          </DESCENDANTS>
+        </NODE>
+
+
+        <NODE id="ss_body">
+          <MATERIAL id="null"/>
+          <TEXTURE id="grill"/>
+          <DESCENDANTS>
+            <NODEREF id="ss_middle"/>
+            <NODEREF id="ss_bottom"/>
+            <NODEREF id="ss_top"/>
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_bottom">
+          <MATERIAL id="null"/>
+          <TEXTURE id="blacktops"/>
+          <TRANSLATION x="0" y="0" z="8"/>
+         <DESCENDANTS>
+            <LEAF id="ss_bot_cylinder" type="cylinder" args="4 4 3 100 100 1 1" />
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="0" y="0" z="-8"/>
+          <ROTATION axis="x" angle="180"/>
+         <DESCENDANTS>
+            <NODEREF id="ss_top_bot" />
+            <NODEREF id="ss_top_mid" />
+            <NODEREF id="ss_top_top" />
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top_bot">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+         <DESCENDANTS>
+            <LEAF id="ss_top_cylinder" type="cylinder" args="4 4 2 100 100 1 1" />
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top_mid">
+          <MATERIAL id="null"/>
+          <TEXTURE id="blacktops"/>
+          <TRANSLATION x="0" y="0" z="4"/>
+         <DESCENDANTS>
+           <NODEREF id="ss_top_mid_window"/>
+           <NODEREF id="ss_top_mid_body"/>
+         </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top_mid_body">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+         <DESCENDANTS>
+           <LEAF id="ss_top_cylinder" type="cylinder" args="7 2 3 100 100 1 1" />
+        </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top_mid_window">
+          <MATERIAL id="null"/>
+          <TEXTURE id="glass"/>
+          <TRANSLATION x="0" y="-3" z="4"/>
+          <ROTATION axis="x" angle="-80" />
+         <DESCENDANTS>
+           <LEAF id="ss_top_cylinder" type="cylinder" args="1 1 1 100 100 1 1" />
+        </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_top_top">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="0" y="0" z="10"/>
+         <DESCENDANTS>
+            <LEAF id="ss_top_cylinder" type="cylinder" args="4 2 2 100 100 0 0" />
+          </DESCENDANTS>
+        </NODE>
+
+        <NODE id="ss_middle">
+          <MATERIAL id="null"/>
+          <TEXTURE id="null"/>
+          <TRANSLATION x="0" y="0" z="-8"/>
+         <DESCENDANTS>
+            <LEAF id="ss_mid_cylinder" type="cylinder" args="16 4 4 100 100 1 1" />
+          </DESCENDANTS>
+        </NODE>
 
 </NODES>
 
