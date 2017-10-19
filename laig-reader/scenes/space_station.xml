@@ -108,7 +108,6 @@
     <NODE id="root">
         <MATERIAL id="default_material" />
         <TEXTURE id="ss_skin" />
-
         <DESCENDANTS>
             <NODEREF id="space_station"/>
         </DESCENDANTS>

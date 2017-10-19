@@ -21,7 +21,7 @@
 
 	this.radius = radius;
 
-	this.angle = (2*Math.PI*1.0/this.slices)*1.01;
+	this.angle = (2*Math.PI*1.0/this.slices)*1.02;
 
   	this.patchWidth = 1.0 / this.slices;
   	this.patchHeight = 1.0 / this.stacks;
