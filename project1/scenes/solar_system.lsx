@@ -482,6 +482,7 @@
         <TRANSLATION x="50" y="5" z="3"/>
         <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <ROTATION axis="y" angle="90"/>
+        <ROTATION axis="x" angle="10"/>
 
         <DESCENDANTS>
           <NODEREF id="shuttle_wings" />
@@ -519,7 +520,7 @@
         <TRANSLATION x="0" y="0" z="-6" />
 
         <DESCENDANTS>
-          <LEAF id="cargo_cylinder" type="cylinder" args="6 2 2 20 20 1 1" />
+          <LEAF id="cargo_cylinder" type="cylinder" args="6 2 2 50 50 1 1" />
         </DESCENDANTS>
 
     </NODE>
