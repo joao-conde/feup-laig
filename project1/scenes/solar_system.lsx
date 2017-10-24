@@ -172,7 +172,7 @@
         <file path="images/light_metal.jpeg" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
-    
+
 
 </TEXTURES>
 
@@ -767,7 +767,7 @@
 
     <NODE id="ss_leftside">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="sun_surface"/>
       <TRANSLATION x="-2" y="0" z="-2" />
       <DESCENDANTS>
         <NODEREF id="ss_leftside_top"/>

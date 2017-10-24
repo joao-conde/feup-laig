@@ -1,0 +1,278 @@
+<SCENE>
+
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.2" sy="0.2" sz="0.2" />
+    <reference length="5" />
+</INITIALS>
+
+<ILLUMINATION>
+    <ambient r="0.5" g="0.5" b="0.5" a="1" />
+    <background r="0.1" g="0.1" b="0.1" a="1" />
+    <doubleside value = "1"/>
+</ILLUMINATION>
+
+<LIGHTS>
+	<LIGHT id="sun_light">
+        <enable value ="1" />
+        <position  x="0" y="0" z="0" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+</LIGHTS>
+
+<TEXTURES>
+
+  <TEXTURE id="panel">
+      <file path="images/solarpanel.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="ss_skin">
+      <file path="images/whitemetal.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="blacktops">
+      <file path="images/wings.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="glass">
+      <file path="images/glass.png" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="grill">
+      <file path="images/metalgrill.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+    <TEXTURE id="sun_surface">
+      <file path="images/sunsurface.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="earth_surface">
+      <file path="images/earth.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="earth_moon_surface">
+      <file path="images/moon.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="mercury_surface">
+      <file path="images/mercury_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="venus_surface">
+      <file path="images/venus_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="mars_surface">
+      <file path="images/mars_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_surface">
+      <file path="images/jupiter_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon1_surface">
+      <file path="images/jupiter_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon2_surface">
+      <file path="images/jupiter_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon3_surface">
+      <file path="images/jupiter_moon_3.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_surface">
+      <file path="images/saturn_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon1_surface">
+      <file path="images/saturn_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon2_surface">
+      <file path="images/saturn_moon_2.png"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_surface">
+      <file path="images/uranus_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_moon1_surface">
+      <file path="images/uranus_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_moon2_surface">
+      <file path="images/uranus_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_surface">
+      <file path="images/neptune_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_1_surface">
+      <file path="images/neptune_moons.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_2_surface">
+      <file path="images/neptune_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="whitemetal">
+        <file path="images/whitemetal.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="stripes">
+        <file path="images/whiteblackstripes.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="wings">
+        <file path="images/wings.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="cockpit">
+        <file path="images/cockpit.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="light_metal">
+        <file path="images/light_metal.jpeg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="monalisa">
+        <file path="images/monalisa.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+
+</TEXTURES>
+
+<MATERIALS>
+
+    <!-- A default material -->
+    <MATERIAL id="default_material">
+        <shininess value="1" />
+        <specular r="0.8" g="0.8" b="0.8" a="1" />
+        <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+        <ambient r="0.8" g="0.8" b="0.8" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Sun material -->
+      <MATERIAL id="sun_material">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="1.0" b="1.0" a="1" />
+    </MATERIAL>
+
+      <!-- Earth material -->
+      <MATERIAL id="earth_material">
+          <shininess value="1" />
+          <specular r="0.8" g="0.8" b="0.8" a="1" />
+          <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Moon material -->
+      <MATERIAL id="earth_moon_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Mercury material -->
+      <MATERIAL id="mercury_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Space station material -->
+      <MATERIAL id="space_station_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="1.0" g="1.0" b="1.0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+</MATERIALS>
+
+<NODES>
+
+    <ROOT id="root" />
+
+    <NODE id="root">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="triangulo" />
+            <NODEREF id="rectangulo"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="triangulo">
+      <MATERIAL id="default_material"/>
+      <TEXTURE id="monalisa"/>
+
+     <DESCENDANTS>
+        <LEAF id="triangle" type="triangle" args="0 0 0 50 0 0 0 50 0" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rectangulo">
+      <MATERIAL id="default_material"/>
+      <TEXTURE id="monalisa"/>
+      <TRANSLATION x="0" y="50" z="-5"/>
+     <DESCENDANTS>
+        <LEAF id="rectangulo" type="rectangle" args="0 50 50 0" />
+      </DESCENDANTS>
+    </NODE>
+
+
+</NODES>
+
+</SCENE>
