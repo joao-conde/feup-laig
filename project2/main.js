@@ -12,7 +12,8 @@ function getUrlVars() {
 }
 
 serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
-			 'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js','MyCylinder.js', 'MyTriangle.js','MyVersatileCylinder.js','MySphere.js', 'MyRectangle.js', 'MyPatch.js',
+			 'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js','MyCylinder.js', 'MyTriangle.js','MyVersatileCylinder.js',
+             'MySphere.js', 'MyRectangle.js', 'MyPatch.js', 'MyAnimation.js','MyLinearAnimation.js',
 
 main=function()
 {
@@ -31,7 +32,7 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
-	var filename=getUrlVars()['file'] || "solar_system.lsx";
+	var filename=getUrlVars()['file'] || "triangulo.lsx";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors

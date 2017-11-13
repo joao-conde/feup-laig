@@ -9,11 +9,12 @@ function XMLscene(interface) {
 
     this.zoom = 1;
 
+    this.initialTime = 0;
+    this.deltaTime = 0;
+
     this.interface = interface;
     this.lightValues = {};
 
-
-    
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -164,8 +165,12 @@ XMLscene.prototype.rotateDeg = function(ang, x, y, z) {
     this.rotate(ang * Math.PI / 180, x, y, z);
 }
 
-XMLscene.prototype.update = function(currTime) {
+XMLscene.prototype.update = function(currentTime) {
 
-    this.graph.update(currTime);
+    for(animation in this.graph.animations) {
+        this.graph.animations[animation].update(currentTime);
+    }
 
+
+        
 }

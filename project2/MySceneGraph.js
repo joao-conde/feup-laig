@@ -6,8 +6,9 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
-var NODES_INDEX = 6;
+var ANIMATIONS_INDEX = 5;
+var LEAVES_INDEX = 6;
+var NODES_INDEX = 7;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -138,6 +139,17 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
             this.onXMLMinorError("tag <MATERIALS> out of order");
 
         if ((error = this.parseMaterials(nodes[index])) != null )
+            return error;
+    }
+
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+        console.log("tag <ANIMATIONS> does not exist");
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+
+        if ((error = this.parseAnimations(nodes[index])) != null )
             return error;
     }
 
@@ -1162,11 +1174,119 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
 }
 
 /**
+ * Parses the <ANIMATIONS> node.
+ */
+MySceneGraph.prototype.parseAnimations = function(animationsNode) {
+
+    var children = animationsNode.children;
+    // Each material.
+
+    this.animations = [];
+
+    function parseControlPoints(controlPoints,reader) {
+
+        var allCoords = [];
+
+        for(var i = 0; i < controlPoints.length; i++) {
+
+            var controlPoint = controlPoints[i];
+            var coordX = reader.getInteger(controlPoint, 'xx');
+            var coordY = reader.getInteger(controlPoint, 'yy');
+            var coordZ = reader.getInteger(controlPoint, 'zz');
+
+            if(coordX == null || coordY == null || coordZ == null)
+                return 'each control point must have 3 coordinates';
+
+            allCoords.push([coordX,coordY,coordZ]);
+
+        }
+
+        return allCoords;
+    }
+
+    
+    for (var i = 0; i < children.length; i++) {
+        
+        if (children[i].nodeName != "ANIMATION") {
+            this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
+            continue;
+        }
+
+        var animationID = this.reader.getString(children[i], 'id');
+        if (animationID == null )
+            return "no ID defined for animation";
+
+        if (this.animations[animationID] != null )
+            return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+        var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);
+        var animationSpeed = this.reader.getFloat(children[i], 'speed');
+
+        var controlPoints = children[i].children;
+
+        if(animationType == "linear") {
+
+            if(controlPoints.length < 2)
+                return "at least two control points are needed in linear animation";
+            
+            controlPointsCoords = parseControlPoints(controlPoints,this.reader);
+            this.animations[animationID] = new MyLinearAnimation(controlPointsCoords,animationSpeed);
+
+        }
+
+        else if(animationType == "circular") {
+
+            var centerX = this.reader.getFloat(children[i], 'centerx', true);
+            var centerY = this.reader.getFloat(children[i], 'centery', true);
+            var centerZ = this.reader.getFloat(children[i], 'centerz', true);
+            var radius = this.reader.getFloat(children[i], 'radius', true);
+            var startAng = this.reader.getFloat(children[i], 'startang', true);
+            var rotAng = this.reader.getFloat(children[i], 'rotang', true);
+
+            //this.animations[animationID] = new MyCircularAnimation....
+
+        }
+
+        else if(animationType == "bezier") {
+
+            if(controlPoints.length != 4)
+                return "4 points are needed in bezier animation";
+
+            controlPointsCoords = parseControlPoints(controlPoints,this.reader);
+            //this.animations[animationID] = new MyBezierAnimation(...);
+
+        }
+
+        else if(animationType == "combo") {
+
+            var spans = children[i].children;
+            if(spans.length < 1)
+                return "At least one animation is needed in combo animation";
+
+            var animationsArray = [];
+            for(var j = 0; j < spans.length; j++) {
+
+                var currentAnimationId = this.reader.getString(spans[j], 'id', true);
+                animationsArray.push(this.animations[currentAnimationId]);
+
+            }
+
+            //this.animations[animationID] = new MyComboAnimation(animationsArray)
+
+        }
+  
+    }
+
+    console.log("Parsed animations");
+
+
+}
+
+/**
  * Parses the <LEAVES> block.
  */
 
 MySceneGraph.prototype.parseLeaves = function(leavesNode) {
-
 
 
     var children = leavesNode.children;
@@ -1234,6 +1354,8 @@ MySceneGraph.prototype.parseLeaves = function(leavesNode) {
     console.log("Parsed leaves");
 }
 
+
+
 /**
  * Parses the <NODES> block.
  */
@@ -1274,7 +1396,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS", "ANIMATIONREFS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1308,6 +1430,30 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             this.nodes[nodeID].textureID = textureID;
 
+            //animations
+            var animationIndex = specsNames.indexOf("ANIMATIONREFS");
+            if (animationIndex != -1) {
+
+                var animationsList = nodeSpecs[animationIndex].children;
+                console.log("Animations List");
+                console.log(animationsList);
+
+                for(var k = 0; k < animationsList.length; k++) {
+
+                    var animationID = this.reader.getString(animationsList[k],'id');
+                    if(animationID == null)
+                        return "unable to parse animation ID (node ID = " + nodeID + ")";
+                    
+                    if(this.animations[animationID] == null)
+                        return "ID does not correspond to a valid animation (node ID = " + nodeID + ")";    
+                    this.nodes[nodeID].animations.push(animationID);
+                    console.log(this.nodes[nodeID]);
+                    
+                }
+
+            }
+            
+           
             // Retrieves possible transformations.
             for (var j = 0; j < nodeSpecs.length; j++) {
                 switch (nodeSpecs[j].nodeName) {
@@ -1556,6 +1702,18 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
     var textureID = node.textureID == "null" ? initialTexture : node.textureID;
 
     this.scene.multMatrix(node.transformMatrix);
+
+    for(var j = 0; j < node.animations.length; j++) {
+        
+        var animation = this.animations[node.animations[j]];
+        
+        this.scene.translate(animation.currentTranslation[0],
+                             animation.currentTranslation[1],
+                             animation.currentTranslation[2]);
+        
+       console.log(animation.currentTranslation);
+        
+    }
 
     for(var i = 0 ; i < node.children.length ; i++) {
 

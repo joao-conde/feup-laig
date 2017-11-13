@@ -1,26 +1,25 @@
 /**
  * MyAnimation
- * @param gl {WebGLRenderingContext}
  * @constructor
  */
 
-function MyAnimation(speed, controlPoints) {
+function MyAnimation() {};
 
-	//CGFobject.call(this,scene);
+//Abstrace methods
+MyAnimation.prototype.calculateTranslation = function(){}
 
-	this.controlPoints = controlPoints;
-	this.speed = speed;
+MyAnimation.prototype.calculateDistance = function(pointo,pointf) {
 
-	//this.initBuffers();
-};
+	var pointoX = pointo[0];
+	var pointoY = pointo[1];
+	var pointoZ = pointo[2];
 
-//MyAnimation.prototype = Object.create(CGFobject.prototype);
-MyAnimation.prototype.constructor=MyAnimation;
+	var pointfX = pointf[0];
+	var pointfY = pointf[1];
+	var pointfZ = pointf[2];
 
-/*
-MyAnimation.prototype.initBuffers = function () {
+	return Math.sqrt(Math.pow((pointoX-pointfX),2) + 
+					 Math.pow((pointoY-pointfY),2) + 
+					 Math.pow((pointoZ-pointfZ),2));
 
-
-	this.initGLBuffers();
-
-};*/
+}
