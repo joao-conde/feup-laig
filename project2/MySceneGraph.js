@@ -1435,9 +1435,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             if (animationIndex != -1) {
 
                 var animationsList = nodeSpecs[animationIndex].children;
-                console.log("Animations List");
-                console.log(animationsList);
-
                 for(var k = 0; k < animationsList.length; k++) {
 
                     var animationID = this.reader.getString(animationsList[k],'id');
@@ -1447,7 +1444,6 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     if(this.animations[animationID] == null)
                         return "ID does not correspond to a valid animation (node ID = " + nodeID + ")";    
                     this.nodes[nodeID].animations.push(animationID);
-                    console.log(this.nodes[nodeID]);
                     
                 }
 
@@ -1701,19 +1697,44 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
     var materialID = node.materialID == "null" ? initialMaterial : node.materialID;
     var textureID = node.textureID == "null" ? initialTexture : node.textureID;
 
-    this.scene.multMatrix(node.transformMatrix);
-
+    
+    /*
     for(var j = 0; j < node.animations.length; j++) {
         
-        var animation = this.animations[node.animations[j]];
+        var animation = this.animations[node.animations[0]];
         
         this.scene.translate(animation.currentTranslation[0],
                              animation.currentTranslation[1],
                              animation.currentTranslation[2]);
+
+        this.scene.rotate(animation.currentRotation,0,1,0);
+         
+    }
+    */
+
+    
+
+    var animation = this.animations[node.animations[0]];
+    if(animation != undefined) {
+        this.scene.translate(
+            animation.currentTranslation[0],
+            animation.currentTranslation[1],
+            animation.currentTranslation[2]);
         
-       console.log(animation.currentTranslation);
+       
         
     }
+
+    this.scene.multMatrix(node.transformMatrix);
+
+    if(animation != undefined) {
+        this.scene.rotate(animation.currentRotation,0,1,0);
+        
+       
+        
+    }
+        
+    
 
     for(var i = 0 ; i < node.children.length ; i++) {
 

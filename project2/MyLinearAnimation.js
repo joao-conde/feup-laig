@@ -17,6 +17,9 @@ function MyLinearAnimation(controlPointsCoords, speed){
   this.paths = [];
 
   var pathTime = 0;
+  var totalTranslationX = 0;
+  var totalTranslationY = 0;
+  var totalTranslationZ = 0;
 
   for(var i = 0; i < controlPointsCoords.length-1; i++) {
 
@@ -27,74 +30,131 @@ function MyLinearAnimation(controlPointsCoords, speed){
 
     currentPath.distance = this.calculateDistance(controlPoint1,controlPoint2);
   
-    currentPath.cosAlfa = (controlPoint2[0] - controlPoint1[0]) / currentPath.distance;
-    currentPath.sinAlfa = (controlPoint2[2] - controlPoint1[2]) / currentPath.distance;
-  
-    currentPath.speedX = this.speed * currentPath.cosAlfa;
-    currentPath.speedZ = this.speed * currentPath.sinAlfa;
-  
-    currentPath.alfa = Math.acos(currentPath.cosAlfa);
+    currentPath.distanceInXOZ = this.calculateDistance([controlPoint1[0],controlPoint1[2]],[controlPoint2[0],controlPoint2[2]]);
 
+    currentPath.cosAlfa = (controlPoint2[0] - controlPoint1[0]) / currentPath.distanceInXOZ;
+    currentPath.sinAlfa = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
+    currentPath.cosBeta = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
+
+    if(currentPath.distanceInXOZ == 0) {
+
+      if(i == 0) {
+
+        currentPath.beta = 0;
+        currentPath.alfa = degToRad(90);
+
+      }
+      else {
+        currentPath.beta = this.paths[i-1].beta;
+        currentPath.alfa = this.paths[i-1].alfa;
+      }
+
+    }
+    
+    else {
+
+      currentPath.beta = Math.acos(currentPath.cosBeta);
+      currentPath.alfa = Math.acos(currentPath.cosAlfa);
+
+    }
+
+    var dir = currentPath.cosBeta > 0 ? -1 : 1;
+
+    currentPath.alfa *= dir;
+
+    var sinGama = (controlPoint2[1]-controlPoint1[1]) / currentPath.distance;
+    var gama = Math.asin(sinGama);
+    
+    currentPath.speedX = currentPath.distanceInXOZ == 0 ? 0 : this.speed * currentPath.cosAlfa;
+    currentPath.speedY = this.speed * sinGama;
+    currentPath.speedZ = currentPath.distanceInXOZ == 0 ? 0 : this.speed * currentPath.sinAlfa;
+  
     currentPath.initialPoint = controlPoint1;
     currentPath.finalPoint = controlPoint2;
 
     currentPath.initialTime = pathTime;
-    currentPath.finalTime = pathTime + (currentPath.distance / this.speed) * 1000;
+    currentPath.finalTime = pathTime + (currentPath.distance / this.speed);
 
     pathTime = currentPath.finalTime;
 
-    
+    totalTranslationX += currentPath.distance * currentPath.cosAlfa;
+    totalTranslationY += currentPath.distance * sinGama;
+    totalTranslationZ += currentPath.distance * currentPath.sinAlfa;
+
+    currentPath.totalTranslationX = totalTranslationX;
+    currentPath.totalTranslationY = totalTranslationY;
+    currentPath.totalTranslationZ = totalTranslationZ;
+
     this.paths.push(currentPath);
 
+    currentPath.alfaDeg = radToDeg(currentPath.alfa);
+    currentPath.betaDeg = radToDeg(currentPath.beta);
+
+    
 
   }
 
-  console.log(this);
-
+  console.log(this.paths);
 
 };
 
 
 MyLinearAnimation.prototype = Object.create(MyAnimation.prototype);
 MyLinearAnimation.prototype.constructor=MyLinearAnimation;
-/*
-MyLinearAnimation.prototype.initBuffers = function () {
-	this.initGLBuffers();
-};*/
 
 
-MyLinearAnimation.prototype.calculateTranslation = function(deltaT) {
+MyLinearAnimation.prototype.calculateTranslation = function(deltaTimePath,selectedPathIndex) {
 
-  var selectedPath = this.selectPath(deltaT);
-  var deltaTPath = deltaT - selectedPath.initialTime;
-  var deltaX = deltaT * selectedPath.speedX;
-  var deltaZ = deltaT * selectedPath.speedZ;
+  var selectedPath = this.paths[selectedPathIndex];
+  
+  var accumulatedTranslationX = 0;
+  var accumulatedTranslationY = 0;
+  var accumulatedTranslationZ = 0;
 
-  var translateX = selectedPath.initialPoint[0] + deltaX;
-  var translateY = 0;
-  var translateZ = selectedPath.initialPoint[2] + deltaZ;
+  if(selectedPathIndex > 0) {
+    accumulatedTranslationX = this.paths[selectedPathIndex-1].totalTranslationX;
+    accumulatedTranslationY = this.paths[selectedPathIndex-1].totalTranslationY;
+    accumulatedTranslationZ = this.paths[selectedPathIndex-1].totalTranslationZ;
+  }
+    
 
-  this.currentTranslation = [translateX,translateY,translateZ];
+  if(selectedPath == null) 
+    this.currentTranslation = [0,0,0];
+
+  else {
+  
+    var deltaX = deltaTimePath * selectedPath.speedX;  
+    var deltaY = deltaTimePath * selectedPath.speedY;
+    var deltaZ = deltaTimePath * selectedPath.speedZ;
+    var translateX = deltaX + accumulatedTranslationX;
+    var translateY = deltaY + accumulatedTranslationY;
+    var translateZ = deltaZ + accumulatedTranslationZ;
+
+    this.currentTranslation = [translateX,translateY,translateZ];
+
+  }
 
 
 }
 
-MyLinearAnimation.prototype.calculateRotation = function(deltaT) {
-
-  this.currentRotation =  this.selectPath(deltaT).alfa;
+MyLinearAnimation.prototype.calculateRotation = function(selectedPath) {
+  
+  this.currentRotation =  selectedPath.alfa + degToRad(90);
+  
 }
 
-MyLinearAnimation.prototype.selectPath = function(deltaT) {
+MyLinearAnimation.prototype.selectPath = function(deltaTAnimation) {
 
-  console.log(this.paths);
 
   for(var i = 0; i < this.paths.length; i++) {
   
-    if(deltaT >= this.paths[i].initialTime && deltaT < this.paths[i].finalTime) {
-      return this.paths[i];
+    if(deltaTAnimation >= this.paths[i].initialTime && deltaTAnimation < this.paths[i].finalTime) {
+      return i;
     }
         
   }
+
+  return null;
 
 }
 
@@ -105,10 +165,22 @@ MyLinearAnimation.prototype.update = function(currentTime) {
   }
   else {
     
-    var deltaTime = currentTime - this.initialTime;
-    this.calculateTranslation(deltaTime);
-    this.calculateRotation(deltaTime);
-  
+    var deltaTimeAnimation = (currentTime - this.initialTime) % this.paths[this.paths.length-1].finalTime;
+    var selectedPathIndex = this.selectPath(deltaTimeAnimation);
+    var selectedPath = this.paths[selectedPathIndex];
+    var deltaTimePath = deltaTimeAnimation - selectedPath.initialTime;
+
+    this.calculateTranslation(deltaTimePath,selectedPathIndex);
+    this.calculateRotation(selectedPath);
+
   }
 
+}
+
+function radToDeg(rad) {
+  return 180*rad / Math.PI;
+}
+
+function degToRad(deg) {
+  return Math.PI*deg / 180;
 }

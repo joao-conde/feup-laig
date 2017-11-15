@@ -147,7 +147,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(50);
 
     }
 	else

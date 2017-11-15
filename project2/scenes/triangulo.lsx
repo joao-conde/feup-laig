@@ -49,26 +49,20 @@
 
 </MATERIALS>
 
-<!-->
-<ANIMATIONS>
-  <ANIMATION id="cylinderAnimation" type="linear" args="0 0 0 10 2"/>
-</ANIMATIONS>-->
-
 <ANIMATIONS>
 
-<ANIMATION id="cylinderAnimation" speed= "1" type="linear">
-    <controlpoint xx="0" yy="0" zz="0"/>
-    <controlpoint xx="0" yy="0" zz="5"/>
-    <controlpoint xx="0" yy="0" zz="0"/>
-    <controlpoint xx="8" yy="0" zz="0"/>
+<ANIMATION id="cylinderAnimation" speed= "10" type="linear">
+    
+    
+    <controlpoint xx="0" yy="0"  zz="0"/>
+    <controlpoint xx="10" yy="0" zz="0"/>
+    <controlpoint xx="0" yy="0" zz="10"/>
+    <controlpoint xx="10" yy="0"  zz="10"/>
+    <controlpoint xx="0" yy="10"  zz="0"/>
+    <controlpoint xx="0" yy="0"  zz="0"/>
+    
 </ANIMATION>
 
-<ANIMATION id="animation2" speed= "2" type="linear">
-    <controlpoint xx="0" yy="0" zz="0"/>
-    <controlpoint xx="0" yy="0" zz="5"/>
-    <controlpoint xx="0" yy="0" zz="0"/>
-    <controlpoint xx="8" yy="0" zz="0"/>
-</ANIMATION>
 
 </ANIMATIONS>
 
@@ -79,26 +73,45 @@
     <NODE id="root">
         <MATERIAL id="default_material" />
         <TEXTURE id="null" />
-
         <DESCENDANTS>
-            <NODEREF id="cylinder" />
-
+            <NODEREF id="monalisa_space_shuttle" />
         </DESCENDANTS>
+    </NODE>
 
+    <NODE id="monalisa_space_shuttle">
+        <MATERIAL id="default_material"/>
+        <TEXTURE id="monalisa"/>
+        
+
+        
+        <ANIMATIONREFS>
+            <ANIMATIONREF  id="cylinderAnimation"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="cylinder"/>
+            <NODEREF id="cone"/>
+        </DESCENDANTS>
     </NODE>
 
     <NODE id="cylinder">
-      <MATERIAL id="default_material"/>
-      <TEXTURE id="monalisa"/>
-      <ANIMATIONREFS>
-        <ANIMATIONREF  id="cylinderAnimation"/>
-        <!--<ANIMATIONREF id="animation2"/>-->
-      </ANIMATIONREFS>
-
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
      <DESCENDANTS>
         <LEAF id="" type="cylinder" args="10, 2, 2, 30, 30, 1, 1" />
       </DESCENDANTS>
     </NODE>
+
+    <NODE id="cone">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="10"/>
+
+     <DESCENDANTS>
+        <LEAF id="" type="cylinder" args="4, 2, 0.0001, 30, 30, 0, 1" />
+      </DESCENDANTS>
+    </NODE>
+
+
 
 
 </NODES>
