@@ -32,9 +32,7 @@ function MyLinearAnimation(controlPointsCoords, speed){
   
     currentPath.distanceInXOZ = this.calculateDistance([controlPoint1[0],controlPoint1[2]],[controlPoint2[0],controlPoint2[2]]);
 
-    currentPath.cosAlfa = (controlPoint2[0] - controlPoint1[0]) / currentPath.distanceInXOZ;
-    currentPath.sinAlfa = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
-    currentPath.cosBeta = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
+    
 
     if(currentPath.distanceInXOZ == 0) {
 
@@ -42,6 +40,7 @@ function MyLinearAnimation(controlPointsCoords, speed){
 
         currentPath.beta = 0;
         currentPath.alfa = degToRad(90);
+        
 
       }
       else {
@@ -49,9 +48,17 @@ function MyLinearAnimation(controlPointsCoords, speed){
         currentPath.alfa = this.paths[i-1].alfa;
       }
 
+      currentPath.cosAlfa = Math.cos(currentPath.alfa);
+      currentPath.sinAlfa = Math.sin(currentPath.alfa);
+      currentPath.cosBeta = Math.cos(currentPath.beta);
+
     }
     
     else {
+
+      currentPath.cosAlfa = (controlPoint2[0] - controlPoint1[0]) / currentPath.distanceInXOZ;
+      currentPath.sinAlfa = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
+      currentPath.cosBeta = (controlPoint2[2] - controlPoint1[2]) / currentPath.distanceInXOZ;
 
       currentPath.beta = Math.acos(currentPath.cosBeta);
       currentPath.alfa = Math.acos(currentPath.cosAlfa);
@@ -77,9 +84,9 @@ function MyLinearAnimation(controlPointsCoords, speed){
 
     pathTime = currentPath.finalTime;
 
-    totalTranslationX += currentPath.distance * currentPath.cosAlfa;
+    totalTranslationX += (currentPath.distanceInXOZ == 0) ? 0 : currentPath.distance * currentPath.cosAlfa;
     totalTranslationY += currentPath.distance * sinGama;
-    totalTranslationZ += currentPath.distance * currentPath.sinAlfa;
+    totalTranslationZ += (currentPath.distanceInXOZ == 0) ? 0 : currentPath.distance * currentPath.sinAlfa;
 
     currentPath.totalTranslationX = totalTranslationX;
     currentPath.totalTranslationY = totalTranslationY;
