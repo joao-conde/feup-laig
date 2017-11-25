@@ -235,10 +235,55 @@
 </MATERIALS>
 <ANIMATIONS>
 
-  <ANIMATION id="earthRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+  <ANIMATION id="sunRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
                 radius="0.1" startang="0" rotang="360"/>
-  <ANIMATION id="earthTranslation" speed="0.0001" type="circular" centerx="0" centery="0" centerz="0"
-                radius="30" startang="0" rotang="360"/>
+
+  <ANIMATION id="planetRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/>
+  <ANIMATION id="earthTranslation" speed="10" type="circular" centerx="0" centery="0" centerz="0"
+                radius="50" startang="0" rotang="360"/>
+
+  <ANIMATION id="ssTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+                radius="10" startang="90" rotang="360"/>
+
+  <ANIMATION id="emTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="5" startang="90" rotang="360"/>
+
+  <ANIMATION id="bpmTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="15" startang="90" rotang="360"/>
+              
+
+  <ANIMATION id="bpm2Translation" speed="25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="15" startang="270" rotang="360"/>
+
+  <ANIMATION id="mpmTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="8" startang="90" rotang="360"/>
+              
+
+  <ANIMATION id="mpm2Translation" speed="25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="8" startang="270" rotang="360"/>
+
+  <ANIMATION id="mercuryTranslation" speed="10" type="circular" centerx="0" centery="0" centerz="0"
+             radius="30" startang="110" rotang="360"/>
+
+   <ANIMATION id="venusTranslation" speed="-14" type="circular" centerx="0" centery="0" centerz="0"
+             radius="40" startang="70" rotang="360"/>
+
+  <ANIMATION id="marsTranslation" speed="-10" type="circular" centerx="0" centery="0" centerz="0"
+             radius="40" startang="0" rotang="360"/>
+
+  <ANIMATION id="jupiterTranslation" speed="-30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="90" startang="180" rotang="360"/>
+
+  <ANIMATION id="saturnTranslation" speed="30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="115" startang="90" rotang="360"/>
+
+  <ANIMATION id="uranusTranslation" speed="-30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="140" startang="1" rotang="360"/>              
+
+  <ANIMATION id="neptuneTranslation" speed="30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="160" startang="15" rotang="360"/>           
+
 
   <ANIMATION id="shuttle1linear1" speed="25" type="linear">
       <controlpoint xx="0" yy="0"  zz="0"/>
@@ -293,8 +338,6 @@
 
 
 
-
-
 </ANIMATIONS>
 
 <NODES>
@@ -302,19 +345,19 @@
     <ROOT id="root" />
 
     <NODE id="root">
-        <MATERIAL id="default_material" />
+        <MATERIAL id="earth_material" />
         <TEXTURE id="null" />
 
         <DESCENDANTS>
             <NODEREF id="sun" />
-            <NODEREF id="mercury" />
-            <NODEREF id="venus" />
-            <NODEREF id="earth_rotation" />
-            <NODEREF id="mars" />
-            <NODEREF id="jupiter" />
-            <NODEREF id="saturn" />
-            <NODEREF id="uranus" />
-            <NODEREF id="neptune" />
+            <NODEREF id="mercury_full" />
+            <NODEREF id="venus_translation" />
+            <NODEREF id="earth_translation" />
+            <NODEREF id="mars_translation" />
+            <NODEREF id="jupiter_translation" />
+            <NODEREF id="saturn_translation" />
+            <NODEREF id="uranus_translation" />
+            <NODEREF id="neptune_translation" />
             <NODEREF id="shuttle" />
             <NODEREF id="shuttle2" />
         </DESCENDANTS>
@@ -325,20 +368,76 @@
         <MATERIAL id="sun_material" />
         <TEXTURE id="sun_surface" />
         <ANIMATIONREFS>
-            <!--<ANIMATIONREF  id="earthRotation"/>-->
+            <ANIMATIONREF  id="sunRotation"/>
         </ANIMATIONREFS>
         <DESCENDANTS>
             <LEAF id="sun_sphere" type="sphere" args="18 50 50" />
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="mercury_full">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="10"/>
+
+        <DESCENDANTS>
+            <NODEREF id="mercury_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="mercuryTranslation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury_rotation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="0.1"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="planetRotation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury"/>
+        </DESCENDANTS>
+    </NODE>
 
     <NODE id="mercury">
         <MATERIAL id="mercury_material" />
         <TEXTURE id="mercury_surface" />
-        <TRANSLATION x="30" y="0" z="0" />
         <DESCENDANTS>
             <LEAF id="mercury_sphere" type="sphere" args="1 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="venus_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="65"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="venusTranslation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="venus_rotation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="venus_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="177"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="planetRotation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury"/>
         </DESCENDANTS>
     </NODE>
 
@@ -351,137 +450,328 @@
         </DESCENDANTS>
     </NODE>
 
-    
+    <NODE id="earth_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="earthTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "earth_rotation"/>
+            <NODEREF id="space_station_full"/>
+            <NODEREF id = "earth_moon_translation"/>
+        </DESCENDANTS>
+    </NODE>
 
     <NODE id="earth_rotation">
-        <MATERIAL id="default_material" />
+        <MATERIAL id="null" />
         <TEXTURE id="null" />
-        <TRANSLATION x="50" y="0" z="0" />
-
+        <ROTATION axis="z" angle="23"/>
+    
         <ANIMATIONREFS>
-          <ANIMATIONREF  id="earthRotation"/>
-          <!-- <ANIMATIONREF id="earthTranslation"/> --> -->
+          <ANIMATIONREF  id="planetRotation"/>
         </ANIMATIONREFS>
+
         <DESCENDANTS>
             <NODEREF id = "earth"/>
         </DESCENDANTS>
     </NODE>
 
+
     <NODE id="earth" selectable="1">
         <MATERIAL id="earth_material" />
         <TEXTURE id="earth_surface" />
-        
+    
         <ROTATION axis="x" angle="-90" />
-        
-         
+             
         <DESCENDANTS>
-            <NODEREF id = "earth_moon"/>
-            <NODEREF id="space_station"/>
             <LEAF id="earth_sphere" type="sphere" args="3 50 50" />
+        </DESCENDANTS>
+    </NODE>
+    
+    <NODE id="earth_moon_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="45"/>
+        <ANIMATIONREFS>
+          <!-- <ANIMATIONREF id="earthTranslation"/> -->
+          <ANIMATIONREF  id="emTranslation"/>
+          
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="earth_moon"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="earth_moon">
         <MATERIAL id="earth_moon_material"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="0" y="5" z="0"/>
         <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="earth_moon_sphere_leaf" type="sphere" args="1 50 50"/>
         </DESCENDANTS>
     </NODE>
 
+
+    <NODE id="mars_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="marsTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "mars_rotation"/>
+            <NODEREF id = "mars_moon1_translation"/>
+            <NODEREF id = "mars_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="25"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "mars"/>
+        </DESCENDANTS>
+    </NODE>
+
+
     <NODE id="mars">
         <MATERIAL id="null" />
         <TEXTURE id="mars_surface" />
-        <TRANSLATION x="60" y="0" z="0" />
         <DESCENDANTS>
-            <NODEREF id="mars_moon1" />
-            <NODEREF id="mars_moon2" />
             <LEAF id="mars_sphere" type="sphere" args="3 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="30"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="emTranslation"/>
+          
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="mars_moon1"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="mars_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="0" y="-4" z="0"/>
         <SCALE sx="0.3" sy="0.3" sz="0.3"/>
         <DESCENDANTS>
             <LEAF id="mars_moon1_sphere" type="sphere" args="1 50 50"/>
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="mars_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="330"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="emTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="mars_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="mars_moon2">
         <MATERIAL id="null"/>
         <TEXTURE id="earth_moon_surface"/>
-        <TRANSLATION x="4" y="0" z="0"/>
         <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="mars_moon2_sphere" type="sphere" args="1 50 50"/>
         </DESCENDANTS>
     </NODE>
 
+     <NODE id="jupiter_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="jupiterTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "jupiter_rotation"/>
+            <NODEREF id = "jupiter_moon1_translation"/>
+            <NODEREF id = "jupiter_moon2_translation"/>
+            <NODEREF id = "jupiter_moon3_translation"/>
+
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="3"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "jupiter"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="jupiter">
         <MATERIAL id="null" />
         <TEXTURE id="jupiter_surface" />
-        <TRANSLATION x="90" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
-            <NODEREF id="jupiter_moon1"/>
-            <NODEREF id="jupiter_moon2"/>
-            <NODEREF id="jupiter_moon3"/>
             <LEAF id="jupiter_sphere" type="sphere" args="9 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="330"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon1"/>
         </DESCENDANTS>
     </NODE>
 
      <NODE id="jupiter_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="jupiter_moon1_surface"/>
-        <TRANSLATION x="0" y="12" z="0"/>
         <DESCENDANTS>
             <LEAF id="jupiter_moon1_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="80"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon2"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="jupiter_moon2">
         <MATERIAL id="null"/>
         <TEXTURE id="jupiter_moon2_surface"/>
-        <TRANSLATION x="0" y="0" z="13"/>
         <DESCENDANTS>
             <LEAF id="jupiter_moon2_sphere" type="sphere" args="1.5 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon3_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="35"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon3"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="jupiter_moon3">
         <MATERIAL id="null"/>
         <TEXTURE id="jupiter_moon3_surface"/>
-        <TRANSLATION x="0" y="0" z="-13"/>
         <SCALE sx="0.8" sy="0.8" sz="0.8"/>
         <DESCENDANTS>
             <LEAF id="jupiter_moon3_sphere" type="sphere" args="1 50 50"/>
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="saturn_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="20"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="saturnTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "saturn_rotation"/>
+            <NODEREF id = "saturn_moon1_translation"/>
+            <NODEREF id = "saturn_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="27"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "saturn"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="saturn">
         <MATERIAL id="null" />
         <TEXTURE id="saturn_surface" />
-        <TRANSLATION x="115" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <NODEREF id="saturn_moon1"/>
-            <NODEREF id="saturn_moon2"/>
             <LEAF id="saturn_sphere" type="sphere" args="8.5 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="80"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="saturn_moon1"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="saturn_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="saturn_moon1_surface"/>
-        <TRANSLATION x="0" y="0" z="-11"/>
         <DESCENDANTS>
             <LEAF id="saturn_moon_1_sphere" type="sphere" args="1.1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="280"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="saturn_moon2"/>
         </DESCENDANTS>
     </NODE>
 
@@ -494,25 +784,76 @@
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="uranus_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="20"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="uranusTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "uranus_rotation"/>
+            <NODEREF id="uranus_moon1_translation"/>
+            <NODEREF id="uranus_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="98"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "uranus"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="uranus">
         <MATERIAL id="null" />
         <TEXTURE id="uranus_surface" />
-        <TRANSLATION x="140" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
         <DESCENDANTS>
-            <NODEREF id="uranus_moon1"/>
-            <NODEREF id="uranus_moon2"/>
             <LEAF id="uranus_sphere" type="sphere" args="6 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="60"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="uranus_moon1"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="uranus_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="uranus_moon1_surface"/>
-        <TRANSLATION x="0" y="5" z="-5"/>
-        <SCALE sx="0.3" sy="0.3" sz="0.3"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="uranus_moon1_sphere" type="sphere" args="1.1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="300"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="uranus_moon2"/>
         </DESCENDANTS>
     </NODE>
 
@@ -526,33 +867,83 @@
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="neptune_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="neptuneTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "neptune_rotation"/>
+            <NODEREF id="neptune_moon1_translation"/>
+            <NODEREF id="neptune_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="30"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "neptune"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="neptune">
         <MATERIAL id="null" />
         <TEXTURE id="neptune_surface" />
-        <TRANSLATION x="160" y="0" z="0" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
-            <NODEREF id="neptune_moon1"/>
-            <NODEREF id="neptune_moon2"/>
             <LEAF id="neptune_sphere" type="sphere" args="6 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="60"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="neptune_moon1"/>
         </DESCENDANTS>
     </NODE>
 
     <NODE id="neptune_moon1">
         <MATERIAL id="null"/>
         <TEXTURE id="neptune_moon_1_surface"/>
-        <TRANSLATION x="0" y="6" z="-6"/>
         <SCALE sx="0.7" sy="0.5" sz="0.5"/>
         <DESCENDANTS>
             <LEAF id="neptune_moon1_sphere" type="sphere" args="1.1 50 50"/>
         </DESCENDANTS>
     </NODE>
 
+    <NODE id="neptune_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="300"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="neptune_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
     <NODE id="neptune_moon2">
         <MATERIAL id="null"/>
         <TEXTURE id="neptune_moon_2_surface"/>
-        <TRANSLATION x="0" y="6" z="6"/>
         <SCALE sx="0.6" sy="0.8" sz="0.6"/>
         <DESCENDANTS>
             <LEAF id="neptune_moon2_sphere" type="sphere" args="2 50 50"/>
@@ -741,17 +1132,38 @@
       </DESCENDANTS>
     </NODE>
 
+    <NODE id="space_station_full">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <ROTATION axis="z" angle="-30"/>
+      
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="ssTranslation"/>
+      </ANIMATIONREFS>
+      <DESCENDANTS>
+        <NODEREF id="space_station"/>
+
+      </DESCENDANTS>
+    </NODE>
+
     <NODE id="space_station">
       <MATERIAL id="space_station_material"/>
       <TEXTURE id="ss_skin"/>
-      <TRANSLATION x="0" y="-2" z="-10"/>
       <SCALE sx="0.2" sy="0.2" sz="0.2"/>
+      <ROTATION axis="y" angle="90"/>
+      <ROTATION axis="z" angle="90"/>
+      <ANIMATIONREFS>
+        <!-- <ANIMATIONREF id="ssTranslation"/> -->
+      </ANIMATIONREFS>
       <DESCENDANTS>
         <NODEREF id="ss_sides"/>
         <NODEREF id="ss_body"/>
 
       </DESCENDANTS>
     </NODE>
+
+    
 
     <NODE id="ss_sides_junction">
       <MATERIAL id="null"/>
