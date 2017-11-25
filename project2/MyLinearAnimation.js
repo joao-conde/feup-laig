@@ -8,6 +8,10 @@ function MyLinearAnimation(controlPointsCoords, speed){
   MyAnimation.call(this);
   this.speed = speed / 1000;
   this.controlPointsCoords = controlPointsCoords;
+  this.type = "linear";
+
+  console.log("control points");
+  console.log(controlPointsCoords);
 
   this.initialTime = 0;
 
@@ -21,6 +25,8 @@ function MyLinearAnimation(controlPointsCoords, speed){
   var totalTranslationY = 0;
   var totalTranslationZ = 0;
 
+  this.transformMatrix = mat4.create();
+  
   for(var i = 0; i < controlPointsCoords.length-1; i++) {
 
     var currentPath = [];
@@ -32,14 +38,12 @@ function MyLinearAnimation(controlPointsCoords, speed){
   
     currentPath.distanceInXOZ = this.calculateDistance([controlPoint1[0],controlPoint1[2]],[controlPoint2[0],controlPoint2[2]]);
 
-    
-
     if(currentPath.distanceInXOZ == 0) {
 
       if(i == 0) {
 
         currentPath.beta = 0;
-        currentPath.alfa = degToRad(90);
+        currentPath.alfa = this.degToRad(90);
         
 
       }
@@ -94,14 +98,16 @@ function MyLinearAnimation(controlPointsCoords, speed){
 
     this.paths.push(currentPath);
 
-    currentPath.alfaDeg = radToDeg(currentPath.alfa);
-    currentPath.betaDeg = radToDeg(currentPath.beta);
+    currentPath.alfaDeg = this.radToDeg(currentPath.alfa);
+    currentPath.betaDeg = this.radToDeg(currentPath.beta);
 
     
 
   }
 
-  console.log(this.paths);
+  this.totalTime = pathTime;
+
+  console.log(this);
 
 };
 
@@ -146,9 +152,19 @@ MyLinearAnimation.prototype.calculateTranslation = function(deltaTimePath,select
 
 MyLinearAnimation.prototype.calculateRotation = function(selectedPath) {
   
-  this.currentRotation =  selectedPath.alfa + degToRad(90);
+  this.currentRotation =  selectedPath.alfa + this.degToRad(90);
   
 }
+
+MyLinearAnimation.prototype.calculateMatrix = function() {
+  
+    mat4.identity(this.transformMatrix);
+    mat4.translate(this.transformMatrix, this.transformMatrix, [this.currentTranslation[0], this.currentTranslation[1], this.currentTranslation[2]]);
+    mat4.translate(this.transformMatrix, this.transformMatrix, [this.controlPointsCoords[0][0], this.controlPointsCoords[0][1], this.controlPointsCoords[0][2]]);
+    mat4.rotate(this.transformMatrix, this.transformMatrix, this.currentRotation, [0,1,0]);
+  
+}
+
 
 MyLinearAnimation.prototype.selectPath = function(deltaTAnimation) {
 
@@ -170,7 +186,8 @@ MyLinearAnimation.prototype.update = function(currentTime) {
   if(this.initialTime == 0) {
     this.initialTime = currentTime;
   }
-  else {
+  
+  //else {
     
     var deltaTimeAnimation = (currentTime - this.initialTime) % this.paths[this.paths.length-1].finalTime;
     var selectedPathIndex = this.selectPath(deltaTimeAnimation);
@@ -179,15 +196,8 @@ MyLinearAnimation.prototype.update = function(currentTime) {
 
     this.calculateTranslation(deltaTimePath,selectedPathIndex);
     this.calculateRotation(selectedPath);
+    this.calculateMatrix();
 
-  }
+  //}
 
-}
-
-function radToDeg(rad) {
-  return 180*rad / Math.PI;
-}
-
-function degToRad(deg) {
-  return Math.PI*deg / 180;
 }

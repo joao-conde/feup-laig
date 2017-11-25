@@ -1,4 +1,5 @@
 var DEGREE_TO_RAD = Math.PI / 180;
+var PERIOD = 2500;
 
 /**
  * XMLscene class, representing the scene that is to be rendered.
@@ -7,13 +8,19 @@ var DEGREE_TO_RAD = Math.PI / 180;
 function XMLscene(interface) {
     CGFscene.call(this);
 
-    this.zoom = 1;
+    this.zoom = 0.7;
 
     this.initialTime = 0;
     this.deltaTime = 0;
 
     this.interface = interface;
     this.lightValues = {};
+
+    this.red = 0;
+    this.green = 0;
+    this.blue = 0;
+
+    
 
 }
 
@@ -36,6 +43,12 @@ XMLscene.prototype.init = function(application) {
     this.gl.depthFunc(this.gl.LEQUAL);
     
     this.axis = new CGFaxis(this);
+
+
+    this.selectables = [];
+
+    this.laigShader = new CGFshader(this.gl, "shaders/laig_multiple_light-vertex.glsl", "shaders/laig_fragment.glsl");
+
 }
 
 /**
@@ -97,6 +110,7 @@ XMLscene.prototype.onGraphLoaded = function()
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
+    this.interface.addShadersGroup();
 }
 
 /**
@@ -147,7 +161,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(10);
 
     }
 	else
@@ -170,6 +184,18 @@ XMLscene.prototype.update = function(currentTime) {
     for(animation in this.graph.animations) {
         this.graph.animations[animation].update(currentTime);
     }
+
+    
+    var factor = Math.abs(Math.sin(currentTime/PERIOD));
+
+    var dic = {
+        timeFactor:factor,
+        red: this.red,
+        green:this.green,
+        blue:this.blue
+    };
+
+    this.laigShader.setUniformsValues(dic);
 
 
         

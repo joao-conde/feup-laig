@@ -40,6 +40,8 @@ function MySceneGraph(filename, scene) {
 
     this.reader.open('scenes/' + filename, this);
 
+    this.selectedNode = null;
+
 }
 
 /*
@@ -1220,7 +1222,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
 
         var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular', 'bezier', 'combo']);
-        var animationSpeed = this.reader.getFloat(children[i], 'speed');
+        var animationSpeed = this.reader.getFloat(children[i], 'speed',false);
 
         var controlPoints = children[i].children;
 
@@ -1243,7 +1245,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             var startAng = this.reader.getFloat(children[i], 'startang', true);
             var rotAng = this.reader.getFloat(children[i], 'rotang', true);
 
-            //this.animations[animationID] = new MyCircularAnimation....
+            this.animations[animationID] = new MyCircularAnimation([centerX,centerY,centerZ],animationSpeed,radius,startAng,rotAng);
 
         }
 
@@ -1253,7 +1255,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                 return "4 points are needed in bezier animation";
 
             controlPointsCoords = parseControlPoints(controlPoints,this.reader);
-            //this.animations[animationID] = new MyBezierAnimation(...);
+            this.animations[animationID] = new MyBezierAnimation(controlPointsCoords,animationSpeed);
 
         }
 
@@ -1266,12 +1268,20 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             var animationsArray = [];
             for(var j = 0; j < spans.length; j++) {
 
+                if(spans[j].nodeName != 'SPANREF')
+                    return "Unknown tag name " + spans[j].nodeName;
+
                 var currentAnimationId = this.reader.getString(spans[j], 'id', true);
+                var index = Object.keys(this.animations).indexOf(currentAnimationId);
+                if(index == -1)
+                    return "Animation does not exist: " + currentAnimationId;
+                if(this.animations[currentAnimationId].type == "combo")
+                    return "A combo animation cannot have a child combo animation";
                 animationsArray.push(this.animations[currentAnimationId]);
 
             }
 
-            //this.animations[animationID] = new MyComboAnimation(animationsArray)
+            this.animations[animationID] = new MyComboAnimation(animationsArray);
 
         }
   
@@ -1389,6 +1399,10 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                 return "node ID must be unique (conflict: ID = " + nodeID + ")";
 
             this.log("Processing node "+nodeID);
+
+            var selectable = this.reader.getBoolean(children[i],'selectable',false);
+            if(selectable == true) 
+                this.scene.selectables.push(nodeID);
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this,nodeID);
@@ -1620,7 +1634,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
     }
 
     console.log("Parsed nodes");
-    console.log(this.nodes);
+    console.log(this.scene);
     return null ;
 }
 
@@ -1697,45 +1711,23 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
     var materialID = node.materialID == "null" ? initialMaterial : node.materialID;
     var textureID = node.textureID == "null" ? initialTexture : node.textureID;
 
-    
-    /*
-    for(var j = 0; j < node.animations.length; j++) {
-        
-        var animation = this.animations[node.animations[0]];
-        
-        this.scene.translate(animation.currentTranslation[0],
-                             animation.currentTranslation[1],
-                             animation.currentTranslation[2]);
-
-        this.scene.rotate(animation.currentRotation,0,1,0);
-         
-    }
-    */
-
-    
-
-    var animation = this.animations[node.animations[0]];
-    if(animation != undefined) {
-        this.scene.translate(
-            animation.currentTranslation[0],
-            animation.currentTranslation[1],
-            animation.currentTranslation[2]);
-        
-       
-        
-    }
-
     this.scene.multMatrix(node.transformMatrix);
 
-    if(animation != undefined) {
-        this.scene.rotate(animation.currentRotation,0,1,0);
+    for(var a = 0; a < node.animations.length; a++) {
         
-       
-        
+        var animation = this.animations[node.animations[a]];
+        this.scene.multMatrix(animation.transformMatrix);
+            
     }
-        
-    
 
+    if(nodeID == this.selectedNode) {
+        
+        this.scene.setActiveShader(this.scene.laigShader);
+        
+
+    }
+
+    
     for(var i = 0 ; i < node.children.length ; i++) {
 
         this.scene.pushMatrix();
@@ -1744,6 +1736,7 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
 
     }
 
+    
     for(var i = 0; i < node.leaves.length ; i++) {
 
         this.scene.pushMatrix();
@@ -1773,6 +1766,9 @@ MySceneGraph.prototype.processNode = function(nodeID, initialMaterial, initialTe
         this.scene.popMatrix();
 
     }
+
+    if(nodeID == this.selectedNode)
+        this.scene.setActiveShader(this.scene.defaultShader);
 
 }
 

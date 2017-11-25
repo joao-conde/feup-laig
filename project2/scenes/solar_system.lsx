@@ -233,6 +233,69 @@
       </MATERIAL>
 
 </MATERIALS>
+<ANIMATIONS>
+
+  <ANIMATION id="earthRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/>
+  <ANIMATION id="earthTranslation" speed="0.0001" type="circular" centerx="0" centery="0" centerz="0"
+                radius="30" startang="0" rotang="360"/>
+
+  <ANIMATION id="shuttle1linear1" speed="25" type="linear">
+      <controlpoint xx="0" yy="0"  zz="0"/>
+      <controlpoint xx="-50" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle1circular" speed="25" type="circular" centerx="-50" centery="0" centerz="25"
+                radius="25" startang="90" rotang="180"/>
+
+  <ANIMATION id="shuttle1linear2" speed="40" type="linear">
+      <controlpoint xx="-50" yy="0"  zz="50"/>
+      <controlpoint xx="0" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttleComboAnimation" type="combo">
+        
+        <SPANREF id="shuttle1linear1"/>
+        <SPANREF id="shuttle1circular"/>
+        <SPANREF id="shuttle1linear2"/>
+
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2bezier1" speed="50" type="bezier">
+      <controlpoint xx="0" yy="0"  zz="0"/>
+      <controlpoint xx="80" yy="50"  zz="40"/>
+      <controlpoint xx="-80" yy="0"  zz="20"/>
+      <controlpoint xx="50" yy="0"  zz="100"/>
+  </ANIMATION>
+
+
+  <ANIMATION id="shuttle2linear" speed="80" type="linear">
+      <controlpoint xx="50" yy="0"  zz="100"/>
+      <controlpoint xx="100" yy="40"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2bezier2" speed="80" type="bezier">
+      <controlpoint xx="100" yy="40"  zz="0"/>
+      <controlpoint xx="160" yy="40"  zz="40"/>
+      <controlpoint xx="-180" yy="40"  zz="120"/>
+      <controlpoint xx="0" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2ComboAnimation" type="combo">
+        
+         <SPANREF id="shuttle2bezier1"/>
+        <SPANREF id="shuttle2linear"/>
+        <SPANREF id="shuttle2bezier2"/>
+       
+        
+
+  </ANIMATION>
+
+
+
+
+
+</ANIMATIONS>
 
 <NODES>
 
@@ -246,20 +309,24 @@
             <NODEREF id="sun" />
             <NODEREF id="mercury" />
             <NODEREF id="venus" />
-            <NODEREF id="earth" />
+            <NODEREF id="earth_rotation" />
             <NODEREF id="mars" />
             <NODEREF id="jupiter" />
             <NODEREF id="saturn" />
             <NODEREF id="uranus" />
             <NODEREF id="neptune" />
             <NODEREF id="shuttle" />
+            <NODEREF id="shuttle2" />
         </DESCENDANTS>
     </NODE>
 
 
-    <NODE id="sun">
+    <NODE id="sun" selectable="1">
         <MATERIAL id="sun_material" />
         <TEXTURE id="sun_surface" />
+        <ANIMATIONREFS>
+            <!--<ANIMATIONREF  id="earthRotation"/>-->
+        </ANIMATIONREFS>
         <DESCENDANTS>
             <LEAF id="sun_sphere" type="sphere" args="18 50 50" />
         </DESCENDANTS>
@@ -284,12 +351,29 @@
         </DESCENDANTS>
     </NODE>
 
+    
 
-    <NODE id="earth">
+    <NODE id="earth_rotation">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="50" y="0" z="0" />
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="earthRotation"/>
+          <!-- <ANIMATIONREF id="earthTranslation"/> --> -->
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "earth"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="earth" selectable="1">
         <MATERIAL id="earth_material" />
         <TEXTURE id="earth_surface" />
-        <TRANSLATION x="50" y="0" z="0" />
+        
         <ROTATION axis="x" angle="-90" />
+        
+         
         <DESCENDANTS>
             <NODEREF id = "earth_moon"/>
             <NODEREF id="space_station"/>
@@ -483,6 +567,33 @@
         <SCALE sx="0.5" sy="0.5" sz="0.5"/>
         <ROTATION axis="y" angle="90"/>
         <ROTATION axis="x" angle="10"/>
+        <ROTATION axis="y" angle="180"/>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="shuttleComboAnimation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_wings" />
+          <NODEREF id="shuttle_body" />
+          <NODEREF id="shuttle_rockets"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="whitemetal"/>
+
+        <TRANSLATION x="70" y="5" z="3"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <ROTATION axis="y" angle="90"/>
+        <ROTATION axis="x" angle="10"/>
+        <ROTATION axis="y" angle="180"/>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="shuttle2ComboAnimation"/>
+        </ANIMATIONREFS>
 
         <DESCENDANTS>
           <NODEREF id="shuttle_wings" />
@@ -767,7 +878,7 @@
 
     <NODE id="ss_leftside">
       <MATERIAL id="null"/>
-      <TEXTURE id="sun_surface"/>
+      <TEXTURE id="null"/>
       <TRANSLATION x="-2" y="0" z="-2" />
       <DESCENDANTS>
         <NODEREF id="ss_leftside_top"/>

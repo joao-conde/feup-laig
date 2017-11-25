@@ -25,3 +25,11 @@ MyAnimation.prototype.calculateDistance = function(pointo,pointf) {
 	return Math.sqrt(acc);
 
 }
+
+MyAnimation.prototype.radToDeg = function(rad) {
+	return 180*rad / Math.PI;
+  }
+  
+MyAnimation.prototype.degToRad = function(deg) {
+	return Math.PI*deg / 180;
+  }

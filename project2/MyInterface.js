@@ -27,7 +27,7 @@ MyInterface.prototype.init = function(application) {
     // add a group of controls (and open/expand by defult)
     var group = this.gui.addFolder("Transforms");
     group.open();
-    var zoomController = group.add(this.scene, 'zoom', 1, 20).name("Zoom").step(0.1);
+    var zoomController = group.add(this.scene, 'zoom', 0, 1).name("Zoom").step(0.01);
     zoomController.scene = this.scene;
 
     zoomController.onChange(function(newValue) {
@@ -36,8 +36,38 @@ MyInterface.prototype.init = function(application) {
 
     });
 
+    zoomController.setValue(0.7);
+
     return true;
 };
+
+MyInterface.prototype.addShadersGroup = function() {
+
+    var groupShaders = this.gui.addFolder("Shaders");
+    groupShaders.open();
+
+    var shadersDic = {"none":null};
+
+    for(var i = 0; i < this.scene.selectables.length; i++)
+        shadersDic[this.scene.selectables[i]] = this.scene.selectables[i];
+
+    
+    
+    var shadersCombo = this.gui.add(this.scene, 'selectables', shadersDic).name("Vertexes");
+
+    shadersCombo.onChange((value) => {
+        
+        this.scene.graph.selectedNode = value;
+        
+    });
+
+    shadersCombo.setValue(null);
+
+    var redController = groupShaders.add(this.scene, 'red', 0, 1).name("Red").step(0.01);
+    var greenController = groupShaders.add(this.scene, 'green', 0, 1).name("Green").step(0.1);
+    var blueController = groupShaders.add(this.scene, 'blue', 0, 1).name("Blue").step(0.1);
+
+}
 
 /**
  * Adds a folder containing the IDs of the lights passed as parameter.
