@@ -629,7 +629,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="jupiter">
+    <NODE id="jupiter" selectable="1">
         <MATERIAL id="null" />
         <TEXTURE id="jupiter_surface" />
         <ROTATION axis="x" angle="-90" />
@@ -651,7 +651,7 @@
         </DESCENDANTS>
     </NODE>
 
-     <NODE id="jupiter_moon1">
+     <NODE id="jupiter_moon1" selectable="1">
         <MATERIAL id="null"/>
         <TEXTURE id="jupiter_moon1_surface"/>
         <DESCENDANTS>
@@ -731,7 +731,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="saturn">
+    <NODE id="saturn" selectable="1">
         <MATERIAL id="null" />
         <TEXTURE id="saturn_surface" />
         <ROTATION axis="x" angle="-90" />
@@ -813,7 +813,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="uranus">
+    <NODE id="uranus" selectable="1">
         <MATERIAL id="null" />
         <TEXTURE id="uranus_surface" />
         <ROTATION axis="x" angle="-90" />
@@ -835,7 +835,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="uranus_moon1">
+    <NODE id="uranus_moon1" selectable="1">
         <MATERIAL id="null"/>
         <TEXTURE id="uranus_moon1_surface"/>
         <SCALE sx="0.5" sy="0.5" sz="0.5"/>
@@ -896,7 +896,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="neptune">
+    <NODE id="neptune" selectable="1">
         <MATERIAL id="null" />
         <TEXTURE id="neptune_surface" />
         <ROTATION axis="x" angle="-90" />
@@ -950,7 +950,7 @@
         </DESCENDANTS>
     </NODE>
 
-    <NODE id="shuttle">
+    <NODE id="shuttle" selectable="1">
         <MATERIAL id="null"/>
         <TEXTURE id="whitemetal"/>
 
@@ -972,7 +972,7 @@
 
     </NODE>
 
-    <NODE id="shuttle2">
+    <NODE id="shuttle2" selectable="1">
         <MATERIAL id="null"/>
         <TEXTURE id="whitemetal"/>
 
@@ -1147,7 +1147,7 @@
       </DESCENDANTS>
     </NODE>
 
-    <NODE id="space_station">
+    <NODE id="space_station" selectable="1">
       <MATERIAL id="space_station_material"/>
       <TEXTURE id="ss_skin"/>
       <SCALE sx="0.2" sy="0.2" sz="0.2"/>
