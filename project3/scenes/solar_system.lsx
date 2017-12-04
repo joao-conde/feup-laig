@@ -1,0 +1,1476 @@
+<SCENE>
+
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.2" sy="0.2" sz="0.2" />
+    <reference length="5" />
+</INITIALS>
+
+<ILLUMINATION>
+    <ambient r="0.5" g="0.5" b="0.5" a="1" />
+    <background r="0.1" g="0.1" b="0.1" a="1" />
+    <doubleside value = "1"/>
+</ILLUMINATION>
+
+<LIGHTS>
+	<LIGHT id="sun_light">
+        <enable value ="1" />
+        <position  x="0" y="0" z="0" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+</LIGHTS>
+
+<TEXTURES>
+
+  <TEXTURE id="panel">
+      <file path="images/solarpanel.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="ss_skin">
+      <file path="images/whitemetal.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="blacktops">
+      <file path="images/wings.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="glass">
+      <file path="images/glass.png" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+  <TEXTURE id="grill">
+      <file path="images/metalgrill.jpg" />
+      <amplif_factor s="1" t="1" />
+  </TEXTURE>
+
+    <TEXTURE id="sun_surface">
+      <file path="images/sunsurface.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="earth_surface">
+      <file path="images/earth.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="earth_moon_surface">
+      <file path="images/moon.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="mercury_surface">
+      <file path="images/mercury_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="venus_surface">
+      <file path="images/venus_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="mars_surface">
+      <file path="images/mars_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_surface">
+      <file path="images/jupiter_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon1_surface">
+      <file path="images/jupiter_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon2_surface">
+      <file path="images/jupiter_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="jupiter_moon3_surface">
+      <file path="images/jupiter_moon_3.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_surface">
+      <file path="images/saturn_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon1_surface">
+      <file path="images/saturn_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="saturn_moon2_surface">
+      <file path="images/saturn_moon_2.png"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_surface">
+      <file path="images/uranus_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_moon1_surface">
+      <file path="images/uranus_moon_1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="uranus_moon2_surface">
+      <file path="images/uranus_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_surface">
+      <file path="images/neptune_surface.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_1_surface">
+      <file path="images/neptune_moons.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="neptune_moon_2_surface">
+      <file path="images/neptune_moon_2.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="whitemetal">
+        <file path="images/whitemetal.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="stripes">
+        <file path="images/whiteblackstripes.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="wings">
+        <file path="images/wings.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="cockpit">
+        <file path="images/cockpit.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="light_metal">
+        <file path="images/light_metal.jpeg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+
+</TEXTURES>
+
+<MATERIALS>
+
+    <!-- A default material -->
+    <MATERIAL id="default_material">
+        <shininess value="1" />
+        <specular r="0.8" g="0.8" b="0.8" a="1" />
+        <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+        <ambient r="0.8" g="0.8" b="0.8" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+    <!-- Sun material -->
+      <MATERIAL id="sun_material">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="1.0" b="1.0" a="1" />
+    </MATERIAL>
+
+      <!-- Earth material -->
+      <MATERIAL id="earth_material">
+          <shininess value="1" />
+          <specular r="0.8" g="0.8" b="0.8" a="1" />
+          <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Moon material -->
+      <MATERIAL id="earth_moon_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Mercury material -->
+      <MATERIAL id="mercury_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="0" g="0" b="0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+      <!-- Space station material -->
+      <MATERIAL id="space_station_material">
+          <shininess value="1" />
+          <specular r="1.0" g="1.0" b="1.0" a="1" />
+          <diffuse r="1.0" g="1.0" b="1.0" a="1" />
+          <ambient r="1.0" g="1.0" b="1.0" a="1" />
+          <emission r="0.0" g="0.0" b="0.0" a="1" />
+      </MATERIAL>
+
+</MATERIALS>
+<ANIMATIONS>
+
+  <ANIMATION id="sunRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/>
+
+  <ANIMATION id="planetRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/>
+  <ANIMATION id="earthTranslation" speed="10" type="circular" centerx="0" centery="0" centerz="0"
+                radius="50" startang="0" rotang="360"/>
+
+  <ANIMATION id="ssTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+                radius="10" startang="90" rotang="360"/>
+
+  <ANIMATION id="emTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="5" startang="90" rotang="360"/>
+
+  <ANIMATION id="bpmTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="15" startang="90" rotang="360"/>
+              
+
+  <ANIMATION id="bpm2Translation" speed="25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="15" startang="270" rotang="360"/>
+
+  <ANIMATION id="mpmTranslation" speed="-25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="8" startang="90" rotang="360"/>
+              
+
+  <ANIMATION id="mpm2Translation" speed="25" type="circular" centerx="0" centery="0" centerz="0"
+              radius="8" startang="270" rotang="360"/>
+
+  <ANIMATION id="mercuryTranslation" speed="10" type="circular" centerx="0" centery="0" centerz="0"
+             radius="30" startang="110" rotang="360"/>
+
+   <ANIMATION id="venusTranslation" speed="-14" type="circular" centerx="0" centery="0" centerz="0"
+             radius="40" startang="70" rotang="360"/>
+
+  <ANIMATION id="marsTranslation" speed="-10" type="circular" centerx="0" centery="0" centerz="0"
+             radius="40" startang="0" rotang="360"/>
+
+  <ANIMATION id="jupiterTranslation" speed="-30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="90" startang="180" rotang="360"/>
+
+  <ANIMATION id="saturnTranslation" speed="30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="115" startang="90" rotang="360"/>
+
+  <ANIMATION id="uranusTranslation" speed="-30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="140" startang="1" rotang="360"/>              
+
+  <ANIMATION id="neptuneTranslation" speed="30" type="circular" centerx="0" centery="0" centerz="0"
+             radius="160" startang="15" rotang="360"/>           
+
+
+  <ANIMATION id="shuttle1linear1" speed="25" type="linear">
+      <controlpoint xx="0" yy="0"  zz="0"/>
+      <controlpoint xx="-50" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle1circular" speed="25" type="circular" centerx="-50" centery="0" centerz="25"
+                radius="25" startang="90" rotang="180"/>
+
+  <ANIMATION id="shuttle1linear2" speed="40" type="linear">
+      <controlpoint xx="-50" yy="0"  zz="50"/>
+      <controlpoint xx="0" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttleComboAnimation" type="combo">
+        
+        <SPANREF id="shuttle1linear1"/>
+        <SPANREF id="shuttle1circular"/>
+        <SPANREF id="shuttle1linear2"/>
+
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2bezier1" speed="50" type="bezier">
+      <controlpoint xx="0" yy="0"  zz="0"/>
+      <controlpoint xx="80" yy="50"  zz="40"/>
+      <controlpoint xx="-80" yy="0"  zz="20"/>
+      <controlpoint xx="50" yy="0"  zz="100"/>
+  </ANIMATION>
+
+
+  <ANIMATION id="shuttle2linear" speed="80" type="linear">
+      <controlpoint xx="50" yy="0"  zz="100"/>
+      <controlpoint xx="100" yy="40"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2bezier2" speed="80" type="bezier">
+      <controlpoint xx="100" yy="40"  zz="0"/>
+      <controlpoint xx="160" yy="40"  zz="40"/>
+      <controlpoint xx="-180" yy="40"  zz="120"/>
+      <controlpoint xx="0" yy="0"  zz="0"/>
+  </ANIMATION>
+
+  <ANIMATION id="shuttle2ComboAnimation" type="combo">
+        
+         <SPANREF id="shuttle2bezier1"/>
+        <SPANREF id="shuttle2linear"/>
+        <SPANREF id="shuttle2bezier2"/>
+       
+        
+
+  </ANIMATION>
+
+
+
+</ANIMATIONS>
+
+<NODES>
+
+    <ROOT id="root" />
+
+    <NODE id="root">
+        <MATERIAL id="earth_material" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="sun" />
+            <NODEREF id="mercury_full" />
+            <NODEREF id="venus_translation" />
+            <NODEREF id="earth_translation" />
+            <NODEREF id="mars_translation" />
+            <NODEREF id="jupiter_translation" />
+            <NODEREF id="saturn_translation" />
+            <NODEREF id="uranus_translation" />
+            <NODEREF id="neptune_translation" />
+            <NODEREF id="shuttle" />
+            <NODEREF id="shuttle2" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="sun" selectable="1">
+        <MATERIAL id="sun_material" />
+        <TEXTURE id="sun_surface" />
+        <ANIMATIONREFS>
+            <ANIMATIONREF  id="sunRotation"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <LEAF id="sun_sphere" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury_full">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="10"/>
+
+        <DESCENDANTS>
+            <NODEREF id="mercury_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="mercuryTranslation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury_rotation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="0.1"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="planetRotation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mercury">
+        <MATERIAL id="mercury_material" />
+        <TEXTURE id="mercury_surface" />
+        <DESCENDANTS>
+            <LEAF id="mercury_sphere" type="sphere" args="1 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="venus_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="65"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="venusTranslation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="venus_rotation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="venus_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="177"/>
+        <ANIMATIONREFS>
+           <ANIMATIONREF id="planetRotation"/>  
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="mercury"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="venus">
+        <MATERIAL id="null" />
+        <TEXTURE id="venus_surface" />
+        <TRANSLATION x="40" y="0" z="0" />
+        <DESCENDANTS>
+            <LEAF id="venus_sphere" type="sphere" args="1.5 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="earth_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="earthTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "earth_rotation"/>
+            <NODEREF id="space_station_full"/>
+            <NODEREF id = "earth_moon_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="earth_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="23"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "earth"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="earth" selectable="1">
+        <MATERIAL id="earth_material" />
+        <TEXTURE id="earth_surface" />
+    
+        <ROTATION axis="x" angle="-90" />
+             
+        <DESCENDANTS>
+            <LEAF id="earth_sphere" type="sphere" args="3 50 50" />
+        </DESCENDANTS>
+    </NODE>
+    
+    <NODE id="earth_moon_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="45"/>
+        <ANIMATIONREFS>
+          <!-- <ANIMATIONREF id="earthTranslation"/> -->
+          <ANIMATIONREF  id="emTranslation"/>
+          
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="earth_moon"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="earth_moon">
+        <MATERIAL id="earth_moon_material"/>
+        <TEXTURE id="earth_moon_surface"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <DESCENDANTS>
+            <LEAF id="earth_moon_sphere_leaf" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="mars_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="marsTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "mars_rotation"/>
+            <NODEREF id = "mars_moon1_translation"/>
+            <NODEREF id = "mars_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="25"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "mars"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="mars">
+        <MATERIAL id="null" />
+        <TEXTURE id="mars_surface" />
+        <DESCENDANTS>
+            <LEAF id="mars_sphere" type="sphere" args="3 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="30"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="emTranslation"/>
+          
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="mars_moon1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="earth_moon_surface"/>
+        <SCALE sx="0.3" sy="0.3" sz="0.3"/>
+        <DESCENDANTS>
+            <LEAF id="mars_moon1_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="330"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="emTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="mars_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="mars_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="earth_moon_surface"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <DESCENDANTS>
+            <LEAF id="mars_moon2_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+     <NODE id="jupiter_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="jupiterTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "jupiter_rotation"/>
+            <NODEREF id = "jupiter_moon1_translation"/>
+            <NODEREF id = "jupiter_moon2_translation"/>
+            <NODEREF id = "jupiter_moon3_translation"/>
+
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="3"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "jupiter"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="jupiter_surface" />
+        <ROTATION axis="x" angle="-90" />
+        <DESCENDANTS>
+            <LEAF id="jupiter_sphere" type="sphere" args="9 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="330"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon1"/>
+        </DESCENDANTS>
+    </NODE>
+
+     <NODE id="jupiter_moon1" selectable="1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon1_surface"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon1_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="80"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon2_surface"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon2_sphere" type="sphere" args="1.5 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon3_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="35"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="jupiter_moon3"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="jupiter_moon3">
+        <MATERIAL id="null"/>
+        <TEXTURE id="jupiter_moon3_surface"/>
+        <SCALE sx="0.8" sy="0.8" sz="0.8"/>
+        <DESCENDANTS>
+            <LEAF id="jupiter_moon3_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="20"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="saturnTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "saturn_rotation"/>
+            <NODEREF id = "saturn_moon1_translation"/>
+            <NODEREF id = "saturn_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="27"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "saturn"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="saturn_surface" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF id="saturn_sphere" type="sphere" args="8.5 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="80"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="saturn_moon1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="saturn_moon1_surface"/>
+        <DESCENDANTS>
+            <LEAF id="saturn_moon_1_sphere" type="sphere" args="1.1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="280"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="bpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="saturn_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="saturn_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="saturn_moon2_surface"/>
+        <TRANSLATION x="0" y="-8" z="8"/>
+        <DESCENDANTS>
+            <LEAF id="mars_moon2_sphere" type="sphere" args="1.5 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="20"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="uranusTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "uranus_rotation"/>
+            <NODEREF id="uranus_moon1_translation"/>
+            <NODEREF id="uranus_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="98"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "uranus"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="uranus_surface" />
+        <ROTATION axis="x" angle="-90" />
+        <DESCENDANTS>
+            <LEAF id="uranus_sphere" type="sphere" args="6 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="60"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="uranus_moon1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon1" selectable="1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="uranus_moon1_surface"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <DESCENDANTS>
+            <LEAF id="uranus_moon1_sphere" type="sphere" args="1.1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="300"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpmTranslation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="uranus_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="uranus_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="uranus_moon2_surface"/>
+        <TRANSLATION x="0" y="-5" z="-5"/>
+        <SCALE sx="0.7" sy="0.8" sz="0.6"/>
+        <DESCENDANTS>
+            <LEAF id="uranus_moon2_sphere" type="sphere" args="1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_translation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="15"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="neptuneTranslation"/>
+          
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id = "neptune_rotation"/>
+            <NODEREF id="neptune_moon1_translation"/>
+            <NODEREF id="neptune_moon2_translation"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_rotation">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <ROTATION axis="z" angle="30"/>
+    
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="planetRotation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id = "neptune"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune" selectable="1">
+        <MATERIAL id="null" />
+        <TEXTURE id="neptune_surface" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+            <LEAF id="neptune_sphere" type="sphere" args="6 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon1_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="60"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="neptune_moon1"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="neptune_moon_1_surface"/>
+        <SCALE sx="0.7" sy="0.5" sz="0.5"/>
+        <DESCENDANTS>
+            <LEAF id="neptune_moon1_sphere" type="sphere" args="1.1 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon2_translation">
+        <MATERIAL id="null"/>
+        <TEXTURE id="null"/>
+        <ROTATION axis="z" angle="300"/>
+        <ANIMATIONREFS>
+          <ANIMATIONREF  id="mpm2Translation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+            <NODEREF id="neptune_moon2"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="neptune_moon2">
+        <MATERIAL id="null"/>
+        <TEXTURE id="neptune_moon_2_surface"/>
+        <SCALE sx="0.6" sy="0.8" sz="0.6"/>
+        <DESCENDANTS>
+            <LEAF id="neptune_moon2_sphere" type="sphere" args="2 50 50"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="shuttle" selectable="1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="whitemetal"/>
+
+        <TRANSLATION x="50" y="5" z="3"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <ROTATION axis="y" angle="90"/>
+        <ROTATION axis="x" angle="10"/>
+        <ROTATION axis="y" angle="180"/>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="shuttleComboAnimation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_wings" />
+          <NODEREF id="shuttle_body" />
+          <NODEREF id="shuttle_rockets"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle2" selectable="1">
+        <MATERIAL id="null"/>
+        <TEXTURE id="whitemetal"/>
+
+        <TRANSLATION x="70" y="5" z="3"/>
+        <SCALE sx="0.5" sy="0.5" sz="0.5"/>
+        <ROTATION axis="y" angle="90"/>
+        <ROTATION axis="x" angle="10"/>
+        <ROTATION axis="y" angle="180"/>
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="shuttle2ComboAnimation"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_wings" />
+          <NODEREF id="shuttle_body" />
+          <NODEREF id="shuttle_rockets"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_body">
+        <MATERIAL id="null" />
+        <TEXTURE id="light_metal" />
+
+        <DESCENDANTS>
+					<NODEREF id="shuttle_cockpit" />
+          <NODEREF id="shuttle_cargo" />
+		    </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cockpit">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+          <LEAF id="cockpit_cylinder" type="cylinder" args="3 2 1 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cargo">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-6" />
+
+        <DESCENDANTS>
+          <LEAF id="cargo_cylinder" type="cylinder" args="6 2 2 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_wings">
+        <MATERIAL id="null" />
+        <TEXTURE id="wings" />
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_leftW" />
+          <NODEREF id="shuttle_rightW" />
+          <NODEREF id="shuttle_topW" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_topW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0.5" y="1.5" z="-5"/>
+        <SCALE sx="0.5" sy="0.4" sz="0.5"/>
+        <ROTATION axis="z" angle="90"/>
+
+        <DESCENDANTS>
+          <NODEREF id="topwing"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="topwing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="pyramid_twing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_twing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF id="pyramid_twing_triangle1" type="triangle" args="8 1 0 0 0 6 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle2" type="triangle" args="8 1 0 0 2 6 0 2 0"/>
+        <LEAF id="pyramid_twing_triangle3" type="triangle" args="8 1 0 0 2 0 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle4" type="triangle" args="0 0 6 0 2 6 8 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="shuttle_leftW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+          <TRANSLATION x="0" y="-1.70" z="-5" />
+          <SCALE sx="1.5" sy="1" sz="2"/>
+
+        <DESCENDANTS>
+          <NODEREF id="wing" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rightW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-1.70" z="-5" />
+        <SCALE sx="-1.5" sy="1" sz="2"/>
+
+        <DESCENDANTS>
+          <NODEREF id="wing" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rockets">
+        <MATERIAL id="null" />
+        <TEXTURE id="stripes" />
+
+        <TRANSLATION x="0" y="0" z="-7"/>
+
+        <DESCENDANTS>
+          <LEAF id="rocket_cone" type="cylinder" args="2 2 1 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="pyramid_wing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="pyramid_wing_triangle1" type="triangle" args="4 0 0 0 0 3 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle2" type="triangle" args="4 0 0 0 1 3 0 1 0"/>
+        <LEAF id="pyramid_wing_triangle3" type="triangle" args="4 0 0 0 1 0 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle4" type="triangle" args="0 0 3 0 1 3 4 0 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="space_station_full">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <ROTATION axis="z" angle="-30"/>
+      
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="ssTranslation"/>
+      </ANIMATIONREFS>
+      <DESCENDANTS>
+        <NODEREF id="space_station"/>
+
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="space_station" selectable="1">
+      <MATERIAL id="space_station_material"/>
+      <TEXTURE id="ss_skin"/>
+      <SCALE sx="0.2" sy="0.2" sz="0.2"/>
+      <ROTATION axis="y" angle="90"/>
+      <ROTATION axis="z" angle="90"/>
+      <ANIMATIONREFS>
+        <!-- <ANIMATIONREF id="ssTranslation"/> -->
+      </ANIMATIONREFS>
+      <DESCENDANTS>
+        <NODEREF id="ss_sides"/>
+        <NODEREF id="ss_body"/>
+
+      </DESCENDANTS>
+    </NODE>
+
+    
+
+    <NODE id="ss_sides_junction">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <SCALE sx="0.2" sy="1" sz="1"/>
+      <DESCENDANTS>
+        <NODEREF id="ss_sides_junction_left"/>
+        <NODEREF id="ss_sides_junction_right"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_left">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="-5" y="0" z="-2"/>
+      <DESCENDANTS>
+        <NODEREF id="ss_sides_junction_left_bot"/>
+        <NODEREF id="ss_sides_junction_left_top"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_right">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="5" y="0" z="-2"/>
+      <SCALE sx="-1" sy="1" sz="1"/>
+      <DESCENDANTS>
+        <NODEREF id="ss_sides_junction_right_bot"/>
+        <NODEREF id="ss_sides_junction_right_top"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_left_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_left_bot">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_right_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides_junction_right_bot">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="2" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_sides">
+      <MATERIAL id="null"/>
+      <TEXTURE id="panel"/>
+      <ROTATION axis="x" angle="45"/>
+      <SCALE sx="4" sy="1" sz="2"/>
+      <DESCENDANTS>
+        <NODEREF id="ss_leftside"/>
+        <NODEREF id="ss_rightside"/>
+        <NODEREF id="ss_sides_junction"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_leftside">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="-2" y="0" z="-2" />
+      <DESCENDANTS>
+        <NODEREF id="ss_leftside_top"/>
+        <NODEREF id="ss_leftside_bot"/>
+      </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="ss_leftside_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="0" y="0" z="0" ww="1"/>
+            <CPOINT x="0" y="2" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_leftside_bot">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="0" y="0" z="0" ww="1"/>
+            <CPOINT x="0" y="2" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_rightside">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="7" y="0" z="-2" />
+      <DESCENDANTS>
+        <NODEREF id="ss_rightside_top"/>
+        <NODEREF id="ss_rightside_bot"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_rightside_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="0" y="0" z="0" ww="1"/>
+            <CPOINT x="0" y="2" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_rightside_bot">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <DESCENDANTS>
+        <LEAF type="patch" args="40 40">
+          <CPLINE>
+            <CPOINT x="-5" y="0" z="0" ww="1"/>
+            <CPOINT x="-5" y="2" z="2" ww="1"/>
+            <CPOINT x="-5" y="0" z="4" ww="1"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT x="0" y="0" z="0" ww="1"/>
+            <CPOINT x="0" y="2" z="2" ww="1"/>
+            <CPOINT x="0" y="0" z="4" ww="1"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="ss_body">
+      <MATERIAL id="null"/>
+      <TEXTURE id="grill"/>
+      <DESCENDANTS>
+        <NODEREF id="ss_middle"/>
+        <NODEREF id="ss_bottom"/>
+        <NODEREF id="ss_top"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_bottom">
+      <MATERIAL id="null"/>
+      <TEXTURE id="blacktops"/>
+      <TRANSLATION x="0" y="0" z="8"/>
+     <DESCENDANTS>
+        <LEAF id="ss_bot_cylinder" type="cylinder" args="4 4 3 50 50 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="-8"/>
+      <ROTATION axis="x" angle="180"/>
+     <DESCENDANTS>
+        <NODEREF id="ss_top_bot" />
+        <NODEREF id="ss_top_mid" />
+        <NODEREF id="ss_top_top" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top_bot">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+     <DESCENDANTS>
+        <LEAF id="ss_top_cylinder" type="cylinder" args="4 4 2 100 100 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top_mid">
+      <MATERIAL id="null"/>
+      <TEXTURE id="blacktops"/>
+      <TRANSLATION x="0" y="0" z="4"/>
+     <DESCENDANTS>
+       <NODEREF id="ss_top_mid_window"/>
+       <NODEREF id="ss_top_mid_body"/>
+     </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top_mid_body">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+     <DESCENDANTS>
+       <LEAF id="ss_top_cylinder" type="cylinder" args="7 2 3 100 100 1 1" />
+    </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top_mid_window">
+      <MATERIAL id="null"/>
+      <TEXTURE id="glass"/>
+      <TRANSLATION x="0" y="-3" z="4"/>
+      <ROTATION axis="x" angle="-80" />
+     <DESCENDANTS>
+       <LEAF id="ss_top_cylinder" type="cylinder" args="1 1 1 100 100 1 1" />
+    </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_top_top">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="10"/>
+     <DESCENDANTS>
+        <LEAF id="ss_top_cylinder" type="cylinder" args="4 2 2 100 100 0 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ss_middle">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="-8"/>
+     <DESCENDANTS>
+        <LEAF id="ss_mid_cylinder" type="cylinder" args="16 4 4 100 100 1 1" />
+      </DESCENDANTS>
+    </NODE>
+
+</NODES>
+
+</SCENE>
