@@ -1,0 +1,153 @@
+<SCENE>
+
+<INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="-1" y="1" z="0" />
+    <rotation axis="x" angle="0" />
+    <rotation axis="y" angle="0" />
+    <rotation axis="z" angle="0" />
+    <scale sx="0.2" sy="0.2" sz="0.2" />
+    <reference length="5" />
+</INITIALS>
+
+<ILLUMINATION>
+    <ambient r="0.5" g="0.5" b="0.5" a="1" />
+    <background r="0.1" g="0.1" b="0.1" a="1" />
+    <doubleside value = "1"/>
+</ILLUMINATION>
+
+<LIGHTS>
+	<LIGHT id="sun_light">
+        <enable value ="1" />
+        <position  x="0" y="0" z="0" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+</LIGHTS>
+
+<TEXTURES>
+
+    <TEXTURE id="monalisa">
+        <file path="images/monalisa.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+
+</TEXTURES>
+
+<MATERIALS>
+
+    <!-- A default material -->
+    <MATERIAL id="default_material">
+        <shininess value="1" />
+        <specular r="0.8" g="0.8" b="0.8" a="1" />
+        <diffuse r="0.8" g="0.8" b="0.8" a="1" />
+        <ambient r="0.8" g="0.8" b="0.8" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
+</MATERIALS>
+
+<ANIMATIONS>
+
+    <ANIMATION id="cylinderAnimation" speed= "20" type="linear">
+        
+        <controlpoint xx="0" yy="0"  zz="20"/>
+        <controlpoint xx="0" yy="0" zz="0"/>
+    
+    </ANIMATION>
+
+    <ANIMATION id="cylinderAnimation2" speed= "20" type="linear">
+        
+        <controlpoint xx="0" yy="0"  zz="0"/>
+        <controlpoint xx="20" yy="0" zz="0"/>
+    </ANIMATION>
+
+    <ANIMATION id="linear2" speed= "20" type="linear">
+        
+        <controlpoint xx="0" yy="0"  zz="20"/>
+        <controlpoint xx="0" yy="0" zz="0"/>
+        <controlpoint xx="20" yy="0" zz="0"/>
+    </ANIMATION>
+
+    <ANIMATION id="circularAnimation" speed="20" type="circular" centerx="0" centery="0" centerz="30"
+                radius="10" startang="0" rotang="360"/>
+
+    <ANIMATION id="bezierExample" speed="10" type="bezier">
+        <controlpoint xx="0" yy="0"  zz="0"/>
+        <controlpoint xx="4" yy="0"  zz="14"/>
+        <controlpoint xx="16" yy="0"  zz="16"/>
+        <controlpoint xx="0" yy="0"  zz="20"/>
+    </ANIMATION>
+
+    <ANIMATION id="comboExample" type="combo">
+        
+        <!--<SPANREF id="circularAnimation"/>-->
+        
+        
+        <SPANREF id="cylinderAnimation"/>
+        <SPANREF id="bezierExample"/>
+        
+        
+        
+    </ANIMATION>
+
+
+</ANIMATIONS>
+
+<LEAVES>
+</LEAVES>
+
+<NODES>
+
+    <ROOT id="root" />
+
+    <NODE id="root">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        
+        <DESCENDANTS>
+            <NODEREF id="monalisa_space_shuttle" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="monalisa_space_shuttle">
+        <MATERIAL id="default_material"/>
+        <TEXTURE id="monalisa"/>
+        <ROTATION axis="x" angle="90"/>
+
+        
+        <ANIMATIONREFS>
+            <ANIMATIONREF  id="comboExample"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <NODEREF id="cylinder"/>
+            <NODEREF id="cone"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="cylinder">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+     <DESCENDANTS>
+        <LEAF id="" type="cylinder" args="10, 2, 2, 30, 30, 1, 1" />
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="cone">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+      <TRANSLATION x="0" y="0" z="10"/>
+
+     <DESCENDANTS>
+        <LEAF id="" type="cylinder" args="4, 2, 0.0001, 30, 30, 0, 1" />
+      </DESCENDANTS>
+    </NODE>
+
+
+
+
+</NODES>
+
+</SCENE>
