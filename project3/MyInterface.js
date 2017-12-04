@@ -24,23 +24,61 @@ MyInterface.prototype.init = function(application) {
     
     this.gui = new dat.GUI();
 
-    // add a group of controls (and open/expand by defult)
-    var group = this.gui.addFolder("Transforms");
-    group.open();
-    var zoomController = group.add(this.scene, 'zoom', 0, 1).name("Zoom").step(0.01);
-    zoomController.scene = this.scene;
-
-    zoomController.onChange(function(newValue) {
-
-        this.scene.zoom = newValue;
-
-    });
-
-    zoomController.setValue(0.7);
-
+    
     return true;
 };
 
+MyInterface.prototype.addZoomController = function(){
+        // add a group of controls (and open/expand by defult)
+        var group = this.gui.addFolder("Transforms");
+        group.open();
+        var zoomController = group.add(this.scene, 'zoom', 0, 1).name("Zoom").step(0.01);
+        zoomController.scene = this.scene;
+    
+        zoomController.onChange(function(newValue) {
+    
+            this.scene.zoom = newValue;
+    
+        });
+    
+        zoomController.setValue(0.7);
+}
+
+MyInterface.prototype.addDifficultySelector = function(){
+    var group = this.gui.addFolder("Difficulties");
+    group.open();
+
+    var difDic = {
+        "Easy":0,
+        "Medium":1,
+        "Hard":2
+    };
+
+    this.scene.difficulty = 0;
+    var difficultyCombo = this.gui.add(this.scene, 'difficulty', difDic).name("Difficulty");
+}
+
+MyInterface.prototype.addGameModeSelector = function(){
+    var group = this.gui.addFolder("Game modes");
+    group.open();
+
+    var gameModeDic = {
+        "Human vs Human":0,
+        "Human vs PC":1,
+        "PC vs PC":2
+    };
+
+    this.scene.mode = 0;
+    var gameModeCombo = this.gui.add(this.scene, 'mode', gameModeDic).name("Mode");
+}
+
+MyInterface.prototype.addUndoBtn = function(){
+    var undoBtn = { Undo:function(){ console.log("clicked") }};
+    this.scene.undoBtn = 0;
+    this.gui.add(undoBtn,'Undo');
+}
+
+/*
 MyInterface.prototype.addShadersGroup = function() {
 
     var groupShaders = this.gui.addFolder("Shaders");
@@ -67,7 +105,7 @@ MyInterface.prototype.addShadersGroup = function() {
     var greenController = groupShaders.add(this.scene, 'green', 0, 1).name("Green").step(0.1);
     var blueController = groupShaders.add(this.scene, 'blue', 0, 1).name("Blue").step(0.1);
 
-}
+}*/
 
 /**
  * Adds a folder containing the IDs of the lights passed as parameter.

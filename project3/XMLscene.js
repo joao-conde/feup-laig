@@ -110,7 +110,11 @@ XMLscene.prototype.onGraphLoaded = function()
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
-    this.interface.addShadersGroup();
+    this.interface.addZoomController();
+    this.interface.addDifficultySelector();
+    this.interface.addGameModeSelector();
+    this.interface.addUndoBtn();
+    //this.interface.addShadersGroup();
 }
 
 /**
