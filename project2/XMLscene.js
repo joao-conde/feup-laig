@@ -16,9 +16,9 @@ function XMLscene(interface) {
     this.interface = interface;
     this.lightValues = {};
 
-    this.red = 0;
-    this.green = 0;
-    this.blue = 0;
+    this.red = 0.1;
+    this.green = 0.1;
+    this.blue = 0.1;
 
     
 

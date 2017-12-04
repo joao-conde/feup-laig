@@ -76,8 +76,8 @@
 
     <ANIMATION id="bezierExample" speed="10" type="bezier">
         <controlpoint xx="0" yy="0"  zz="0"/>
-        <controlpoint xx="4" yy="0"  zz="14"/>
-        <controlpoint xx="16" yy="0"  zz="16"/>
+        <controlpoint xx="4" yy="10"  zz="14"/>
+        <controlpoint xx="16" yy="5"  zz="16"/>
         <controlpoint xx="0" yy="0"  zz="20"/>
     </ANIMATION>
 
@@ -115,7 +115,7 @@
     <NODE id="monalisa_space_shuttle">
         <MATERIAL id="default_material"/>
         <TEXTURE id="monalisa"/>
-        <ROTATION axis="x" angle="90"/>
+        <!-- <ROTATION axis="x" angle="90"/> -->
 
         
         <ANIMATIONREFS>

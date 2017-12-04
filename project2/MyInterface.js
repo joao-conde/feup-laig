@@ -27,7 +27,7 @@ MyInterface.prototype.init = function(application) {
     // add a group of controls (and open/expand by defult)
     var group = this.gui.addFolder("Transforms");
     group.open();
-    var zoomController = group.add(this.scene, 'zoom', 0, 1).name("Zoom").step(0.01);
+    var zoomController = group.add(this.scene, 'zoom', 0, 3).name("Zoom").step(0.01);
     zoomController.scene = this.scene;
 
     zoomController.onChange(function(newValue) {
@@ -63,9 +63,9 @@ MyInterface.prototype.addShadersGroup = function() {
 
     shadersCombo.setValue(null);
 
-    var redController = groupShaders.add(this.scene, 'red', 0, 1).name("Red").step(0.01);
-    var greenController = groupShaders.add(this.scene, 'green', 0, 1).name("Green").step(0.1);
-    var blueController = groupShaders.add(this.scene, 'blue', 0, 1).name("Blue").step(0.1);
+    var redController = groupShaders.add(this.scene, 'red', 0.0, 1.0).name("Red").step(0.01);
+    var greenController = groupShaders.add(this.scene, 'green', 0.0, 1.0).name("Green").step(0.01);
+    var blueController = groupShaders.add(this.scene, 'blue', 0.0, 1.0).name("Blue").step(0.01);
 
 }
 
