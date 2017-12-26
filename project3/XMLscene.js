@@ -21,7 +21,6 @@ function XMLscene(interface) {
     this.blue = 0;
 
     
-
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -48,6 +47,8 @@ XMLscene.prototype.init = function(application) {
     this.selectables = [];
 
     this.laigShader = new CGFshader(this.gl, "shaders/laig_multiple_light-vertex.glsl", "shaders/laig_fragment.glsl");
+
+    this.piece = new MyNijuPiece(this);
 
 }
 
@@ -136,43 +137,55 @@ XMLscene.prototype.display = function() {
 
     this.pushMatrix();
     
-    if (this.graph.loadedOk) 
-    {        
 
-        // Applies initial transformations.
-        this.multMatrix(this.graph.initialTransforms);
+    // if (this.graph.loadedOk) 
+    // {        
 
-		// Draw axis
-		this.axis.display();
+    //     // Applies initial transformations.
+    //     this.multMatrix(this.graph.initialTransforms);
 
-        var i = 0;
-        for (var key in this.lightValues) {
-            if (this.lightValues.hasOwnProperty(key)) {
-                if (this.lightValues[key]) {
-                    this.lights[i].setVisible(true);
-                    this.lights[i].enable();
-                }
-                else {
-                    this.lights[i].setVisible(false);
-                    this.lights[i].disable();
-                }
-                this.lights[i].update();
-                i++;
-            }
-        }
+	// 	// Draw axis
+	// 	this.axis.display();
 
-        // Displays the scene.
-        this.scale(this.zoom,this.zoom,this.zoom);
-        this.graph.displayScene();
+    //     var i = 0;
+    //     for (var key in this.lightValues) {
+    //         if (this.lightValues.hasOwnProperty(key)) {
+    //             if (this.lightValues[key]) {
+    //                 this.lights[i].setVisible(true);
+    //                 this.lights[i].enable();
+    //             }
+    //             else {
+    //                 this.lights[i].setVisible(false);
+    //                 this.lights[i].disable();
+    //             }
+    //             this.lights[i].update();
+    //             i++;
+    //         }
+    //     }
 
-        this.setUpdatePeriod(10);
+    //     // Displays the scene.
+    //     this.scale(this.zoom,this.zoom,this.zoom);
+    //     this.graph.displayScene();
 
-    }
-	else
-	{
-		// Draw axis
-		this.axis.display();
-	}
+    //     this.setUpdatePeriod(10);
+
+    // }
+	// else
+	// {
+	// 	// Draw axis
+	// 	this.axis.display();
+    // }
+
+
+    this.piece.display(0,'white');
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    this.translate(0,-5,0);
+    this.piece.display(1,'black');
+
+    this.popMatrix();
     
     
     // ---- END Background, camera and axis setup
