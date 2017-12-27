@@ -2,7 +2,7 @@
 
 <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-1" y="1" z="0" />
+    <translation x="0" y="0" z="0" />
     <rotation axis="x" angle="0" />
     <rotation axis="y" angle="0" />
     <rotation axis="z" angle="0" />
@@ -19,11 +19,36 @@
 <LIGHTS>
 	<LIGHT id="light1">
         <enable value ="1" />
-        <position  x="0" y="0" z="0" w="1" />
+        <position  x="0" y="50" z="0" w="1" />
         <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
         <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
         <specular r="1.0" g="1.0" b="1.0" a="1.0" />
     </LIGHT>
+
+    <LIGHT id="light2">
+        <enable value ="1" />
+        <position  x="0" y="50" z="50" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light3">
+        <enable value ="1" />
+        <position  x="50" y="50" z="50" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+
+    <LIGHT id="light4">
+        <enable value ="1" />
+        <position  x="50" y="50" z="0" w="1" />
+        <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+        <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+        <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+    </LIGHT>
+    
 </LIGHTS>
 
 <TEXTURES>
@@ -31,11 +56,6 @@
     <TEXTURE id="wood">
         <file path="images/wood.jpg" />
         <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="monalisa">
-        <file path="images/monalisa.jpg" />
-        <amplif_factor s="0.1" t="0.1" />
     </TEXTURE>
 
 
@@ -71,7 +91,7 @@
     <NODE id="table">
         <MATERIAL id="default_material" />
         <TEXTURE id="wood" />
-        <SCALE sx="3" sy="3" sz="3" />
+        <SCALE sx="8" sy="3" sz="6" />
         
         <DESCENDANTS>
             <NODEREF id="table_top"/>

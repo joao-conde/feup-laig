@@ -19,7 +19,6 @@ function XMLscene(interface) {
     this.red = 0;
     this.green = 0;
     this.blue = 0;
-
     
 }
 
@@ -40,6 +39,9 @@ XMLscene.prototype.init = function(application) {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    this.gl.enable(this.gl.BLEND);
     
     this.axis = new CGFaxis(this);
 
@@ -112,9 +114,10 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
     this.interface.addZoomController();
-    this.interface.addDifficultySelector();
     this.interface.addGameModeSelector();
+    this.interface.addDifficultySelector();
     this.interface.addUndoBtn();
+    this.interface.addStartButton();
     //this.interface.addShadersGroup();
 }
 
@@ -122,6 +125,10 @@ XMLscene.prototype.onGraphLoaded = function()
  * Displays the scene.
  */
 XMLscene.prototype.display = function() {
+    
+    this.logPicking();
+	this.clearPickRegistration();
+    
     // ---- BEGIN Background, camera and axis setup
     
     // Clear image and depth buffer everytime we update the scene
@@ -136,57 +143,74 @@ XMLscene.prototype.display = function() {
     this.applyViewMatrix();
 
     this.pushMatrix();
+
+    if (this.graph.loadedOk) 
+    {        
+
+        // Applies initial transformations.
+        this.multMatrix(this.graph.initialTransforms);
+
+		// Draw axis
+		this.axis.display();
+
+        var i = 0;
+        for (var key in this.lightValues) {
+            if (this.lightValues.hasOwnProperty(key)) {
+                if (this.lightValues[key]) {
+                    this.lights[i].setVisible(true);
+                    this.lights[i].enable();
+                }
+                else {
+                    this.lights[i].setVisible(false);
+                    this.lights[i].disable();
+                }
+                this.lights[i].update();
+                i++;
+            }
+        }
+
+        // Displays the scene.
+        this.scale(this.zoom,this.zoom,this.zoom);
+        this.graph.displayScene();
+
+        this.setUpdatePeriod(10);
+
+    }
+	else
+	{
+		// Draw axis
+		this.axis.display();
+    }
+
+    this.popMatrix();
+
+    this.pushMatrix();
+
+
+    this.registerForPick(1,this.piece);
+
+    this.translate(0,4.35,2);
+
+    this.piece.display(19,'black');
+
     
-
-    // if (this.graph.loadedOk) 
-    // {        
-
-    //     // Applies initial transformations.
-    //     this.multMatrix(this.graph.initialTransforms);
-
-	// 	// Draw axis
-	// 	this.axis.display();
-
-    //     var i = 0;
-    //     for (var key in this.lightValues) {
-    //         if (this.lightValues.hasOwnProperty(key)) {
-    //             if (this.lightValues[key]) {
-    //                 this.lights[i].setVisible(true);
-    //                 this.lights[i].enable();
-    //             }
-    //             else {
-    //                 this.lights[i].setVisible(false);
-    //                 this.lights[i].disable();
-    //             }
-    //             this.lights[i].update();
-    //             i++;
-    //         }
-    //     }
-
-    //     // Displays the scene.
-    //     this.scale(this.zoom,this.zoom,this.zoom);
-    //     this.graph.displayScene();
-
-    //     this.setUpdatePeriod(10);
-
-    // }
-	// else
-	// {
-	// 	// Draw axis
-	// 	this.axis.display();
-    // }
-
-
-    this.piece.display(0,'white');
-
     this.popMatrix();
     this.pushMatrix();
 
-    this.translate(0,-5,0);
-    this.piece.display(1,'black');
+    this.translate(0,4.35,2+this.piece.width+0.05);
+
+    this.registerForPick(2,this.piece);
+
+    this.piece.display(1,'white');
 
     this.popMatrix();
-    
+
+    this.pushMatrix();
+
+    if(this.game != undefined)
+        this.game.board.display();
+
+    this.popMatrix();
     
     // ---- END Background, camera and axis setup
     
@@ -216,4 +240,22 @@ XMLscene.prototype.update = function(currentTime) {
 
 
         
+}
+
+
+XMLscene.prototype.logPicking = function () {
+    
+    if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];				
+					console.log("Picked object: " + obj + ", with pick id " + customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}		
+	}
 }

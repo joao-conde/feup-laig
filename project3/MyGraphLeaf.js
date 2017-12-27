@@ -3,73 +3,85 @@
  * @constructor
 **/
 
-function MyGraphLeaf(graph, xmlelem, controlVertexes) {
+function MyGraphLeaf(graph, xmlelem, controlVertexes, primitive) {
 
 	this.graph = graph;
-	this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
-	this.args = this.graph.reader.getString(xmlelem, 'args').split(" ");
-	this.primitive = null;
 
-	this.controlVertexes = controlVertexes;
+	//TODO: Apagar
 
-
-	if(this.type == "rectangle") {
-
-		this.primitive = new MyRectangle(this.graph.scene,
-			parseInt(this.args[0]),
-			parseInt(this.args[1]),
-			parseInt(this.args[2]),
-			parseInt(this.args[3]));
-
-	}
-
-	else if(this.type == "triangle") {
-
-		this.primitive = new MyTriangle(this.graph.scene,
-			parseInt(this.args[0]),
-			parseInt(this.args[1]),
-			parseInt(this.args[2]),
-			parseInt(this.args[3]),
-			parseInt(this.args[4]),
-			parseInt(this.args[5]),
-			parseInt(this.args[6]),
-			parseInt(this.args[7]),
-			parseInt(this.args[8]));
-	}
-
-	else if(this.type == "cylinder") {
-
-		this.primitive = new MyVersatileCylinder(this.graph.scene,
-			parseInt(this.args[0]),
-			parseInt(this.args[1]),
-			parseInt(this.args[2]),
-			parseInt(this.args[3]),
-			parseInt(this.args[4]),
-			parseInt(this.args[5]),
-			parseInt(this.args[6]));
-
-	}
-
-	else if(this.type == "sphere") {
-
-		this.primitive = new MySphere(this.graph.scene,
-			
-			parseInt(this.args[0]),
-			parseInt(this.args[1]),
-			parseInt(this.args[2]));
-
-	}
-
-	else if(this.type == "patch") {
-
+	if(primitive != undefined) {
+		console.log("Primitive" + primitive);
+		this.primitive = primitive;
 		
-		this.primitive = new MyPatch(this.graph.scene,
-			
-			this.controlVertexes,
-			parseInt(this.args[0]),
-			parseInt(this.args[1]));
-			
+	}
 
+	else {
+	
+		this.type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+		this.args = this.graph.reader.getString(xmlelem, 'args').split(" ");
+		this.primitive = null;
+
+		this.controlVertexes = controlVertexes;
+
+
+		if(this.type == "rectangle") {
+
+			this.primitive = new MyRectangle(this.graph.scene,
+				parseInt(this.args[0]),
+				parseInt(this.args[1]),
+				parseInt(this.args[2]),
+				parseInt(this.args[3]));
+
+		}
+
+		else if(this.type == "triangle") {
+
+			this.primitive = new MyTriangle(this.graph.scene,
+				parseInt(this.args[0]),
+				parseInt(this.args[1]),
+				parseInt(this.args[2]),
+				parseInt(this.args[3]),
+				parseInt(this.args[4]),
+				parseInt(this.args[5]),
+				parseInt(this.args[6]),
+				parseInt(this.args[7]),
+				parseInt(this.args[8]));
+		}
+
+		else if(this.type == "cylinder") {
+
+			this.primitive = new MyVersatileCylinder(this.graph.scene,
+				parseInt(this.args[0]),
+				parseInt(this.args[1]),
+				parseInt(this.args[2]),
+				parseInt(this.args[3]),
+				parseInt(this.args[4]),
+				parseInt(this.args[5]),
+				parseInt(this.args[6]));
+
+		}
+
+		else if(this.type == "sphere") {
+
+			this.primitive = new MySphere(this.graph.scene,
+				
+				parseInt(this.args[0]),
+				parseInt(this.args[1]),
+				parseInt(this.args[2]));
+
+		}
+
+		else if(this.type == "patch") {
+
+			
+			this.primitive = new MyPatch(this.graph.scene,
+				
+				this.controlVertexes,
+				parseInt(this.args[0]),
+				parseInt(this.args[1]));
+				
+
+		}
 	}
 
 }

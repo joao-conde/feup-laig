@@ -44,20 +44,6 @@ MyInterface.prototype.addZoomController = function(){
         zoomController.setValue(0.7);
 }
 
-MyInterface.prototype.addDifficultySelector = function(){
-    var group = this.gui.addFolder("Difficulties");
-    group.open();
-
-    var difDic = {
-        "Easy":0,
-        "Medium":1,
-        "Hard":2
-    };
-
-    this.scene.difficulty = 0;
-    var difficultyCombo = this.gui.add(this.scene, 'difficulty', difDic).name("Difficulty");
-}
-
 MyInterface.prototype.addGameModeSelector = function(){
     var group = this.gui.addFolder("Game modes");
     group.open();
@@ -69,13 +55,35 @@ MyInterface.prototype.addGameModeSelector = function(){
     };
 
     this.scene.mode = 0;
-    var gameModeCombo = this.gui.add(this.scene, 'mode', gameModeDic).name("Mode");
+    var gameModeCombo = group.add(this.scene, 'mode', gameModeDic).name("Mode");
 }
 
+MyInterface.prototype.addDifficultySelector = function(){
+    var group = this.gui.addFolder("Difficulties");
+    group.open();
+
+    var difDic = {
+        "Easy":0,
+        "Medium":1,
+        "Hard":2
+    };
+
+    this.scene.difficulty = 0;
+    var difficultyCombo = group.add(this.scene, 'difficulty', difDic).name("Difficulty");
+}
+
+
+
 MyInterface.prototype.addUndoBtn = function(){
-    var undoBtn = { Undo:function(){ console.log("clicked") }};
+    var undoBtn = { 'Undo Move':function(){ console.log("clicked") }};
     this.scene.undoBtn = 0;
-    this.gui.add(undoBtn,'Undo');
+    this.gui.add(undoBtn,'Undo Move');
+}
+
+MyInterface.prototype.addStartButton = function(){
+    var startButton = { 'Start Game':function(){ console.log("clicked") }};
+    this.scene.startButton = 0;
+    this.gui.add(startButton,'Start Game');
 }
 
 /*
