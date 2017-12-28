@@ -40,23 +40,23 @@ MyPlayer.prototype.displayPieces = function(piece) {
 
     }
 
-    // else if(this.color == "black") {
+    else if(this.color == "black") {
 
 
-    //     for(var i = 0; i < this.pieces.length; i++) {
+        for(var i = 0; i < this.pieces.length; i++) {
 
-    //         this.scene.pushMatrix();
+            this.scene.pushMatrix();
             
-    //         this.scene.translate(1+PIECE_WIDTH + i*0.45,BOARD_HEIGHT + PIECE_WIDTH,0.3);
-    //         this.scene.rotateDeg(180,0,1,0);
-    //         this.scene.rotateDeg(-90,0,0,1);
-    //         this.scene.rotateDeg(90,1,0,0);
-    //         piece.display(this.pieces[this.pieces.length-i-1],this.color);
-    //         this.scene.popMatrix();
+            this.scene.translate(1+PIECE_WIDTH + i*0.45,BOARD_HEIGHT + PIECE_WIDTH,0.3);
+            this.scene.rotateDeg(180,0,1,0);
+            this.scene.rotateDeg(-90,0,0,1);
+            this.scene.rotateDeg(90,1,0,0);
+            piece.display(this.pieces[this.pieces.length-i-1],this.color);
+            this.scene.popMatrix();
     
-    //     }
+        }
 
-    // }
+    }
 
 
     
