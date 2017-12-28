@@ -187,28 +187,8 @@ XMLscene.prototype.display = function() {
     this.pushMatrix();
 
 
-    this.registerForPick(1,this.piece);
-
-    this.translate(0,4.35,2);
-
-    this.piece.display(19,'black');
-
-    
-    this.popMatrix();
-    this.pushMatrix();
-
-    this.translate(0,4.35,2+this.piece.width+0.05);
-
-    this.registerForPick(2,this.piece);
-
-    this.piece.display(1,'white');
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
     if(this.game != undefined)
-        this.game.board.display();
+        this.game.display();
 
     this.popMatrix();
     

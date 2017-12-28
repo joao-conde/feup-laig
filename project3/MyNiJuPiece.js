@@ -82,7 +82,7 @@ function MyNijuPiece(scene) {
 MyNijuPiece.prototype = Object.create(CGFobject.prototype);
 MyNijuPiece.prototype.constructor = MyNijuPiece;
 
-MyNijuPiece.prototype.display = function (pieceNumber, colorTexture) {
+MyNijuPiece.prototype.display = function (pieceArray, colorTexture) {
 
     this.changeColor(colorTexture);
     
@@ -127,7 +127,7 @@ MyNijuPiece.prototype.display = function (pieceNumber, colorTexture) {
 	this.patch.display();
     this.scene.popMatrix();
 
-    this.drawDots(pieceNumber);
+    this.drawDots(pieceArray);
 
    
 
@@ -146,14 +146,19 @@ MyNijuPiece.prototype.changeColor = function(colorTexture) {
 }
 
 
-MyNijuPiece.prototype.drawDots = function(pieceNumber) {
+MyNijuPiece.prototype.drawDots = function(pieceArray) {
 
-    var dots = this.pieceIndexs[pieceNumber];
+    for(var i = 0; i < pieceArray.length; i++) 
+        for(var j = 0; j < pieceArray[i].length; j++) {
 
+            if(i == 1 && j == 1)
+                continue;
 
+            if(pieceArray[i][j] == 1)
+                this.drawDot({x:i, y:j});
 
-    for(var i = 0; i < dots.length; i++) 
-         this.drawDot(dots[i]);
+        }
+           
 
 
 }

@@ -81,10 +81,23 @@ MyInterface.prototype.addUndoBtn = function(){
 }
 
 MyInterface.prototype.addStartButton = function(){
-    var startButton = { 'Start Game':function(){ console.log("clicked") }};
+
+    var startButton = { 'Start Game':interfaceStartGame.bind(this)};
     this.scene.startButton = 0;
     this.gui.add(startButton,'Start Game');
 }
+
+function interfaceStartGame(){ 
+
+    var player1Name = "Player 1";
+    var player2Name = "Player 2";
+
+    this.scene.game = new MyGame(this.scene,player1Name,player2Name, this.scene.mode, this.scene.difficulty); 
+
+    //DISABLE BUTTONS AND MODES
+
+
+};
 
 /*
 MyInterface.prototype.addShadersGroup = function() {
