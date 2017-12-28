@@ -83,9 +83,9 @@ MyGame.prototype.handleReplyPieces = function(player,data) {
 
 MyGame.prototype.display = function() {
 
-    this.board.display();
+    // this.board.display();
     this.player1.displayPieces(this.piece);
-    // this.player2.displayPieces(this.piece);
+    this.player2.displayPieces(this.piece);
 
 
 }
