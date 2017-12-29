@@ -126,7 +126,8 @@ XMLscene.prototype.onGraphLoaded = function()
  */
 XMLscene.prototype.display = function() {
     
-    this.logPicking();
+    //this.logPicking();
+    // this.updateSelectedPiece();
 	this.clearPickRegistration();
     
     // ---- BEGIN Background, camera and axis setup
@@ -187,8 +188,9 @@ XMLscene.prototype.display = function() {
     this.pushMatrix();
 
 
-    if(this.game != undefined)
+    if(this.game != undefined) {
         this.game.display();
+    }
 
     this.popMatrix();
     
@@ -218,6 +220,9 @@ XMLscene.prototype.update = function(currentTime) {
 
     this.laigShader.setUniformsValues(dic);
 
+    this.updateSelectedPiece();
+	// this.clearPickRegistration();
+
 
         
 }
@@ -233,6 +238,34 @@ XMLscene.prototype.logPicking = function () {
 				{
 					var customId = this.pickResults[i][1];				
 					console.log("Picked object: " + obj + ", with pick id " + customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}		
+	}
+}
+
+XMLscene.prototype.updateSelectedPiece = function () {
+    
+    if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];				
+                    
+                    if(customId >= 0 && customId < 40)
+                        this.game.selectedPiece = customId;
+                    else {
+                        if(this.game.selectedPiece != -1)
+                            this.game.selectedPosition = customId;
+                    }
+                        
+                    console.log("PositionId: " + customId);
+
+                    this.game.play();
+
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);

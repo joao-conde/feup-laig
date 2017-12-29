@@ -8,12 +8,13 @@ function MyBoard(scene) {
 
     this.scene = scene;
 
-    this.dotMaterial = new CGFappearance(this.scene);
-    this.dotMaterial.setAmbient(0.0, 0.0, 0.0, 0.5);
-    this.dotMaterial.setDiffuse(1.0, 1.0, 1.0, 0.0);
-    this.dotMaterial.setSpecular(0.0, 0.0, 0.0, 0.5);
-    this.dotMaterial.setEmission(0.0, 0.0, 0.0, 0.5);
+    this.spaceMaterial = new CGFappearance(this.scene);
+    this.spaceMaterial.setAmbient(0.0, 0.0, 0.0, 0.5);
+    this.spaceMaterial.setDiffuse(1.0, 1.0, 1.0, 0.0);
+    this.spaceMaterial.setSpecular(0.0, 0.0, 0.0, 0.5);
+    this.spaceMaterial.setEmission(0.0, 0.0, 0.0, 0.5);
 
+    this.board = [];
 
 
 };
@@ -21,30 +22,63 @@ function MyBoard(scene) {
 MyBoard.prototype = Object.create(CGFobject.prototype);
 MyBoard.prototype.constructor = MyBoard;
 
+MyBoard.prototype.updateBoard = function(board) {
+
+    this.board = board;
+
+}
+
 
 MyBoard.prototype.display = function() {
 
     // this.scene.setActiveShader(this.scene.laigShader);
 
+    var offsetX = BOARD_X/2 - (this.board[0].length*0.4) / 2;
+    var offsetY = BOARD_WIDTH/2 - this.board.length*0.4 / 2 + PIECE_WIDTH;
 
-    for(var j = 2; j < 18; j++) {
+    for(var i = 0; i < this.board.length; i++) {
 
 
-        for(var i = 0; i < 27; i++) {
+        for(var j = 0; j < this.board[i].length; j++) {
 
-            this.scene.pushMatrix();
+
+            if(this.board[i][j][0][0] == -1) {
+
+                this.scene.pushMatrix();
+
+                this.scene.registerForPick(i * this.board[0].length + j + 40, this.space);
+            
+                this.scene.translate(offsetX+0.4*j,BOARD_HEIGHT,offsetY+0.4*i);
+                this.scene.rotateDeg(-90,1,0,0);
+
+                this.spaceMaterial.apply();
+            
+                this.space.display();
+
+                this.scene.popMatrix();
+
+            }
+
+            else {
+
+                this.scene.pushMatrix();
+
+                var pieceColor = this.board[i][j][1][1] == 1 ? "white" : "black";
+
+                this.scene.registerForPick(i * this.board[0].length + j + 40, this.space);
+            
+                this.scene.translate(offsetX+0.4*j,BOARD_HEIGHT,offsetY+0.4*i  - PIECE_WIDTH);
+                this.scene.rotateDeg(-90,0,1,0);
 
             
-            this.scene.registerForPick((j-2) * 27 + i + 20, this.space);
-        
-            this.scene.translate(0.25+0.4*i,BOARD_HEIGHT,0.6+0.4*j);
-            this.scene.rotateDeg(-90,1,0,0);
+                this.scene.game.piece.display(this.board[i][j],pieceColor);
 
-            this.dotMaterial.apply();
-        
-            this.space.display();
+                this.scene.popMatrix();
 
-            this.scene.popMatrix();
+
+            }
+
+            
 
            
 

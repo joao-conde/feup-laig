@@ -1,2 +1,1 @@
-:- include('logic.pl').
-%
+:- include('interface.pl').

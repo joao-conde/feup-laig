@@ -88,14 +88,15 @@ playFirstPiece(InitialBoard, CurrentBoard, Pieces, PieceNumber, NewPieces) :-
   replaceMatrixElement(InitialBoard, CurrentBoard, 1, 1, Piece),
   remove(Piece,Pieces,NewPieces).
 
-playPiece(Board, NewBoard, Row, Column, PieceNumber, Pieces, NewPieces) :-
+playPiece(Board, NewBoard, Row, Column, PieceNumber, Pieces, NewPieces, true) :-
 
+  validPlay(Board,Row,Column),
   nth0(PieceNumber,Pieces,Piece),
   replaceMatrixElement(Board, BoardWithPiece, Row, Column, Piece),
   growBoard(BoardWithPiece, NewBoard, Row, Column),
   remove(Piece,Pieces,NewPieces).
 
-playPiece(Board,Board, Row, Column, _, Pieces, Pieces) :-
+playPiece(Board,Board, Row, Column, _, Pieces, Pieces, false) :-
 
   \+ validPlay(Board,Row,Column),
   nl, write('invalid play'), nl.

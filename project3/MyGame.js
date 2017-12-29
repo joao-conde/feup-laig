@@ -1,5 +1,6 @@
 const BOARD_HEIGHT = 3.4;
 const BOARD_WIDTH = 8.2;
+const BOARD_X = 11.2;
 
 /**
  *
@@ -21,8 +22,15 @@ function MyGame(scene, namePlayer1, namePlayer2, gameMode, difficulty) {
     this.gameMode = gameMode;
     this.difficulty = difficulty;
 
+    this.numberOfTurns = 0;
+
+    this.currentPlayer = this.player1;
+
+    this.selectedPiece = -1;
+    this.selectedPosition = -1;
 
     this.startGame();
+
 
     
 
@@ -43,6 +51,7 @@ MyGame.prototype.startGame = function() {
 
     //TODO: gameMode and difficulty
 
+    this.makeRequest('getInitialBoard', this.handleReplyInitialBoard.bind(this));
     this.makeRequest('getPiecesP1', this.handleReplyPieces.bind(this,this.player1));
     this.makeRequest('getPiecesP2', this.handleReplyPieces.bind(this,this.player2));
 
@@ -57,7 +66,9 @@ MyGame.prototype.getPrologRequest = function(requestString, onSuccess, onError, 
     
     var requestPort = port || 8081
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
+    // request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
+
+    request.open('GET', 'http://172.30.2.119:'+requestPort+'/'+requestString, false);
 
     request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
     request.onerror = onError || function(){console.log("Error waiting for response");};
@@ -78,14 +89,124 @@ MyGame.prototype.handleReplyPieces = function(player,data) {
 
     player.createPieces(JSON.parse(data.target.responseText));
 
+    console.log(player.pieces);
+
     
+}
+
+MyGame.prototype.handleReplyInitialBoard = function(data) {
+
+    console.log(data);
+    this.board.updateBoard(JSON.parse(data.target.responseText));
+    console.log(this.board);
+
+}
+
+MyGame.prototype.handleReplyPlay = function(player,data) {
+
+    var response = JSON.parse(data.target.responseText);
+
+    var newBoard = response[0];
+    var newPieces = response[1];
+    var valid = response[2];
+
+    console.log(newPieces);
+    console.log(player);
+
+    if(!valid)
+        return;
+
+
+    this.board.updateBoard(newBoard);
+    player.createPieces(newPieces);
+
+    if(this.currentPlayer == this.player1)
+        this.currentPlayer = this.player2;
+    else
+        this.currentPlayer = this.player1;
+
+    console.log(this.board);
+
+    this.selectedPiece = -1;
+    this.selectedPosition = -1;
+
+    this.numberOfTurns++;
+
+    console.log(this.currentPlayer);
+
 }
 
 MyGame.prototype.display = function() {
 
-    // this.board.display();
+    this.board.display();
     this.player1.displayPieces(this.piece);
     this.player2.displayPieces(this.piece);
 
+}
+
+MyGame.prototype.play = function() {
+
+    if(this.selectedPiece == -1 || this.selectedPosition == -1)
+        return;
+
+    if(this.numberOfTurns == 0) {
+
+        var requestString = JSON.stringify([this.board.board, [this.selectedPiece,-5], this.player1.pieces]);
+
+        console.log(requestString);
+
+        this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
+
+    }
+
+    else {
+
+        if(this.currentPlayer == this.player1) {
+            if(this.selectedPiece >= 0 && this.selectedPiece < 20) {
+    
+                console.log("Player 1 playing");
+    
+                var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
+                var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+                
+                var requestString = JSON.stringify([this.board.board, [row,column,this.selectedPiece], this.player1.pieces]);
+                this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
+    
+            }
+    
+        }
+                
+        
+        else if(this.currentPlayer == this.player2) {
+            if(this.selectedPiece >= 20 && this.selectedPiece < 40) {
+    
+                console.log("Player 2 playing");
+                var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
+                var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+                
+                var requestString = JSON.stringify([this.board.board, [row,column,this.selectedPiece-20], this.player2.pieces]);
+                this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player2));
+    
+            }
+    
+        } 
+
+    }
+        
+
+
+       
+
+}
+
+MyGame.prototype.calculateRow = function(id, col, number_cols) {
+
+    return (id - col) / number_cols;
+
+}
+
+MyGame.prototype.calculateColumn = function(id, number_cols) {
+
+    return id % number_cols;
 
 }

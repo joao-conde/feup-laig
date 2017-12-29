@@ -103,7 +103,7 @@ print_header_line(_).
 
 % Require your Prolog Files here
 
-:- include('plog/bridge.pl').
+:- include('prolog/bridge.pl').
 
 parse_input(handshake, handshake).
 parse_input(quit, goodbye).
@@ -116,6 +116,19 @@ parse_input(getPiecesP1, PiecesP1) :-
 parse_input(getPiecesP2, PiecesP2) :-
 
 	buildPiecesP2(PiecesP2).
+
+parse_input(getInitialBoard, InitialBoard) :-
+
+	initialBoard(InitialBoard).
+
+parse_input([Board, [Row,Column, PieceNumber], Pieces], [NewBoard, NewPieces, Valid]) :-
+
+	playPiece(Board, NewBoard, Row, Column, PieceNumber, Pieces, NewPieces, Valid).
+
+
+parse_input([InitialBoard, [PieceNumber,-5], Pieces], [CurrentBoard, NewPieces, true]) :-
+
+	playFirstPiece(InitialBoard, CurrentBoard, Pieces, PieceNumber, NewPieces).
 
 
 %reconsult('/Users/joaofurriel/Sites/feup/ano3/laig/tps/project3/server/server.pl').

@@ -19,7 +19,8 @@ function MyNijuPiece(scene) {
     var cpline2 = [[0,0,0,1],[1,0,0,1]];
 
 	this.scene = scene;
-    this.patch = new MyPatch(scene, [cpline1,cpline2],40,40);
+
+    this.patch = new MyRectangle(scene, 0, 1, 1, 0);
     
     this.whiteMaterial = new CGFappearance(this.scene);
     this.whiteMaterial.setAmbient(0.0, 0.0, 0.0, 1.0);
@@ -147,6 +148,7 @@ MyNijuPiece.prototype.changeColor = function(colorTexture) {
 
 
 MyNijuPiece.prototype.drawDots = function(pieceArray) {
+
 
     for(var i = 0; i < pieceArray.length; i++) 
         for(var j = 0; j < pieceArray[i].length; j++) {
