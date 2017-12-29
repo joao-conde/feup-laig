@@ -52,6 +52,8 @@ XMLscene.prototype.init = function(application) {
 
     this.piece = new MyNijuPiece(this);
 
+    this.gameInProgress = false;
+
 }
 
 /**
@@ -92,7 +94,23 @@ XMLscene.prototype.initLights = function() {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.4,0.1,500,vec3.fromValues(15, 15, 15),vec3.fromValues(0, 0, 0));
+    
+
+    this.camera = new CGFcamera(0.2,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+
+    this.initialCamera = this.camera;
+
+    this.topDownBlack = new CGFcamera(0.7,0.1,500,vec3.fromValues(4, 18, 4),vec3.fromValues(5, 0, 5));
+    this.topDownBlack.orbit(vec3.fromValues(1,0,0), -Math.PI/4);
+
+    this.topDownWhite = new CGFcamera(0.7,0.1,500,vec3.fromValues(4, 18, 4),vec3.fromValues(5, 0, 5));
+    this.topDownWhite.orbit(vec3.fromValues(1,0,0), -Math.PI/4);
+
+    this.topDownWhite.orbit(vec3.fromValues(0,1,0), -Math.PI);
+
+    this.cameras = [this.initialCamera, this.topDownWhite, this.topDownBlack];
+
+
 }
 
 /* Handler called when the graph is finally loaded. 
@@ -113,11 +131,12 @@ XMLscene.prototype.onGraphLoaded = function()
 
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
-    this.interface.addZoomController();
+    // this.interface.addZoomController();
     this.interface.addGameModeSelector();
     this.interface.addDifficultySelector();
     this.interface.addUndoBtn();
     this.interface.addStartButton();
+    this.interface.addCameraSelector();
     //this.interface.addShadersGroup();
 }
 
@@ -187,10 +206,11 @@ XMLscene.prototype.display = function() {
 
     this.pushMatrix();
 
-
     if(this.game != undefined) {
         this.game.display();
     }
+
+    
 
     this.popMatrix();
     
@@ -221,10 +241,23 @@ XMLscene.prototype.update = function(currentTime) {
     this.laigShader.setUniformsValues(dic);
 
     this.updateSelectedPiece();
-	// this.clearPickRegistration();
+    // this.clearPickRegistration();
+    
+    if(this.game != undefined) {
 
-
+        if(this.game.selectedPiece != -1)
+            this.game.liftPieceAnimation.update(currentTime);
         
+        if(this.game.destinationRow != -1)
+            this.game.movePieceAnimations[this.game.destinationRow][this.game.destinationColumn].update(currentTime);
+
+    }
+
+    // if(this.cameraIndex != this.cameras.indexOf(this.camera))
+        this.camera = this.cameras[this.cameraIndex];
+    
+
+
 }
 
 
@@ -256,6 +289,8 @@ XMLscene.prototype.updateSelectedPiece = function () {
 					var customId = this.pickResults[i][1];				
                     
                     if(customId >= 0 && customId < 40){
+
+                        this.game.liftPieceAnimation.initialTime = 0;
                         this.game.selectedPiece = customId;
                         this.game.selectedPosition = -1;
                     }

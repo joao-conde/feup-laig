@@ -10,17 +10,42 @@ body, html {
     padding: 0;
     margin: 0;
     overflow: hidden;
+
 }
 
 canvas {
     width: 100%;
     height: 100%;
 }
+
+section {
+    display: flex;
+    background-color: rgb(220, 232, 236);
+}
+
+section p {
+    margin: 2px 1em 2px 2px; 
+}
+
+section p.name {
+    margin-right: 1px;
+}
+
 </style>
 </head>
 <body>
 
+<section id="score">
+    <p class="name" id="p1Name">Player 1: </p>
+    <p id="p1Score">0</p>
+    <p class ="name" id="p2Name">Player 2: </p>
+    <p id="p2Score">0</p>
+    <p id="message"></p>
+
+</section>
+
 <script src="main.js"></script>
+
 
 </body>
 </html>

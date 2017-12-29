@@ -5,6 +5,12 @@
 function MyInterface() {
     //call CGFinterface constructor 
     CGFinterface.call(this);
+
+    this.camDic = {
+        "Initial":0,
+        "White Side":1,
+        "Black Side":2
+    };
 }
 
 
@@ -89,15 +95,31 @@ MyInterface.prototype.addStartButton = function(){
 
 function interfaceStartGame(){ 
 
+    if(this.scene.gameInProgress)
+        return;
+
     var player1Name = "Player 1";
     var player2Name = "Player 2";
 
     this.scene.game = new MyGame(this.scene,player1Name,player2Name, this.scene.mode, this.scene.difficulty); 
+    this.scene.gameInProgress = true;
 
     //DISABLE BUTTONS AND MODES
 
 
 };
+
+MyInterface.prototype.addCameraSelector = function(){
+    var group = this.gui.addFolder("Cameras");
+
+    console.log("Cameras");
+    console.log(this.scene.camera);
+
+    
+
+    this.scene.cameraIndex = 0;
+    var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras");
+}
 
 /*
 MyInterface.prototype.addShadersGroup = function() {

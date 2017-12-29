@@ -32,10 +32,38 @@ MyPlayer.prototype.displayPieces = function(piece) {
                 continue;
 
             this.scene.pushMatrix();
-            this.scene.translate(1 + i*0.45,BOARD_HEIGHT + PIECE_WIDTH, BOARD_WIDTH);
-            this.scene.rotateDeg(-90,0,0,1);
-            this.scene.rotateDeg(90,1,0,0);
+            
+            
+            if(this.scene.game.selectedPiece == i) { 
+
+                if(this.scene.game.currentPlayer == this)
+                    this.scene.multMatrix(this.scene.game.liftPieceAnimation.transformMatrix);
+
+                // else {
+
+                //     if(this.scene.game.isPlaying == true) {
+                //         this.scene.multMatrix(this.scene.game.movePieceAnimations[this.scene.game.destinationRow][this.scene.game.destinationColumn].transformMatrix);
+                //     }
+
+                // }
+
+                
+
+            }
+
+            this.scene.translate(1 + i*0.45,BOARD_HEIGHT, BOARD_WIDTH - PIECE_WIDTH - 0.05);
+            
+            this.scene.rotateDeg(-90,0,1,0);
+
+            
+
+            
+
             this.scene.registerForPick(i,piece);
+
+            
+            
+    
             piece.display(this.pieces[i],this.color);
             this.scene.popMatrix();
     
@@ -54,12 +82,15 @@ MyPlayer.prototype.displayPieces = function(piece) {
 
             this.scene.pushMatrix();
             
-            this.scene.translate(1+PIECE_WIDTH + i*0.45,BOARD_HEIGHT + PIECE_WIDTH,0.3);
+            this.scene.translate(1+PIECE_WIDTH + (this.pieces.length-1-i)*0.45,BOARD_HEIGHT,PIECE_WIDTH +0.05);
             this.scene.rotateDeg(180,0,1,0);
-            this.scene.rotateDeg(-90,0,0,1);
-            this.scene.rotateDeg(90,1,0,0);
+            this.scene.rotateDeg(-90,0,1,0);
             this.scene.registerForPick(i+20,piece);
-            piece.display(this.pieces[this.pieces.length-i-1],this.color);
+
+            if(this.scene.game.selectedPiece == i+20 && this.scene.game.currentPlayer == this)
+                this.scene.multMatrix(this.scene.game.liftPieceAnimation.transformMatrix);
+
+            piece.display(this.pieces[i],this.color);
             this.scene.popMatrix();
     
         }

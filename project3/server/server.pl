@@ -138,5 +138,11 @@ parse_input([Board,Row,Column], false) :-
 
 	\+ validPlay(Board,Row,Column).
 
+parse_input(Board,[ScorePlayer1,ScorePlayer2]) :-
+
+	calculateGlobalScore(Board,ScorePlayer1,player1),
+	calculateGlobalScore(Board,ScorePlayer2,player2).
+
+
 
 %reconsult('/Users/joaofurriel/Sites/feup/ano3/laig/tps/project3/server/server.pl').

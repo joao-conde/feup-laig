@@ -10,9 +10,6 @@ function MyLinearAnimation(controlPointsCoords, speed){
   this.controlPointsCoords = controlPointsCoords;
   this.type = "linear";
 
-  console.log("control points");
-  console.log(controlPointsCoords);
-
   this.initialTime = 0;
 
   this.currentTranslation = [];
@@ -101,13 +98,9 @@ function MyLinearAnimation(controlPointsCoords, speed){
     currentPath.alfaDeg = this.radToDeg(currentPath.alfa);
     currentPath.betaDeg = this.radToDeg(currentPath.beta);
 
-    
-
   }
 
   this.totalTime = pathTime;
-
-  console.log(this);
 
 };
 
@@ -186,10 +179,15 @@ MyLinearAnimation.prototype.update = function(currentTime) {
   if(this.initialTime == 0) {
     this.initialTime = currentTime;
   }
+
   
   //else {
     
-    var deltaTimeAnimation = (currentTime - this.initialTime) % this.paths[this.paths.length-1].finalTime;
+    var deltaTimeAnimation = (currentTime - this.initialTime) /*% this.paths[this.paths.length-1].finalTime*/;
+
+    if(deltaTimeAnimation >= this.totalTime)
+      deltaTimeAnimation = this.totalTime-1;
+
     var selectedPathIndex = this.selectPath(deltaTimeAnimation);
     var selectedPath = this.paths[selectedPathIndex];
     var deltaTimePath = deltaTimeAnimation - selectedPath.initialTime;

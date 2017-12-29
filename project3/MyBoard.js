@@ -53,7 +53,7 @@ MyBoard.prototype.updateBoard = function (board) {
 
 MyBoard.prototype.display = function () {
 
-    // this.scene.setActiveShader(this.scene.laigShader);
+    this.scene.setActiveShader(this.scene.laigShader);
 
     var offsetX = BOARD_X / 2 - (this.board[0].length * 0.4) / 2;
     var offsetY = BOARD_WIDTH / 2 - this.board.length * 0.4 / 2 + 0.4;
@@ -72,7 +72,7 @@ MyBoard.prototype.display = function () {
 
                 this.scene.translate(offsetX + 0.4 * j, BOARD_HEIGHT, offsetY + 0.4 * i);
                 this.scene.rotateDeg(-90, 1, 0, 0);
-
+                
                 this.spaceMaterial.apply();
 
                 this.space.display();
@@ -85,7 +85,7 @@ MyBoard.prototype.display = function () {
 
     }
 
-    // this.scene.setActiveShader(this.scene.defaultShader);
+    this.scene.setActiveShader(this.scene.defaultShader);
 
     for (var i = 0; i < this.board.length; i++) {
 
