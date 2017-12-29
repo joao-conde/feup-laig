@@ -28,6 +28,9 @@ MyPlayer.prototype.displayPieces = function(piece) {
 
         for(var i = 0; i < this.pieces.length; i++) {
 
+            if(this.pieces[i][0][0] == -1)
+                continue;
+
             this.scene.pushMatrix();
             this.scene.translate(1 + i*0.45,BOARD_HEIGHT + PIECE_WIDTH, BOARD_WIDTH);
             this.scene.rotateDeg(-90,0,0,1);
@@ -46,6 +49,9 @@ MyPlayer.prototype.displayPieces = function(piece) {
 
         for(var i = 0; i < this.pieces.length; i++) {
 
+            if(this.pieces[i][0][0] == -1)
+                continue;
+
             this.scene.pushMatrix();
             
             this.scene.translate(1+PIECE_WIDTH + i*0.45,BOARD_HEIGHT + PIECE_WIDTH,0.3);
@@ -61,7 +67,10 @@ MyPlayer.prototype.displayPieces = function(piece) {
     }
 
 
-    
-
-
 } 
+
+MyPlayer.prototype.removePiece = function(pieceNumber) {
+
+    this.pieces[pieceNumber] = EMPTY_SPACE;
+
+}

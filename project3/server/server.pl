@@ -125,10 +125,18 @@ parse_input([Board, [Row,Column, PieceNumber], Pieces], [NewBoard, NewPieces, Va
 
 	playPiece(Board, NewBoard, Row, Column, PieceNumber, Pieces, NewPieces, Valid).
 
-
 parse_input([InitialBoard, [PieceNumber,-5], Pieces], [CurrentBoard, NewPieces, true]) :-
 
 	playFirstPiece(InitialBoard, CurrentBoard, Pieces, PieceNumber, NewPieces).
+
+
+parse_input([Board,Row,Column], true) :-
+
+	validPlay(Board,Row,Column).
+
+parse_input([Board,Row,Column], false) :-
+
+	\+ validPlay(Board,Row,Column).
 
 
 %reconsult('/Users/joaofurriel/Sites/feup/ano3/laig/tps/project3/server/server.pl').

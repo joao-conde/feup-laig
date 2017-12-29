@@ -255,8 +255,11 @@ XMLscene.prototype.updateSelectedPiece = function () {
 				{
 					var customId = this.pickResults[i][1];				
                     
-                    if(customId >= 0 && customId < 40)
+                    if(customId >= 0 && customId < 40){
                         this.game.selectedPiece = customId;
+                        this.game.selectedPosition = -1;
+                    }
+                        
                     else {
                         if(this.game.selectedPiece != -1)
                             this.game.selectedPosition = customId;

@@ -2,6 +2,8 @@ const BOARD_HEIGHT = 3.4;
 const BOARD_WIDTH = 8.2;
 const BOARD_X = 11.2;
 
+const EMPTY_SPACE = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
+
 /**
  *
  MyGame
@@ -51,7 +53,6 @@ MyGame.prototype.startGame = function() {
 
     //TODO: gameMode and difficulty
 
-    this.makeRequest('getInitialBoard', this.handleReplyInitialBoard.bind(this));
     this.makeRequest('getPiecesP1', this.handleReplyPieces.bind(this,this.player1));
     this.makeRequest('getPiecesP2', this.handleReplyPieces.bind(this,this.player2));
 
@@ -104,33 +105,13 @@ MyGame.prototype.handleReplyInitialBoard = function(data) {
 
 MyGame.prototype.handleReplyPlay = function(player,data) {
 
-    var response = JSON.parse(data.target.responseText);
-
-    var newBoard = response[0];
-    var newPieces = response[1];
-    var valid = response[2];
-
-    console.log(newPieces);
-    console.log(player);
+    var valid = data.target.responseText == "true" ? true : false;
 
     if(!valid)
         return;
 
 
-    this.board.updateBoard(newBoard);
-    player.createPieces(newPieces);
-
-    if(this.currentPlayer == this.player1)
-        this.currentPlayer = this.player2;
-    else
-        this.currentPlayer = this.player1;
-
-    console.log(this.board);
-
-    this.selectedPiece = -1;
-    this.selectedPosition = -1;
-
-    this.numberOfTurns++;
+    this.playPiece();
 
     console.log(this.currentPlayer);
 
@@ -149,19 +130,13 @@ MyGame.prototype.play = function() {
     if(this.selectedPiece == -1 || this.selectedPosition == -1)
         return;
 
-    if(this.numberOfTurns == 0) {
-
-        var requestString = JSON.stringify([this.board.board, [this.selectedPiece,-5], this.player1.pieces]);
-
-        console.log(requestString);
-
-        this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
-
-    }
+    if(this.numberOfTurns == 0 && this.selectedPiece >= 0 && this.selectedPiece < 20)
+        this.playPiece();
 
     else {
 
         if(this.currentPlayer == this.player1) {
+            
             if(this.selectedPiece >= 0 && this.selectedPiece < 20) {
     
                 console.log("Player 1 playing");
@@ -169,7 +144,8 @@ MyGame.prototype.play = function() {
                 var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
                 var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
                 
-                var requestString = JSON.stringify([this.board.board, [row,column,this.selectedPiece], this.player1.pieces]);
+                var requestString = JSON.stringify([this.board.board, row,column]);
+
                 this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
     
             }
@@ -178,13 +154,16 @@ MyGame.prototype.play = function() {
                 
         
         else if(this.currentPlayer == this.player2) {
+            
             if(this.selectedPiece >= 20 && this.selectedPiece < 40) {
     
                 console.log("Player 2 playing");
+    
                 var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
                 var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
                 
-                var requestString = JSON.stringify([this.board.board, [row,column,this.selectedPiece-20], this.player2.pieces]);
+                var requestString = JSON.stringify([this.board.board, row,column]);
+
                 this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player2));
     
             }
@@ -192,10 +171,33 @@ MyGame.prototype.play = function() {
         } 
 
     }
-        
+    
+}
 
+MyGame.prototype.playPiece = function() {
 
-       
+    var piece = this.currentPlayer == this.player1 ? this.selectedPiece : this.selectedPiece - 20;
+
+    var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
+    var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+
+    this.board.board[row][column] = this.currentPlayer.pieces[piece];
+    this.currentPlayer.removePiece(piece);
+
+    this.selectedPiece = -1;
+    this.selectedPosition = -1;
+    this.numberOfTurns++;
+
+    this.switchPlayer();
+
+}
+
+MyGame.prototype.switchPlayer = function() {
+
+    if(this.currentPlayer == this.player1)
+        this.currentPlayer = this.player2;
+    else
+        this.currentPlayer = this.player1;
 
 }
 
