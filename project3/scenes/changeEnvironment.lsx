@@ -58,6 +58,31 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
+    <TEXTURE id="carpet">
+        <file path="images/carpet.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="floor">
+        <file path="images/floor.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="leftwall">
+        <file path="images/leftwall.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="rightwall">
+        <file path="images/rightwall.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="toptable">
+        <file path="images/toptable.png" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
 
 </TEXTURES>
 
@@ -83,12 +108,12 @@
         <TEXTURE id="null" />
         
         <DESCENDANTS>
-            <NODEREF id="rootLivingRoom" />
+            <NODEREF id="rootOrientalRoom" />
             <NODEREF id="rootTestRoom" />
         </DESCENDANTS>
     </NODE>
 
-    <!-- TEST -->
+    <!-- TODO: change root name -->
 
     <NODE id="rootTestRoom">
         <MATERIAL id="default_material" />
@@ -100,13 +125,84 @@
     </NODE>
 
 
-    <!-- LIVING ROOM -->
-    <NODE id="rootLivingRoom">
+    <!-- oriental room -->
+    <NODE id="rootOrientalRoom">
         <MATERIAL id="default_material" />
         <TEXTURE id="null" />
         
         <DESCENDANTS>
             <NODEREF id="table" />
+            <NODEREF id="floor"/>
+            <NODEREF id="walls"/>
+            <NODEREF id="pillows"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="walls">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        
+        <DESCENDANTS>
+            <NODEREF id="leftWall"/>
+            <NODEREF id="rightWall"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="leftWall">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="leftwall" />
+        <ROTATION axis="y" angle="90"/>
+        <SCALE sx="201" sy="100" sz="1" />
+        <TRANSLATION x="-0.75" y="0" z="-40"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rightWall">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="rightwall" />
+        <SCALE sx="200" sy="100" sz="1" />
+        <TRANSLATION x="-0.2" y="0" z="-50"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="floor">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        <ROTATION axis="x" angle="270"/>
+        <ROTATION axis="z" angle="90"/>
+        <DESCENDANTS>
+            <NODEREF id="carpet"/>
+            <NODEREF id="ground"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="carpet">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        <SCALE sx="120" sy="120" sz="1" />
+        <TRANSLATION x="-0.75" y="-0.8" z="0"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ground">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="floor" />
+        <SCALE sx="200" sy="200" sz="1" />
+        <TRANSLATION x="-0.75" y="-0.8" z="-0.5"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
         </DESCENDANTS>
     </NODE>
 
@@ -125,7 +221,7 @@
 
     <NODE id="table_top">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="toptable" />
         <TRANSLATION x="0" y="7" z="0"/>
         <SCALE sx="10" sy="1" sz="10"/>
         

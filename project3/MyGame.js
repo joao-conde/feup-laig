@@ -114,9 +114,10 @@ MyGame.prototype.getPrologRequest = function(requestString, onSuccess, onError, 
     
     var requestPort = port || 8081
     var request = new XMLHttpRequest();
-    //TODO:uncomment // request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
+    //TODO:uncomment 
+    request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
 
-    request.open('GET', 'http://172.30.2.119:'+requestPort+'/'+requestString, false);
+   // request.open('GET', 'http://172.30.2.119:'+requestPort+'/'+requestString, false);
 
     request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
     request.onerror = onError || function(){console.log("Error waiting for response");};

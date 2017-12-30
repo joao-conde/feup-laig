@@ -54,7 +54,7 @@ XMLscene.prototype.init = function(application) {
 
     this.gameInProgress = false;
 
-    this.rootID = "rootLivingRoom";
+    this.rootID = "rootOrientalRoom";
 }
 
 /**
@@ -97,7 +97,7 @@ XMLscene.prototype.initLights = function() {
 XMLscene.prototype.initCameras = function() {
     
 
-    this.camera = new CGFcamera(0.2,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
 
     this.initialCamera = this.camera;
 
@@ -145,7 +145,7 @@ XMLscene.prototype.onGraphLoaded = function()
 
 XMLscene.prototype.updateEnvironment = function(){
     if(this.environment == 0)
-        this.rootID = "rootLivingRoom";
+        this.rootID = "rootOrientalRoom";
     
     if(this.environment == 1)
         this.rootID = "rootTestRoom";
@@ -203,7 +203,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(10);
+        this.setUpdatePeriod(300);
 
     }
 	else

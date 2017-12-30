@@ -14,7 +14,7 @@ function MyInterface() {
 
 
     this.environmentDic = {
-        "Living Room": 0,
+        "Oriental Room": 0,
         "Outside": 1
     };
 }
