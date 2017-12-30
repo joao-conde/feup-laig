@@ -83,6 +83,26 @@
         <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
+    <TEXTURE id="blackpillow">
+        <file path="images/blackpillow.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="whitepillow">
+        <file path="images/whitepillow.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="laig">
+        <file path="images/laig.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
+    <TEXTURE id="niju">
+        <file path="images/niju.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
 
 </TEXTURES>
 
@@ -135,6 +155,53 @@
             <NODEREF id="floor"/>
             <NODEREF id="walls"/>
             <NODEREF id="pillows"/>
+            <NODEREF id="laig-banner"/>
+            <NODEREF id="niju-banner"/>
+            <NODEREF id="cups"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="cups">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        
+        <DESCENDANTS>
+            <NODEREF id="blackcup"/>
+            <NODEREF id="whitecup"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="pillows">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        
+        <DESCENDANTS>
+            <NODEREF id="blackpillow"/>
+            <NODEREF id="whitepillow"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="blackpillow">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="blackpillow" />
+        <TRANSLATION x="40" y="5" z="-15"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+        
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="whitepillow">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="whitepillow" />
+        <TRANSLATION x="40" y="5" z="75"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+        
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
         </DESCENDANTS>
     </NODE>
 
@@ -159,6 +226,28 @@
 
         <DESCENDANTS>
             <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="laig-banner">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="laig"/>
+        <ROTATION axis="y" angle="90"/>
+        <TRANSLATION x="-100" y="6" z="-39"/>
+ 
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 60 30 0"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="niju-banner">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="niju"/>
+        <ROTATION axis="y" angle="90"/>
+        <TRANSLATION x="-40" y="6" z="-39"/>
+ 
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 60 30 0"/>
         </DESCENDANTS>
     </NODE>
 
