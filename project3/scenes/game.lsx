@@ -103,6 +103,28 @@
         <amplif_factor s="30" t="60"/>
     </TEXTURE>
 
+    <TEXTURE id="table-legs">
+        <file path="images/tablelegs.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
+
+    <TEXTURE id="sun_surface">
+      <file path="images/sunsurface.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="clouds">
+      <file path="images/clouds.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+
+    <TEXTURE id="cloud">
+      <file path="images/cloud.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
 
 </TEXTURES>
 
@@ -117,7 +139,22 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+        <!-- Sun material -->
+    <MATERIAL id="sun_material">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="1.0" b="1.0" a="1" />
+    </MATERIAL>
+
 </MATERIALS>
+
+<ANIMATIONS>
+  <ANIMATION id="sunRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/>         
+
+</ANIMATIONS>
 
 <NODES>
 
@@ -129,18 +166,94 @@
         
         <DESCENDANTS>
             <NODEREF id="rootOrientalRoom" />
-            <NODEREF id="rootTestRoom" />
+            <NODEREF id="rootOutside" />
         </DESCENDANTS>
     </NODE>
 
-    <!-- TODO: change root name -->
+    <!-- outside environment -->
 
-    <NODE id="rootTestRoom">
+    <NODE id="rootOutside">
         <MATERIAL id="default_material" />
-        <TEXTURE id="wood" />
+        <TEXTURE id="cloud" />
+        <SCALE sx="8" sy="3" sz="6" />
+
         
         <DESCENDANTS>
-            <LEAF id="sun_sphere" type="sphere" args="18 50 50" />
+             <NODEREF id="sun"/>
+             <NODEREF id="horizon"/>
+             <NODEREF id="table_top_clouds"/>
+             <NODEREF id="clouds"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="clouds">
+        <MATERIAL id="null" />
+        <TEXTURE id="cloud" />
+        <SCALE sx="0.75" sy="2" sz="1"/>
+        <SCALE sx="0.2" sy="0.2" sz="0.2"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+      
+        <DESCENDANTS>
+            <NODEREF id="blackcloud" />
+            <NODEREF id="whitecloud" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="blackcloud">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="5" z="-15"/>
+
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="whitecloud">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="5" z="70"/>
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="horizon">
+        <MATERIAL id="null" />
+        <TEXTURE id="clouds" />
+        <SCALE sx="-3.75" sy="-10" sz="-5"/>
+        <ROTATION axis="y" angle="10"/>
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="sun">
+        <MATERIAL id="sun_material" />
+        <TEXTURE id="sun_surface" />
+        <SCALE sx="0.75" sy="2" sz="1" />
+        <SCALE sx="1.3" sy="1.3" sz="1.3"/>
+        <TRANSLATION x="-10" y="2" z="-40"/>
+        <ANIMATIONREFS>
+            <ANIMATIONREF  id="sunRotation"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="table_top_clouds">
+        <MATERIAL id="null" />
+        <TEXTURE id="cloud" />
+        <TRANSLATION x="0" y="7" z="0"/>
+        <SCALE sx="10" sy="1" sz="10"/>
+        
+        <DESCENDANTS>
+            <NODEREF id="cube"/>
         </DESCENDANTS>
     </NODE>
 
@@ -309,7 +422,7 @@
 
     <NODE id="table_legs">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="table-legs" />
         <SCALE sx="1" sy="7" sz="1"/>
         
         <DESCENDANTS>

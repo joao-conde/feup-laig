@@ -54,7 +54,8 @@ XMLscene.prototype.init = function(application) {
 
     this.gameInProgress = false;
 
-    this.rootID = "rootOrientalRoom";
+    // this.rootID = "rootOrientalRoom";
+    this.rootID = "rootOutside";
 }
 
 /**
@@ -148,7 +149,7 @@ XMLscene.prototype.updateEnvironment = function(){
         this.rootID = "rootOrientalRoom";
     
     if(this.environment == 1)
-        this.rootID = "rootTestRoom";
+        this.rootID = "rootOutside";
 }
 
 /**
@@ -203,7 +204,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(300);
+        this.setUpdatePeriod(600);
 
     }
 	else

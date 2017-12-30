@@ -73,7 +73,9 @@ MyInterface.prototype.addGameModeSelector = function(){
 
 MyInterface.prototype.addEnvironmentSelector = function(){
     var group = this.gui.addFolder("Environment");
-    this.scene.environment = 0;
+    group.open();
+    // this.scene.environment = 0;
+    this.scene.environment = 1;
     var environmentSelector = group.add(this.scene, 'environment', this.environmentDic).name("Environment");
 }
 
