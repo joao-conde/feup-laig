@@ -157,18 +157,6 @@
             <NODEREF id="pillows"/>
             <NODEREF id="laig-banner"/>
             <NODEREF id="niju-banner"/>
-            <NODEREF id="cups"/>
-        </DESCENDANTS>
-    </NODE>
-
-
-    <NODE id="cups">
-        <MATERIAL id="default_material" />
-        <TEXTURE id="null" />
-        
-        <DESCENDANTS>
-            <NODEREF id="blackcup"/>
-            <NODEREF id="whitecup"/>
         </DESCENDANTS>
     </NODE>
 
