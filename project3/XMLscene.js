@@ -54,6 +54,7 @@ XMLscene.prototype.init = function(application) {
 
     this.gameInProgress = false;
 
+    this.rootID = "rootLivingRoom";
 }
 
 /**
@@ -137,14 +138,23 @@ XMLscene.prototype.onGraphLoaded = function()
     this.interface.addUndoBtn();
     this.interface.addStartButton();
     this.interface.addCameraSelector();
+    this.interface.addEnvironmentSelector();
     //this.interface.addShadersGroup();
+}
+
+
+XMLscene.prototype.updateEnvironment = function(){
+    if(this.environment == 0)
+        this.rootID = "rootLivingRoom";
+    
+    if(this.environment == 1)
+        this.rootID = "rootTestRoom";
 }
 
 /**
  * Displays the scene.
  */
 XMLscene.prototype.display = function() {
-    
     //this.logPicking();
     // this.updateSelectedPiece();
 	this.clearPickRegistration();

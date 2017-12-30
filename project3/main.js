@@ -33,7 +33,7 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
-	var filename=getUrlVars()['file'] || "game.lsx";
+	var filename=getUrlVars()['file'] || "changeEnvironment.lsx";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors
