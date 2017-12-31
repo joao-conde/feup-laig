@@ -143,6 +143,60 @@ parse_input(Board,[ScorePlayer1,ScorePlayer2]) :-
 	calculateGlobalScore(Board,ScorePlayer1,player1),
 	calculateGlobalScore(Board,ScorePlayer2,player2).
 
+parse_input([-100,Piece],PieceRotated) :-
 
+	rotatePiece(Piece,PieceRotated,r,1).
+
+
+
+%%ask Piece Number to Computer
+
+parse_input([-199,PiecesComputer], PieceNumber) :-
+
+	askPieceNumberComputer(PiecesComputer,PieceNumber).
+
+
+%ask Piece Rotation to Computer
+
+parse_input([-198,[PiecesComputer,PieceNumber]], NewPiece) :-
+
+	askPieceRotationComputer(PiecesComputer,PieceNumber,PiecesComputerAR),
+	nth0(PieceNumber, PiecesComputerAR, NewPiece).
+
+
+%ask Piece Position to Computer
+
+parse_input('initialTurn',[7,13]).
+
+parse_input([-197,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,easy,player1,player2).
+
+parse_input([-196,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,medium,player1,player2).
+
+parse_input([-195,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,hard,player1,player2).
+
+
+parse_input([-297,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,easy,player2,player1).
+
+parse_input([-296,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,medium,player2,player1).
+
+parse_input([-295,[Board]], [Row,Col]) :-
+
+	askPiecePositionComputer(Board,Row,Col,hard,player2,player1).
+
+%playPiece(Board, NextBoard, Row, Column, PieceNumber, PiecesComputerAR, NewPiecesComputer).
 
 %reconsult('/Users/joaofurriel/Sites/feup/ano3/laig/tps/project3/server/server.pl').
+
+
+
+%parse_input([-198,[[],1]], X).

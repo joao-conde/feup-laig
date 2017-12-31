@@ -23,8 +23,6 @@ function MyGame(scene, namePlayer1, namePlayer2, gameMode, difficulty) {
 
     document.querySelector("p#message").innerHTML = "";
 
-    console.log(this.player2);
-
     this.gameMode = gameMode;
     this.difficulty = difficulty;
 
@@ -37,20 +35,34 @@ function MyGame(scene, namePlayer1, namePlayer2, gameMode, difficulty) {
 
     this.destinationRow = -1;
     this.destinationColumn = -1;
+
+    this.clock = new MyClock(scene);
     
 
     this.startGame();
 
+    window.addEventListener('keyup', this.handleKeys.bind(this));
+
     this.liftPieceAnimation = new MyLinearAnimation([[0,0,0],[0,1,0]],5);
 
-    this.movePieceAnimations = this.createMoveAnimations();
+    //this.movePieceAnimations = this.createMoveAnimations();
 
+    this.rotatedPiece = 0;
+    this.computerSelectedPos = 0;
 
 };
 
 
 MyGame.prototype = Object.create(CGFobject.prototype);
 MyGame.prototype.constructor = MyGame;
+
+MyGame.prototype.handleKeys = function(event) {
+    if(event.keyCode == 32)
+        this.rotatePiece();
+    else if(event.keyCode == 13)
+        this.makeComputerMove();
+
+}
 
 MyGame.prototype.createMoveAnimations = function() {
 
@@ -92,19 +104,13 @@ MyGame.prototype.createMoveAnimations = function() {
 
 MyGame.prototype.startGame = function() {
 
-    console.log("game will start");
-
-    if(this.gameMode == 0) 
-        var prologMode = "humanVshuman";
-
 
     //TODO: gameMode and difficulty
 
     this.makeRequest('getPiecesP1', this.handleReplyPieces.bind(this,this.player1));
     this.makeRequest('getPiecesP2', this.handleReplyPieces.bind(this,this.player2));
 
-    console.log(this.gameMode);
-
+    this.initialTime = 0;
 
 }
 
@@ -114,9 +120,10 @@ MyGame.prototype.getPrologRequest = function(requestString, onSuccess, onError, 
     
     var requestPort = port || 8081
     var request = new XMLHttpRequest();
-    //TODO:uncomment // request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
+    //TODO:uncomment 
+    request.open('GET', 'http://localhost:'+requestPort+'/'+requestString, false);
 
-    request.open('GET', 'http://172.30.2.119:'+requestPort+'/'+requestString, false);
+    // request.open('GET', 'http://172.30.2.119:'+requestPort+'/'+requestString, false);
 
     request.onload = onSuccess || function(data){console.log("Request successful. Reply: " + data.target.response);};
     request.onerror = onError || function(){console.log("Error waiting for response");};
@@ -134,14 +141,9 @@ MyGame.prototype.makeRequest = function(requestString, handle) {
 //Handle the Reply
 MyGame.prototype.handleReplyPieces = function(player,data) {
    
-
     player.createPieces(JSON.parse(data.target.responseText));
-
-    console.log(player.pieces);
-
     
 }
-
 
 MyGame.prototype.handleReplyPlay = function(player,data) {
 
@@ -153,8 +155,7 @@ MyGame.prototype.handleReplyPlay = function(player,data) {
 
     this.playPiece();
 
-    var requestString = JSON.stringify(this.board.board);
-    this.makeRequest(requestString, this.handlePlayersScores.bind(this));
+    
 
 
 }
@@ -165,6 +166,8 @@ MyGame.prototype.handlePlayersScores = function(data) {
 
     this.player1.score = response[0];
     this.player2.score = response[1];
+
+   
     
     this.updateScore();
 
@@ -175,6 +178,13 @@ MyGame.prototype.updateScore = function() {
     document.querySelector("p#p1Score").innerHTML = this.player1.score;
     document.querySelector("p#p2Score").innerHTML = this.player2.score;
 
+    this.selectedPiece = -1;
+    this.selectedPosition = -1;
+    this.numberOfTurns++;
+
+    
+    this.checkGameOver();
+
 }
 
 MyGame.prototype.display = function() {
@@ -182,6 +192,11 @@ MyGame.prototype.display = function() {
     this.board.display();
     this.player1.displayPieces(this.piece);
     this.player2.displayPieces(this.piece);
+    this.scene.pushMatrix();
+    this.scene.translate(6,7,-2);
+    this.scene.scale(2,2,2);
+    this.clock.display();
+    this.scene.popMatrix();
 
 }
 
@@ -196,37 +211,50 @@ MyGame.prototype.play = function() {
     else {
 
         if(this.currentPlayer == this.player1) {
-            
-            if(this.selectedPiece >= 0 && this.selectedPiece < 20) {
-    
-                console.log("Player 1 playing");
-    
-                var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
-                var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
-                
-                var requestString = JSON.stringify([this.board.board, row,column]);
 
-                this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
+            if(this.gameMode == 0 || this.gameMode == 1) {
+
+                if(this.selectedPiece >= 0 && this.selectedPiece < 20) {
     
+                    var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
+                    var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+                    
+                    var requestString = JSON.stringify([this.board.board, row,column]);
+    
+                    this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player1));
+        
+                }
+
+            } 
+
+            else {
+                //TODO
             }
-    
+            
         }
                 
         
         else if(this.currentPlayer == this.player2) {
-            
-            if(this.selectedPiece >= 20 && this.selectedPiece < 40) {
-    
-                console.log("Player 2 playing");
-    
-                var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
-                var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
-                
-                var requestString = JSON.stringify([this.board.board, row,column]);
 
-                this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player2));
+            if(this.gameMode == 0) {
+
+                if(this.selectedPiece >= 20 && this.selectedPiece < 40) {
     
+                    var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
+                    var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+                    
+                    var requestString = JSON.stringify([this.board.board, row,column]);
+    
+                    this.makeRequest(requestString, this.handleReplyPlay.bind(this,this.player2));
+        
+                }
             }
+
+            else {
+                //TODO
+            }
+            
+            
     
         } 
 
@@ -243,23 +271,23 @@ MyGame.prototype.playPiece = function() {
 
     this.board.board[row][column] = this.currentPlayer.pieces[piece];
 
-    console.log("Piece Played:" + piece);
-    console.log("Piece Original Played:" + this.selectedPiece);
-    console.log(this.currentPlayer);
-
     this.currentPlayer.removePiece(piece);
 
-    this.selectedPiece = -1;
-    this.selectedPosition = -1;
-    this.numberOfTurns++;
+    
 
     this.destinationRow = row;
     this.destinationColumn = column;
 
-    
+    var requestString = JSON.stringify(this.board.board);
+    this.makeRequest(requestString, this.handlePlayersScores.bind(this));
 
-    this.switchPlayer();
-    this.checkGameOver();
+    // this.selectedPiece = -1;
+    // this.selectedPosition = -1;
+    // this.numberOfTurns++;
+
+    
+    // this.switchPlayer();
+    // this.checkGameOver();
 
 
 }
@@ -267,7 +295,8 @@ MyGame.prototype.playPiece = function() {
 MyGame.prototype.checkGameOver = function() {
 
     if(this.numberOfTurns == 40) {
-        console.log("Game Over P1: " + this.player1.score + "P2: " + this.player2.score);
+        
+
         this.scene.gameInProgress = false;
 
         if(this.player1.score > this.player2.score)
@@ -282,23 +311,37 @@ MyGame.prototype.checkGameOver = function() {
         var message_p = document.querySelector("p#message");
         message_p.innerHTML = message;
 
-      
     }
+
+    else 
+        this.switchPlayer();
 
 }
 
 MyGame.prototype.switchPlayer = function() {
 
+    var p1 = document.querySelector("p#p1Name");
+    var p2 = document.querySelector("p#p2Name");
+
     if(this.currentPlayer == this.player1){
 
         this.currentPlayer = this.player2;
         this.scene.cameraIndex = 2;
+        p1.style.textDecoration = "none";
+        p2.style.textDecoration = "underline";
+
 
     }
-    else{
+    else {
+
         this.currentPlayer = this.player1; 
         this.scene.cameraIndex = 1;
+        p1.style.textDecoration = "underline";
+        p2.style.textDecoration = "none";
     }
+
+    this.rotatedPiece = 0;
+    this.computerSelectedPos = 0;
 }
 
 MyGame.prototype.calculateRow = function(id, col, number_cols) {
@@ -310,5 +353,164 @@ MyGame.prototype.calculateRow = function(id, col, number_cols) {
 MyGame.prototype.calculateColumn = function(id, number_cols) {
 
     return id % number_cols;
+
+}
+
+MyGame.prototype.updateGameTime = function(time) {
+
+    if(this.initialTime == 0)
+        this.initialTime = time;
+
+    var deltaTime = time - this.initialTime;
+
+    this.clock.update(deltaTime);
+
+
+}
+
+MyGame.prototype.rotatePiece = function() {
+
+    if(this.scene.gameInProgress) {
+
+        if(this.selectedPiece != -1 && this.selectedPosition == -1) {
+
+            var piece = this.currentPlayer == this.player1 ? this.currentPlayer.pieces[this.selectedPiece] : this.currentPlayer.pieces[this.selectedPiece-20];
+
+            var requestString = JSON.stringify([-100,piece]);
+
+            this.makeRequest(requestString,this.handleRotatedPiece.bind(this));
+
+        }
+    }
+
+} 
+
+
+MyGame.prototype.handleRotatedPiece = function(data) {
+
+    var response = JSON.parse(data.target.responseText);
+
+    if(this.currentPlayer == this.player1)
+        this.player1.pieces[this.selectedPiece] = response;
+
+    else
+        this.player2.pieces[this.selectedPiece-20] = response;
+
+
+}
+
+
+MyGame.prototype.makeComputerMove = function() {
+
+    console.log(this.numberOfTurns);
+
+    if(this.gameMode == 0)
+        return;
+
+    if(this.selectedPiece == -1) {
+
+        // var requestString = JSON.stringify([-199,this.currentPlayer.pieces]);
+        // this.makeRequest(requestString,this.handleComputerPieceSelection.bind(this));
+
+        var pieceIndex = this.currentPlayer.selectPiece();
+        this.selectedPiece = this.currentPlayer == this.player1 ? pieceIndex : pieceIndex + 20;
+
+    }
+
+    else if(this.selectedPiece != -1 && this.selectedPosition == -1) {
+
+        if(this.rotatedPiece == 0) {
+
+            var selectedPiece = this.currentPlayer == this.player1 ? this.selectedPiece : this.selectedPiece - 20;
+            var requestString = JSON.stringify([-198, [this.currentPlayer.pieces, selectedPiece]]);
+            
+            
+
+            this.makeRequest(requestString, this.handleComputerPieceRotation.bind(this));
+
+        }
+
+        else {
+
+            if(this.computerSelectedPos == 0) {
+
+                switch(this.difficulty) {
+
+                    case 0:
+    
+                        var id = this.currentPlayer == this.player1 ? -197 : -297;
+                        break;
+    
+                    case '1':
+                        var id = this.currentPlayer == this.player1 ? -196 : -296;
+                        break;
+    
+                    case '2':
+                        var id = this.currentPlayer == this.player1 ? -195 : -295;
+                        break;
+    
+                    default:
+    
+                }
+    
+                if(this.numberOfTurns == 0)
+                    this.makeRequest('initialTurn', this.handlerSelectComputerPosition.bind(this));
+                else {
+
+                    var requestString = JSON.stringify([id, [ this.board.board]]);
+                    this.makeRequest(requestString, this.handlerSelectComputerPosition.bind(this));
+
+                }
+
+                
+
+            }
+
+        }
+
+    }
+
+}
+
+MyGame.prototype.handleComputerPieceSelection = function(data) {
+
+    // var selectedPiece = data.target.responseText;
+
+    // //TODO: Verificar se é -1
+
+    // this.selectedPiece = this.currentPlayer == this.player1 ? parseInt(selectedPiece) : parseInt(selectedPiece) + 20;
+
+}
+
+
+MyGame.prototype.handleComputerPieceRotation = function(data) {
+
+    var rotatedPiece = JSON.parse(data.target.responseText);
+    
+    var selectedPiece = this.currentPlayer == this.player1 ? this.selectedPiece : this.selectedPiece - 20; 
+
+    this.currentPlayer.pieces[selectedPiece] = rotatedPiece;
+
+    this.rotatedPiece = 1;
+
+
+}
+
+MyGame.prototype.handlerSelectComputerPosition = function(data) {
+
+
+
+    var response = JSON.parse(data.target.responseText);
+
+    this.selectedPosition = (parseInt(response[0]) * this.board.board[0].length + parseInt(response[1])) + 40;
+
+    this.computerSelectedPos = 1;
+
+    this.playPiece();
+
+
+    
+
+
 
 }

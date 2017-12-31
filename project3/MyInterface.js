@@ -111,12 +111,7 @@ function interfaceStartGame(){
 
 MyInterface.prototype.addCameraSelector = function(){
     var group = this.gui.addFolder("Cameras");
-
-    console.log("Cameras");
-    console.log(this.scene.camera);
-
     
-
     this.scene.cameraIndex = 0;
     var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras");
 }

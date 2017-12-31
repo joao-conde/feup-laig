@@ -193,7 +193,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(10);
+        this.setUpdatePeriod(200);
 
     }
 	else
@@ -248,13 +248,17 @@ XMLscene.prototype.update = function(currentTime) {
         if(this.game.selectedPiece != -1)
             this.game.liftPieceAnimation.update(currentTime);
         
-        if(this.game.destinationRow != -1)
-            this.game.movePieceAnimations[this.game.destinationRow][this.game.destinationColumn].update(currentTime);
+        // if(this.game.destinationRow != -1)
+        //     this.game.movePieceAnimations[this.game.destinationRow][this.game.destinationColumn].update(currentTime);
 
     }
 
+    
+    if(this.gameInProgress == true)
+        this.game.updateGameTime(currentTime);
+
     // if(this.cameraIndex != this.cameras.indexOf(this.camera))
-        this.camera = this.cameras[this.cameraIndex];
+        // this.camera = this.cameras[this.cameraIndex];
     
 
 
@@ -270,7 +274,7 @@ XMLscene.prototype.logPicking = function () {
 				if (obj)
 				{
 					var customId = this.pickResults[i][1];				
-					console.log("Picked object: " + obj + ", with pick id " + customId);
+					// console.log("Picked object: " + obj + ", with pick id " + customId);
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);
@@ -286,9 +290,26 @@ XMLscene.prototype.updateSelectedPiece = function () {
 				var obj = this.pickResults[i][0];
 				if (obj)
 				{
-					var customId = this.pickResults[i][1];				
+                    var customId = this.pickResults[i][1];
                     
-                    if(customId >= 0 && customId < 40){
+                    var validSelection = false;
+
+                    switch(this.game.gameMode) {
+
+                        case 0:
+                            if(this.game.currentPlayer == this.game.player1 && customId >= 0 && customId < 20)
+                                validSelection = true;
+                            else if(this.game.currentPlayer == this.game.player2 && customId >= 20 && customId < 40)
+                                validSelection = true;
+                        case '1':
+                            if(this.game.currentPlayer == this.game.player1 && customId >= 0 && customId < 20)
+                                validSelection = true;
+                        default:
+                    }
+
+
+
+                    if(validSelection){
 
                         this.game.liftPieceAnimation.initialTime = 0;
                         this.game.selectedPiece = customId;
@@ -296,11 +317,22 @@ XMLscene.prototype.updateSelectedPiece = function () {
                     }
                         
                     else {
-                        if(this.game.selectedPiece != -1)
-                            this.game.selectedPosition = customId;
+                        if(this.game.selectedPiece != -1) {
+
+                                var validPosition = true;
+
+                                if(this.game.gameMode == 1)
+                                    if(this.game.currentPlayer == this.game.player2)
+                                        validPosition = false;
+                                else if(this.game.gameMode == 2)
+                                    validPosition = false;
+
+                                if(validPosition && customId >= 40)
+                                    this.game.selectedPosition = customId;
+                                //TODO: Impedir que o humano escolha a posição do computador
+                            
+                        }
                     }
-                        
-                    console.log("PositionId: " + customId);
 
                     this.game.play();
 

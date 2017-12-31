@@ -105,3 +105,40 @@ MyPlayer.prototype.removePiece = function(pieceNumber) {
     this.pieces[pieceNumber] = EMPTY_SPACE;
 
 }
+
+MyPlayer.prototype.emptyPiece = function(index) {
+
+    return this.pieces[index] == EMPTY_SPACE;
+
+
+}
+
+MyPlayer.prototype.emptyBag = function() {
+
+    for(var i = 0; i < this.pieces[i]; i++) {
+
+        if(!this.checkNoPiece(i))
+            return false;
+    }
+
+    return true;
+
+}
+
+MyPlayer.prototype.selectPiece = function() {
+
+    
+    var index;
+
+    do {
+
+        index =  Math.floor((Math.random() * this.pieces.length));
+
+
+    }
+
+    while(this.emptyPiece(index));
+
+    return index;
+
+}

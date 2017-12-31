@@ -1,7 +1,5 @@
 function MyBoard(scene) {
 
-    console.log(scene);
-
     this.space = new MyRectangle(scene, 0, PIECE_WIDTH, PIECE_WIDTH, 0);
 
     // this.space = new MyRectangle(scene,0,200,200,0);

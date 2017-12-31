@@ -2,16 +2,6 @@ const DOT_WIDTH = 0.07;
 const HEIGHT = 0.05;
 const PIECE_WIDTH = 3 * DOT_WIDTH + 4 * DOT_WIDTH/2;
 
-
-
-/**
- *
- MyVersatileCylinder
- * @param gl {WebGLRenderingContext}
- * @constructor
- */
-
-
 function MyNijuPiece(scene) {
 	CGFobject.call(this,scene);
 
@@ -45,38 +35,7 @@ function MyNijuPiece(scene) {
     this.height = HEIGHT;
     this.width = PIECE_WIDTH;
 
-    console.log("Piece Width: " + PIECE_WIDTH);
-
     this.dot = new MyRectangle(scene, 0,DOT_WIDTH,DOT_WIDTH,0);
-
-    // this.pieceIndexs = [
-
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:0,y:2}, {x:1,y:2}], // piece 1
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:0,y:2}, {x:2,y:2}], // piece 2
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:0,y:2}, {x:2,y:1}], // piece 3
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:0,y:2}, {x:2,y:0}], // piece 4
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:0,y:2}, {x:1,y:0}], // piece 5
-
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:2}, {x:2,y:2}], // piece 6
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:2}, {x:2,y:1}], // piece 7
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:2}, {x:2,y:0}], // piece 8
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:2}, {x:1,y:0}], // piece 9
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:2,y:1}, {x:2,y:2}], // piece 10
-
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:2,y:0}, {x:2,y:2}], // piece 11
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:0}, {x:2,y:2}], // piece 12
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:2,y:0}, {x:2,y:1}], // piece 13
-    //     [ {x:0,y:0}, {x:0,y:1}, {x:1,y:0}, {x:2,y:1}], // piece 14
-    //     [ {x:0,y:0}, {x:1,y:2}, {x:2,y:0}, {x:2,y:2}], // piece 15
-
-    //     [ {x:0,y:0}, {x:1,y:0}, {x:1,y:2}, {x:2,y:2}], //piece 16
-    //     [ {x:0,y:0}, {x:1,y:2}, {x:2,y:0}, {x:2,y:1}], //piece 17
-    //     [ {x:0,y:0}, {x:1,y:0}, {x:1,y:2}, {x:2,y:1}], //piece 18
-    //     [ {x:0,y:1}, {x:1,y:0}, {x:1,y:2}, {x:2,y:1}], //piece 19
-    //     [ {x:0,y:0}, {x:0,y:2}, {x:2,y:0}, {x:2,y:2}]  //piece 20
-
-    // ]
-
     
 };
 
