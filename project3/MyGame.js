@@ -433,7 +433,6 @@ MyGame.prototype.handleRotatedPiece = function(data) {
 
 MyGame.prototype.makeComputerMove = function() {
 
-
     if(this.gameMode == 0)
         return;
 
