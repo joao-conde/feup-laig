@@ -385,8 +385,6 @@ MyGame.prototype.handleRotatedPiece = function(data) {
 
 MyGame.prototype.makeComputerMove = function() {
 
-    console.log(this.numberOfTurns);
-
     if(this.gameMode == 0)
         return;
 
