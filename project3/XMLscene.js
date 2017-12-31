@@ -54,6 +54,8 @@ XMLscene.prototype.init = function(application) {
 
     this.gameInProgress = false;
 
+    // this.rootID = "rootOrientalRoom";
+    this.rootID = "rootOutside";
 }
 
 /**
@@ -96,7 +98,7 @@ XMLscene.prototype.initLights = function() {
 XMLscene.prototype.initCameras = function() {
     
 
-    this.camera = new CGFcamera(0.2,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
 
     this.initialCamera = this.camera;
 
@@ -137,14 +139,23 @@ XMLscene.prototype.onGraphLoaded = function()
     this.interface.addUndoBtn();
     this.interface.addStartButton();
     this.interface.addCameraSelector();
+    this.interface.addEnvironmentSelector();
     //this.interface.addShadersGroup();
+}
+
+
+XMLscene.prototype.updateEnvironment = function(){
+    if(this.environment == 0)
+        this.rootID = "rootOrientalRoom";
+    
+    if(this.environment == 1)
+        this.rootID = "rootOutside";
 }
 
 /**
  * Displays the scene.
  */
 XMLscene.prototype.display = function() {
-    
     //this.logPicking();
     // this.updateSelectedPiece();
 	this.clearPickRegistration();

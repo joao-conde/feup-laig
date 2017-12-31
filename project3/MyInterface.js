@@ -11,6 +11,12 @@ function MyInterface() {
         "White Side":1,
         "Black Side":2
     };
+
+
+    this.environmentDic = {
+        "Oriental Room": 0,
+        "Outside": 1
+    };
 }
 
 
@@ -64,6 +70,15 @@ MyInterface.prototype.addGameModeSelector = function(){
     var gameModeCombo = group.add(this.scene, 'mode', gameModeDic).name("Mode");
 }
 
+
+MyInterface.prototype.addEnvironmentSelector = function(){
+    var group = this.gui.addFolder("Environment");
+    group.open();
+    // this.scene.environment = 0;
+    this.scene.environment = 1;
+    var environmentSelector = group.add(this.scene, 'environment', this.environmentDic).name("Environment");
+}
+
 MyInterface.prototype.addDifficultySelector = function(){
     var group = this.gui.addFolder("Difficulties");
     group.open();
@@ -111,7 +126,6 @@ function interfaceStartGame(){
 
 MyInterface.prototype.addCameraSelector = function(){
     var group = this.gui.addFolder("Cameras");
-    
     this.scene.cameraIndex = 0;
     var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras");
 }

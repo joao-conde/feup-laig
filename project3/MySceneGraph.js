@@ -1698,8 +1698,8 @@ MySceneGraph.generateRandomString = function(length) {
 
 MySceneGraph.prototype.displayScene = function() {
     // entry point for graph rendering
-    // remove log below to avoid performance issues
-    this.processNode("root", null, null);
+    this.scene.updateEnvironment();
+    this.processNode(this.scene.rootID, null, null);
 }
 
 

@@ -58,6 +58,97 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
+    <TEXTURE id="carpet">
+        <file path="images/carpet.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="floor">
+        <file path="images/floor.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="leftwall">
+        <file path="images/leftwall.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="rightwall">
+        <file path="images/rightwall.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="toptable">
+        <file path="images/toptable.png" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="blackpillow">
+        <file path="images/blackpillow.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="whitepillow">
+        <file path="images/whitepillow.jpg" />
+        <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="laig">
+        <file path="images/laig.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
+    <TEXTURE id="niju">
+        <file path="images/niju.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
+    <TEXTURE id="table-legs">
+        <file path="images/tablelegs.png" />
+        <amplif_factor s="30" t="60"/>
+    </TEXTURE>
+
+
+    <TEXTURE id="sun_surface">
+      <file path="images/sunsurface.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="clouds">
+      <file path="images/clouds.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+
+    <TEXTURE id="cloud">
+      <file path="images/cloud.jpg" />
+      <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="whitemetal">
+        <file path="images/whitemetal.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="stripes">
+        <file path="images/whiteblackstripes.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="wings">
+        <file path="images/wings.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="cockpit">
+        <file path="images/cockpit.jpg" />
+        <amplif_factor s="15" t="10" />
+    </TEXTURE>
+
+    <TEXTURE id="light_metal">
+        <file path="images/light_metal.jpeg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
 
 </TEXTURES>
 
@@ -72,7 +163,26 @@
         <emission r="0.0" g="0.0" b="0.0" a="1" />
     </MATERIAL>
 
+        <!-- Sun material -->
+    <MATERIAL id="sun_material">
+        <shininess value="100" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.0" g="0.0" b="0.0" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="1.0" g="1.0" b="1.0" a="1" />
+    </MATERIAL>
+
 </MATERIALS>
+
+<ANIMATIONS>
+
+  <ANIMATION id="sunRotation" speed="0.1" type="circular" centerx="0" centery="0" centerz="0"
+                radius="0.1" startang="0" rotang="360"/> 
+
+  <ANIMATION id="shuttleAnim" speed="10" type="circular" centerx="10" centery="6" centerz="10"
+                radius="30" startang="0" rotang="360"/>         
+
+</ANIMATIONS>
 
 <NODES>
 
@@ -83,7 +193,391 @@
         <TEXTURE id="null" />
         
         <DESCENDANTS>
+            <NODEREF id="rootOrientalRoom" />
+            <NODEREF id="rootOutside" />
+        </DESCENDANTS>
+    </NODE>
+
+    <!-- outside environment -->
+
+    <NODE id="rootOutside">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="cloud" />
+        <SCALE sx="8" sy="3" sz="6" />
+
+        
+        <DESCENDANTS>
+             <NODEREF id="sun"/>
+             <NODEREF id="horizon"/>
+             <NODEREF id="table_top_clouds"/>
+             <NODEREF id="clouds"/>
+             <NODEREF id="shuttle" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="shuttle" >
+        <MATERIAL id="null"/>
+        <TEXTURE id="whitemetal"/>
+        <SCALE sx="0.75" sy="2" sz="1" />
+        <TRANSLATION x="-15" y="5" z="3"/>
+
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="shuttleAnim"/>
+        </ANIMATIONREFS>
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_wings" />
+          <NODEREF id="shuttle_body" />
+          <NODEREF id="shuttle_rockets"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_body">
+        <MATERIAL id="null" />
+        <TEXTURE id="light_metal" />
+
+        <DESCENDANTS>
+			<NODEREF id="shuttle_cockpit" />
+             <NODEREF id="shuttle_cargo" />
+		</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cockpit">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+          <LEAF id="cockpit_cylinder" type="cylinder" args="3 2 1 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_cargo">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="0" z="-6" />
+
+        <DESCENDANTS>
+          <LEAF id="cargo_cylinder" type="cylinder" args="6 2 2 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_wings">
+        <MATERIAL id="null" />
+        <TEXTURE id="wings" />
+
+        <DESCENDANTS>
+          <NODEREF id="shuttle_leftW" />
+          <NODEREF id="shuttle_rightW" />
+          <NODEREF id="shuttle_topW" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_topW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0.5" y="1.5" z="-5"/>
+        <SCALE sx="0.5" sy="0.4" sz="0.5"/>
+        <ROTATION axis="z" angle="90"/>
+
+        <DESCENDANTS>
+          <NODEREF id="topwing"/>
+        </DESCENDANTS>
+
+    </NODE>
+
+
+    <NODE id="topwing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <NODEREF id="pyramid_twing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_twing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+
+      <DESCENDANTS>
+        <LEAF id="pyramid_twing_triangle1" type="triangle" args="8 1 0 0 0 6 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle2" type="triangle" args="8 1 0 0 2 6 0 2 0"/>
+        <LEAF id="pyramid_twing_triangle3" type="triangle" args="8 1 0 0 2 0 0 0 0"/>
+        <LEAF id="pyramid_twing_triangle4" type="triangle" args="0 0 6 0 2 6 8 1 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="shuttle_leftW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+          <TRANSLATION x="0" y="-1.70" z="-5" />
+          <SCALE sx="1.5" sy="1" sz="2"/>
+
+        <DESCENDANTS>
+          <NODEREF id="wing" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rightW">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="0" y="-1.70" z="-5" />
+        <SCALE sx="-1.5" sy="1" sz="2"/>
+
+        <DESCENDANTS>
+          <NODEREF id="wing" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shuttle_rockets">
+        <MATERIAL id="null" />
+        <TEXTURE id="stripes" />
+
+        <TRANSLATION x="0" y="0" z="-7"/>
+
+        <DESCENDANTS>
+          <LEAF id="rocket_cone" type="cylinder" args="2 2 1 50 50 1 1" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <NODEREF id="pyramid_wing"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="pyramid_wing">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null" />
+      <DESCENDANTS>
+        <LEAF id="pyramid_wing_triangle1" type="triangle" args="4 0 0 0 0 3 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle2" type="triangle" args="4 0 0 0 1 3 0 1 0"/>
+        <LEAF id="pyramid_wing_triangle3" type="triangle" args="4 0 0 0 1 0 0 0 0"/>
+        <LEAF id="pyramid_wing_triangle4" type="triangle" args="0 0 3 0 1 3 4 0 0"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="clouds">
+        <MATERIAL id="null" />
+        <TEXTURE id="cloud" />
+        <SCALE sx="0.75" sy="2" sz="1"/>
+        <SCALE sx="0.2" sy="0.2" sz="0.2"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+      
+        <DESCENDANTS>
+            <NODEREF id="blackcloud" />
+            <NODEREF id="whitecloud" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="blackcloud">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="5" z="-15"/>
+
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="whitecloud">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+        <TRANSLATION x="23" y="5" z="70"/>
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="horizon">
+        <MATERIAL id="null" />
+        <TEXTURE id="clouds" />
+        <SCALE sx="-3.75" sy="-10" sz="-5"/>
+        <ROTATION axis="y" angle="10"/>
+      
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="sun">
+        <MATERIAL id="sun_material" />
+        <TEXTURE id="sun_surface" />
+        <SCALE sx="0.75" sy="2" sz="1" />
+        <SCALE sx="1.3" sy="1.3" sz="1.3"/>
+        <TRANSLATION x="-10" y="2" z="-40"/>
+        <ANIMATIONREFS>
+            <ANIMATIONREF  id="sunRotation"/>
+        </ANIMATIONREFS>
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="table_top_clouds">
+        <MATERIAL id="null" />
+        <TEXTURE id="cloud" />
+        <TRANSLATION x="0" y="7" z="0"/>
+        <SCALE sx="10" sy="1" sz="10"/>
+        
+        <DESCENDANTS>
+            <NODEREF id="cube"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <!-- oriental room -->
+    <NODE id="rootOrientalRoom">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        
+        <DESCENDANTS>
             <NODEREF id="table" />
+            <NODEREF id="floor"/>
+            <NODEREF id="walls"/>
+            <NODEREF id="pillows"/>
+            <NODEREF id="laig-banner"/>
+            <NODEREF id="niju-banner"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="pillows">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="null" />
+        
+        <DESCENDANTS>
+            <NODEREF id="blackpillow"/>
+            <NODEREF id="whitepillow"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="blackpillow">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="blackpillow" />
+        <TRANSLATION x="40" y="5" z="-15"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+        
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="whitepillow">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="whitepillow" />
+        <TRANSLATION x="40" y="5" z="75"/>
+        <SCALE sx="1.5" sy="0.4" sz="1"/>
+        
+        <DESCENDANTS>
+            <LEAF id="" type="sphere" args="18 50 50" />
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="walls">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        
+        <DESCENDANTS>
+            <NODEREF id="leftWall"/>
+            <NODEREF id="rightWall"/>
+        </DESCENDANTS>
+    </NODE>
+
+
+    <NODE id="leftWall">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="leftwall" />
+        <ROTATION axis="y" angle="90"/>
+        <SCALE sx="201" sy="100" sz="1" />
+        <TRANSLATION x="-0.75" y="0" z="-40"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="laig-banner">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="laig"/>
+        <ROTATION axis="y" angle="90"/>
+        <TRANSLATION x="-100" y="6" z="-39"/>
+ 
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 60 30 0"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="niju-banner">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="niju"/>
+        <ROTATION axis="y" angle="90"/>
+        <TRANSLATION x="-40" y="6" z="-39"/>
+ 
+        <DESCENDANTS>
+            <LEAF type="rectangle" args="0 60 30 0"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="rightWall">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="rightwall" />
+        <SCALE sx="200" sy="100" sz="1" />
+        <TRANSLATION x="-0.2" y="0" z="-50"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="floor">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        <ROTATION axis="x" angle="270"/>
+        <ROTATION axis="z" angle="90"/>
+        <DESCENDANTS>
+            <NODEREF id="carpet"/>
+            <NODEREF id="ground"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="carpet">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="carpet" />
+        <SCALE sx="120" sy="120" sz="1" />
+        <TRANSLATION x="-0.75" y="-0.8" z="0"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
+        </DESCENDANTS>
+    </NODE>
+
+    <NODE id="ground">
+        <MATERIAL id="default_material" />
+        <TEXTURE id="floor" />
+        <SCALE sx="200" sy="200" sz="1" />
+        <TRANSLATION x="-0.75" y="-0.8" z="-0.5"/>
+
+        <DESCENDANTS>
+            <NODEREF id="rectPatch"/>
         </DESCENDANTS>
     </NODE>
 
@@ -102,7 +596,7 @@
 
     <NODE id="table_top">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="toptable" />
         <TRANSLATION x="0" y="7" z="0"/>
         <SCALE sx="10" sy="1" sz="10"/>
         
@@ -113,7 +607,7 @@
 
     <NODE id="table_legs">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="table-legs" />
         <SCALE sx="1" sy="7" sz="1"/>
         
         <DESCENDANTS>
