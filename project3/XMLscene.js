@@ -136,7 +136,7 @@ XMLscene.prototype.onGraphLoaded = function()
     // this.interface.addZoomController();
     this.interface.addGameModeSelector();
     this.interface.addDifficultySelector();
-    // this.interface.addUndoBtn();
+    this.interface.addUndoBtn();
     this.interface.addNames();
     this.interface.addStartButton();
     this.interface.addCameraSelector();

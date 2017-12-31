@@ -103,9 +103,16 @@ MyInterface.prototype.addDifficultySelector = function(){
 
 
 MyInterface.prototype.addUndoBtn = function(){
-    var undoBtn = { 'Undo Move':function(){ console.log("clicked") }};
+    var undoBtn = { 'Undo Move':this.listenUndo.bind(this)};
     this.scene.undoBtn = 0;
     this.gui.add(undoBtn,'Undo Move');
+}
+
+MyInterface.prototype.listenUndo = function() {
+
+    if(this.scene.game != undefined) 
+        this.scene.game.undo();
+
 }
 
 MyInterface.prototype.addNames = function() {

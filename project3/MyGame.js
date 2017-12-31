@@ -19,14 +19,18 @@ function MyGame(scene, namePlayer1, namePlayer2, gameMode, difficulty) {
     this.player1 = new MyPlayer(this.scene,namePlayer1,"white");
     this.player2 = new MyPlayer(this.scene,namePlayer2,"black");
 
-    this.updateScore();
+    this.numberOfTurns = 0;
+
+    this.savedTurns = [];
+
+    this.updateScore(0);
 
     document.querySelector("p#message").innerHTML = "";
 
     this.gameMode = gameMode;
     this.difficulty = difficulty;
 
-    this.numberOfTurns = 0;
+    
 
     this.currentPlayer = this.player1;
 
@@ -61,10 +65,16 @@ MyGame.prototype = Object.create(CGFobject.prototype);
 MyGame.prototype.constructor = MyGame;
 
 MyGame.prototype.handleKeys = function(event) {
+
     if(event.keyCode == 32)
         this.rotatePiece();
     else if(event.keyCode == 13)
         this.makeComputerMove();
+
+    else if(event.keyCode == 66) {
+
+        this.undo();
+    }
 
 }
 
@@ -162,6 +172,16 @@ MyGame.prototype.handleReplyPlay = function(player,data) {
 
 }
 
+MyGame.prototype.undo = function() {
+
+    if(this.numberOfTurns == 0)
+        return;
+
+
+    this.updateScore(-1);
+
+}
+
 MyGame.prototype.handlePlayersScores = function(data) {
 
     var response = JSON.parse(data.target.responseText);
@@ -169,23 +189,43 @@ MyGame.prototype.handlePlayersScores = function(data) {
     this.player1.score = response[0];
     this.player2.score = response[1];
 
-   
-    
-    this.updateScore();
+
+    this.updateScore(1);
 
 }
 
-MyGame.prototype.updateScore = function() {
+MyGame.prototype.updateScore = function(playing) {
 
-    document.querySelector("p#p1Score").innerHTML = this.player1.score;
-    document.querySelector("p#p2Score").innerHTML = this.player2.score;
+    
 
     this.selectedPiece = -1;
     this.selectedPosition = -1;
-    this.numberOfTurns++;
-
     
-    this.checkGameOver();
+
+    if(playing == 1) {
+        this.numberOfTurns++;
+        this.checkGameOver();
+
+    }
+
+    else if(playing == -1) {
+
+        var lastTurn = this.savedTurns[this.savedTurns.length-1];
+
+        this.board.board = lastTurn[0];
+        this.player1.pieces = lastTurn[1];
+        this.player1.score = lastTurn[2];
+        this.player2.pieces = lastTurn[3];
+        this.player2.score = lastTurn[4];
+
+        this.savedTurns.pop();
+        this.numberOfTurns--;
+
+        this.switchPlayer();
+    }
+
+    document.querySelector("p#p1Score").innerHTML = this.player1.score;
+    document.querySelector("p#p2Score").innerHTML = this.player2.score;
 
 }
 
@@ -262,6 +302,14 @@ MyGame.prototype.playPiece = function() {
 
     var column = this.calculateColumn(this.selectedPosition-40, this.board.board[0].length);
     var row = this.calculateRow(this.selectedPosition-40, column, this.board.board[0].length);
+
+    var oldBoard = [];
+
+    for(var i = 0; i < this.board.board.length; i++) {
+        oldBoard.push(this.board.board[i].slice());
+    }
+
+    this.savedTurns.push([oldBoard,this.player1.pieces.slice(),this.player1.score,this.player2.pieces.slice(),this.player2.score]);
 
     this.board.board[row][column] = this.currentPlayer.pieces[piece];
 
@@ -385,7 +433,6 @@ MyGame.prototype.handleRotatedPiece = function(data) {
 
 MyGame.prototype.makeComputerMove = function() {
 
-    console.log(this.numberOfTurns);
 
     if(this.gameMode == 0)
         return;
