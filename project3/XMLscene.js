@@ -377,10 +377,10 @@ XMLscene.prototype.updateCamera = function(deltaTime) {
        
     }
 
-    this.copyCamera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+    // this.copyCamera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
 
     var orbitX = this.cameraIndex == 0 ? (deltaTime * -Math.PI/4) / this.totalTimeUpdatingCamera : (deltaTime * Math.PI/4) / this.totalTimeUpdatingCamera;
-    var orbitY = this.cameraIndex == 0 ? deltaTime * -Math.PI / this.totalTimeUpdatingCamera : (deltaTime * Math.PI) / this.totalTimeUpdatingCamera;
+    var orbitY = this.cameraIndex == 0 ? deltaTime * Math.PI / this.totalTimeUpdatingCamera : (deltaTime * -Math.PI) / this.totalTimeUpdatingCamera;
 
     var posX = this.cameraIndex == 0 ? (deltaTime * -26) / this.totalTimeUpdatingCamera : (deltaTime * 26) / this.totalTimeUpdatingCamera;
     var posY = this.cameraIndex == 0 ? (deltaTime * 7) / this.totalTimeUpdatingCamera : (deltaTime * -7) / this.totalTimeUpdatingCamera;
