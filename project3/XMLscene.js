@@ -96,22 +96,19 @@ XMLscene.prototype.initLights = function() {
  * Initializes the scene cameras.
  */
 XMLscene.prototype.initCameras = function() {
-    
 
     this.camera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+    this.copyCamera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+    this.copyFinalCamera = new CGFcamera(0.6,0.1,500,vec3.fromValues(4, 22, 4),vec3.fromValues(5, 0, 5));
 
-    this.initialCamera = this.camera;
+    this.totalTimeUpdatingCamera = 3000;
+      
+}
 
-    this.topDownBlack = new CGFcamera(0.7,0.1,500,vec3.fromValues(4, 18, 4),vec3.fromValues(5, 0, 5));
-    this.topDownBlack.orbit(vec3.fromValues(1,0,0), -Math.PI/4);
+XMLscene.prototype.changeCamera = function() {
 
-    this.topDownWhite = new CGFcamera(0.7,0.1,500,vec3.fromValues(4, 18, 4),vec3.fromValues(5, 0, 5));
-    this.topDownWhite.orbit(vec3.fromValues(1,0,0), -Math.PI/4);
-
-    this.topDownWhite.orbit(vec3.fromValues(0,1,0), -Math.PI);
-
-    this.cameras = [this.initialCamera, this.topDownWhite, this.topDownBlack];
-
+    this.updatingCamera = true;
+    this.resetCameraTime = true;
 
 }
 
@@ -207,7 +204,7 @@ XMLscene.prototype.display = function() {
         this.scale(this.zoom,this.zoom,this.zoom);
         this.graph.displayScene();
 
-        this.setUpdatePeriod(200);
+        this.setUpdatePeriod(10);
 
     }
 	else
@@ -261,19 +258,27 @@ XMLscene.prototype.update = function(currentTime) {
 
         if(this.game.selectedPiece != -1)
             this.game.liftPieceAnimation.update(currentTime);
-        
-        // if(this.game.destinationRow != -1)
-        //     this.game.movePieceAnimations[this.game.destinationRow][this.game.destinationColumn].update(currentTime);
-
+    
     }
 
     
     if(this.gameInProgress == true)
         this.game.updateGameTime(currentTime);
 
-    if(this.cameraIndex != this.cameras.indexOf(this.camera))
-        this.camera = this.cameras[this.cameraIndex];
-    
+
+
+    if(this.updatingCamera == true) {
+
+        if(this.resetCameraTime == true) {
+            this.cameraInitialTime = currentTime;
+            this.resetCameraTime = false;
+        }
+
+        var deltaTimeCamera = currentTime - this.cameraInitialTime;
+        this.updateCamera(deltaTimeCamera);
+
+    }
+
 
 
 }
@@ -355,4 +360,55 @@ XMLscene.prototype.updateSelectedPiece = function () {
 			this.pickResults.splice(0,this.pickResults.length);
 		}		
 	}
+}
+
+
+XMLscene.prototype.updateCamera = function(deltaTime) {
+
+    if(deltaTime > this.totalTimeUpdatingCamera) {
+
+        this.updatingCamera = false;
+
+        if(this.cameraIndex == 1)
+            this.camera = this.copyCamera;
+
+        this.cameraIndex = this.cameraIndex == 0 ? 1 : 0;
+        return;
+       
+    }
+
+    this.copyCamera = new CGFcamera(0.6,0.1,500,vec3.fromValues(30, 15, 25),vec3.fromValues(0, 0, 0));
+
+    var orbitX = this.cameraIndex == 0 ? (deltaTime * -Math.PI/4) / this.totalTimeUpdatingCamera : (deltaTime * Math.PI/4) / this.totalTimeUpdatingCamera;
+    var orbitY = this.cameraIndex == 0 ? deltaTime * -Math.PI / this.totalTimeUpdatingCamera : (deltaTime * Math.PI) / this.totalTimeUpdatingCamera;
+
+    var posX = this.cameraIndex == 0 ? (deltaTime * -26) / this.totalTimeUpdatingCamera : (deltaTime * 26) / this.totalTimeUpdatingCamera;
+    var posY = this.cameraIndex == 0 ? (deltaTime * 7) / this.totalTimeUpdatingCamera : (deltaTime * -7) / this.totalTimeUpdatingCamera;
+    var posZ = this.cameraIndex == 0 ? (deltaTime * -21) / this.totalTimeUpdatingCamera : (deltaTime * 21) / this.totalTimeUpdatingCamera;
+
+    var tar = this.cameraIndex == 0 ? (deltaTime * 5) / this.totalTimeUpdatingCamera : (deltaTime * -5) / this.totalTimeUpdatingCamera;
+    
+
+    if(this.cameraIndex == 0) {
+
+        var position = vec3.fromValues(this.copyCamera.position[0]+posX, this.copyCamera.position[1]+posY, this.copyCamera.position[2]+posZ);
+        var target = vec3.fromValues(this.copyCamera.target[0] + tar, this.copyCamera.target[1],this.copyCamera.target[2]+tar);
+
+    }
+
+    else {
+
+        var position = vec3.fromValues(this.copyFinalCamera.position[0]-posX, this.copyFinalCamera.position[1]-posY, this.copyFinalCamera.position[2]-posZ);
+        var target = vec3.fromValues(this.copyFinalCamera.target[0] - tar, this.copyFinalCamera.target[1],this.copyFinalCamera.target[2]-tar);
+
+    }
+
+
+    this.camera.setPosition(position);
+    this.camera.setTarget(target);
+
+    this.camera.orbit(vec3.fromValues(1,0,0),orbitX);
+    this.camera.orbit(vec3.fromValues(0,1,0),orbitY);
+    
+
 }

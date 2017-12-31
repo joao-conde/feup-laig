@@ -7,8 +7,8 @@ function MyInterface() {
     CGFinterface.call(this);
 
     this.camDic = {
-        "Initial":0,
-        "Top":1,
+        "Top":0,
+        "Inital":1,
         // "Black Side":2
     };
 
@@ -162,8 +162,13 @@ function interfaceStartGame(){
 
 MyInterface.prototype.addCameraSelector = function(){
     var group = this.gui.addFolder("Cameras");
-    this.scene.cameraIndex = 0;
-    var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras");
+    this.scene.cameraIndex = 1;
+    var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras").onChange(this.listenCameras.bind(this));
+}
+
+MyInterface.prototype.listenCameras = function() {
+
+    this.scene.changeCamera();
 }
 
 /**
