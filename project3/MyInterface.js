@@ -8,8 +8,8 @@ function MyInterface() {
 
     this.camDic = {
         "Initial":0,
-        "White Side":1,
-        "Black Side":2
+        "Top":1,
+        // "Black Side":2
     };
 
 
@@ -17,6 +17,15 @@ function MyInterface() {
         "Oriental Room": 0,
         "Outside": 1
     };
+
+    this.playerNames = {
+        player1: "Player1",
+        player2: "Player2"
+    };
+
+    this.player1Name = this.playerNames.player1;
+    this.player2Name = this.playerNames.player2;
+
 }
 
 
@@ -74,8 +83,7 @@ MyInterface.prototype.addGameModeSelector = function(){
 MyInterface.prototype.addEnvironmentSelector = function(){
     var group = this.gui.addFolder("Environment");
     group.open();
-    // this.scene.environment = 0;
-    this.scene.environment = 1;
+    this.scene.environment = 0;
     var environmentSelector = group.add(this.scene, 'environment', this.environmentDic).name("Environment");
 }
 
@@ -94,12 +102,32 @@ MyInterface.prototype.addDifficultySelector = function(){
 }
 
 
-
 MyInterface.prototype.addUndoBtn = function(){
     var undoBtn = { 'Undo Move':function(){ console.log("clicked") }};
     this.scene.undoBtn = 0;
     this.gui.add(undoBtn,'Undo Move');
 }
+
+MyInterface.prototype.addNames = function() {
+
+    var group = this.gui.addFolder("Players");
+    group.open();
+
+    group.add(this.playerNames, "player1").onChange(this.handlerChangeNames.bind(this,1));
+
+    group.add(this.playerNames, "player2").onChange(this.handlerChangeNames.bind(this,2));
+
+}
+
+MyInterface.prototype.handlerChangeNames = function(player,name) {
+
+    if(player == 1)
+        this.player1Name = name;
+    else if(player == 2)
+        this.player2Name = name;
+
+}
+
 
 MyInterface.prototype.addStartButton = function(){
 
@@ -113,8 +141,9 @@ function interfaceStartGame(){
     if(this.scene.gameInProgress)
         return;
 
-    var player1Name = "Player 1";
-    var player2Name = "Player 2";
+    var player1Name = this.player1Name;
+    var player2Name = this.player2Name;
+
 
     this.scene.game = new MyGame(this.scene,player1Name,player2Name, this.scene.mode, this.scene.difficulty); 
     this.scene.gameInProgress = true;
@@ -129,35 +158,6 @@ MyInterface.prototype.addCameraSelector = function(){
     this.scene.cameraIndex = 0;
     var cameraSelector = group.add(this.scene, 'cameraIndex', this.camDic).name("Cameras");
 }
-
-/*
-MyInterface.prototype.addShadersGroup = function() {
-
-    var groupShaders = this.gui.addFolder("Shaders");
-    groupShaders.open();
-
-    var shadersDic = {"none":null};
-
-    for(var i = 0; i < this.scene.selectables.length; i++)
-        shadersDic[this.scene.selectables[i]] = this.scene.selectables[i];
-
-    
-    
-    var shadersCombo = this.gui.add(this.scene, 'selectables', shadersDic).name("Vertexes");
-
-    shadersCombo.onChange((value) => {
-        
-        this.scene.graph.selectedNode = value;
-        
-    });
-
-    shadersCombo.setValue(null);
-
-    var redController = groupShaders.add(this.scene, 'red', 0, 1).name("Red").step(0.01);
-    var greenController = groupShaders.add(this.scene, 'green', 0, 1).name("Green").step(0.1);
-    var blueController = groupShaders.add(this.scene, 'blue', 0, 1).name("Blue").step(0.1);
-
-}*/
 
 /**
  * Adds a folder containing the IDs of the lights passed as parameter.
@@ -177,7 +177,5 @@ MyInterface.prototype.addLightsGroup = function(lights) {
         }
     }
 
-    
-    
 }
 

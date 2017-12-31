@@ -45,10 +45,14 @@ function MyGame(scene, namePlayer1, namePlayer2, gameMode, difficulty) {
 
     this.liftPieceAnimation = new MyLinearAnimation([[0,0,0],[0,1,0]],5);
 
-    //this.movePieceAnimations = this.createMoveAnimations();
-
     this.rotatedPiece = 0;
     this.computerSelectedPos = 0;
+
+    var p1 = document.querySelector("p#p1Name");
+    var p2 = document.querySelector("p#p2Name");
+
+    p1.innerHTML = this.player1.name + ": ";
+    p2.innerHTML = this.player2.name + ": ";
 
 };
 
@@ -104,8 +108,6 @@ MyGame.prototype.createMoveAnimations = function() {
 
 MyGame.prototype.startGame = function() {
 
-
-    //TODO: gameMode and difficulty
 
     this.makeRequest('getPiecesP1', this.handleReplyPieces.bind(this,this.player1));
     this.makeRequest('getPiecesP2', this.handleReplyPieces.bind(this,this.player2));
@@ -193,8 +195,9 @@ MyGame.prototype.display = function() {
     this.player1.displayPieces(this.piece);
     this.player2.displayPieces(this.piece);
     this.scene.pushMatrix();
-    this.scene.translate(6,7,-2);
+    this.scene.translate(-7.5,10,7.7);
     this.scene.scale(2,2,2);
+    this.scene.rotateDeg(90,0,1,0);
     this.clock.display();
     this.scene.popMatrix();
 
@@ -227,9 +230,6 @@ MyGame.prototype.play = function() {
 
             } 
 
-            else {
-                //TODO
-            }
             
         }
                 
@@ -249,12 +249,6 @@ MyGame.prototype.play = function() {
         
                 }
             }
-
-            else {
-                //TODO
-            }
-            
-            
     
         } 
 
@@ -273,21 +267,12 @@ MyGame.prototype.playPiece = function() {
 
     this.currentPlayer.removePiece(piece);
 
-    
 
     this.destinationRow = row;
     this.destinationColumn = column;
 
     var requestString = JSON.stringify(this.board.board);
     this.makeRequest(requestString, this.handlePlayersScores.bind(this));
-
-    // this.selectedPiece = -1;
-    // this.selectedPosition = -1;
-    // this.numberOfTurns++;
-
-    
-    // this.switchPlayer();
-    // this.checkGameOver();
 
 
 }
@@ -326,7 +311,6 @@ MyGame.prototype.switchPlayer = function() {
     if(this.currentPlayer == this.player1){
 
         this.currentPlayer = this.player2;
-        this.scene.cameraIndex = 2;
         p1.style.textDecoration = "none";
         p2.style.textDecoration = "underline";
 
@@ -335,7 +319,6 @@ MyGame.prototype.switchPlayer = function() {
     else {
 
         this.currentPlayer = this.player1; 
-        this.scene.cameraIndex = 1;
         p1.style.textDecoration = "underline";
         p2.style.textDecoration = "none";
     }
@@ -409,9 +392,6 @@ MyGame.prototype.makeComputerMove = function() {
 
     if(this.selectedPiece == -1) {
 
-        // var requestString = JSON.stringify([-199,this.currentPlayer.pieces]);
-        // this.makeRequest(requestString,this.handleComputerPieceSelection.bind(this));
-
         var pieceIndex = this.currentPlayer.selectPiece();
         this.selectedPiece = this.currentPlayer == this.player1 ? pieceIndex : pieceIndex + 20;
 
@@ -471,17 +451,6 @@ MyGame.prototype.makeComputerMove = function() {
     }
 
 }
-
-MyGame.prototype.handleComputerPieceSelection = function(data) {
-
-    // var selectedPiece = data.target.responseText;
-
-    // //TODO: Verificar se é -1
-
-    // this.selectedPiece = this.currentPlayer == this.player1 ? parseInt(selectedPiece) : parseInt(selectedPiece) + 20;
-
-}
-
 
 MyGame.prototype.handleComputerPieceRotation = function(data) {
 

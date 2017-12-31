@@ -54,8 +54,8 @@ XMLscene.prototype.init = function(application) {
 
     this.gameInProgress = false;
 
-    // this.rootID = "rootOrientalRoom";
-    this.rootID = "rootOutside";
+    this.rootID = "rootOrientalRoom";
+    //this.rootID = "rootOutside";
 }
 
 /**
@@ -136,10 +136,12 @@ XMLscene.prototype.onGraphLoaded = function()
     // this.interface.addZoomController();
     this.interface.addGameModeSelector();
     this.interface.addDifficultySelector();
-    this.interface.addUndoBtn();
+    // this.interface.addUndoBtn();
+    this.interface.addNames();
     this.interface.addStartButton();
     this.interface.addCameraSelector();
     this.interface.addEnvironmentSelector();
+
     //this.interface.addShadersGroup();
 }
 
@@ -268,8 +270,8 @@ XMLscene.prototype.update = function(currentTime) {
     if(this.gameInProgress == true)
         this.game.updateGameTime(currentTime);
 
-    // if(this.cameraIndex != this.cameras.indexOf(this.camera))
-        // this.camera = this.cameras[this.cameraIndex];
+    if(this.cameraIndex != this.cameras.indexOf(this.camera))
+        this.camera = this.cameras[this.cameraIndex];
     
 
 
