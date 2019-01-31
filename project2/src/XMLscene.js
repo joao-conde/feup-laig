@@ -47,7 +47,7 @@ XMLscene.prototype.init = function(application) {
 
     this.selectables = [];
 
-    this.laigShader = new CGFshader(this.gl, "shaders/laig_multiple_light-vertex.glsl", "shaders/laig_fragment.glsl");
+    this.laigShader = new CGFshader(this.gl, "../shaders/laig_multiple_light-vertex.glsl", "../shaders/laig_fragment.glsl");
 
 }
 
