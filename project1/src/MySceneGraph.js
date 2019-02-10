@@ -37,7 +37,7 @@ function MySceneGraph(filename, scene) {
 	 * If any error occurs, the reader calls onXMLError on this object, with an error message
 	 */
 
-    this.reader.open('scenes/' + filename, this);
+    this.reader.open('../scenes/' + filename, this);
 
 }
 
@@ -912,7 +912,7 @@ MySceneGraph.prototype.parseTextures = function(texturesNode) {
             else if (amplifFactorT == null )
                 return "t amplification factor undefined for texture with ID = " + textureID;
 
-            var texture = new CGFtexture(this.scene,"./scenes/" + filepath);
+            var texture = new CGFtexture(this.scene,"../scenes/" + filepath);
 
             this.textures[textureID] = [texture, amplifFactorS, amplifFactorT];
             console.log(texture);
